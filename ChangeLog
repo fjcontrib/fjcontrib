@@ -1,5 +1,8 @@
 2013-01-30  Gregory Soyez  <soyez@fastjet.fr>
 
+	* scripts/update-contribs.sh:
+	when updating a specified contrib, ask for confirmation
+
 	* scripts/switch-to-version.sh:
 	  - use svn switch --relocate since svn relocate is not available
 	    with old svn version

@@ -48,6 +48,8 @@ cd ..
 
 #------------------------------------------------------------------------
 # make sure everything is committed
+. `dirname $0`/internal/common.sh
+
 check_pending_modifications $contrib || {
     echo "There are some pending modifications that need to be committed before the release"
     exit 1
@@ -60,8 +62,6 @@ version=`cat VERSION`
 
 #------------------------------------------------------------------------
 # ask confirmation that we can proceed with the release
-
-. `dirname $0`/internal/common.sh
 
 get_yesno_answer "Releasing version $version of $contrib?" || {
     echo "Checking if there is not an already-existing tag with the same name:"

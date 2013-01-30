@@ -1,0 +1,12 @@
+2013-01-30  Gregory Soyez  <soyez@fastjet.fr>
+
+	* scripts/update-contribs.sh:
+	added "Template" to the list of ignored directories
+
+	* scripts/*            *** ADDED ***
+	* README               *** ADDED ***
+	added a list of maintenance scripts (see README for details)
+
+	* contribs.svn         *** ADDED ***
+	added an (empty) list of supported contribs
+

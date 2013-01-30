@@ -18,7 +18,7 @@
 
 . `dirname $0`/internal/common.sh
 
-internal_directories="_,scripts,data,_"
+internal_directories="_,scripts,Template,data,_"
 
 #----------------------------------------------------------------------
 # update svn

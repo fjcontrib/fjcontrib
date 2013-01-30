@@ -1,0 +1,25 @@
+# -*- Makefile -*-
+# This Makefile template gets processed by the 'configure' script using
+#    @contrib_commandline@
+# If you edit it, you do so at your own risk
+# (for developers, make sure any edits fit with the rest of the build system)
+
+# installation setup
+SUBDIRS=@CONTRIB_BUILD_LIST@
+SUBDIRS.all=$(SUBDIRS:=.all)
+
+SUBMAKE=$(MAKE) FASTJETCONFIG=@FJCONFIG@ PREFIX=@PREFIX@
+
+.PHONY: $(SUBDIRS) $(SUBDIRS.all) clean distclean check install examples
+
+all: $(SUBDIRS.all)
+
+install: all $(SUBDIRS)
+
+examples check clean distclean: $(SUBDIRS)
+
+$(SUBDIRS):
+	+$(SUBMAKE) -C $@ $(MAKECMDGOALS)
+
+$(SUBDIRS.all):
+	+$(SUBMAKE) -C $(basename $@)

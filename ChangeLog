@@ -1,5 +1,9 @@
 2013-01-30  Gregory Soyez  <soyez@fastjet.fr>
 
+	* scripts/switch-to-version.sh:
+	allowed to run it with a contrib name and optional version
+	This is then equivalent to calling switch-to-version.sh
+
 	* scripts/update-contribs.sh:
 	added "Template" to the list of ignored directories
 

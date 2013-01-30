@@ -25,6 +25,14 @@ internal_directories="_,scripts,Template,data,_"
 svn up || { echo "Failed to update svn. Aborting"; exit 1; }
 
 #----------------------------------------------------------------------
+# if there is a single argument or two, jsut call switch-to-version
+if [[ $# -gt 0 ]]; then
+    # just call switch-to-version
+    `dirname $0`/switch-to-version.sh $*
+    exit 0
+fi
+
+#----------------------------------------------------------------------
 # update all the contribs in the contribs.svn file
 svn_contrib_list=$(cat contribs.svn | grep -v '^#' | grep -v '^$' | awk '{print $1}')
 echo "Checking for updates"

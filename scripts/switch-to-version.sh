@@ -77,7 +77,11 @@ fi
 # if the directory does not exist, check it out
 if [[ "$current_version" == "[None]" ]]; then
     echo "  Checking out version ${version} of ${contrib}"
-    svn co ${svn_read}/contribs/${contrib}/${version} $contrib
+    if [[ "${version}" == "trunk" ]]; then
+	svn co ${svn_write}/contribs/${contrib}/${version} $contrib
+    else
+	svn co ${svn_read}/contribs/${contrib}/${version} $contrib
+    fi
     exit 0
 fi
 
@@ -115,14 +119,14 @@ cd $contrib
 # if we're coming from the trunk, first switch to a read-only access
 if [[ "$current_mode" == "rw" ]]; then
     echo "  (first changing the access-mode to read-only)"
-    svn relocate ${svn_read}/contribs/$contrib/${current_version}
+    svn switch --relocate ${svn_read}/contribs/$contrib/${current_version}
     svn up
 fi
 
 # now switch to the correct location
 if [[ "$version" == "trunk" ]]; then
     svn switch ${svn_read}/contribs/$contrib/trunk
-    svn relocate ${svn_write}/contribs/$contrib/trunk
+    svn switch --relocate ${svn_write}/contribs/$contrib/trunk
     svn up
 else
     svn switch ${svn_read}/contribs/$contrib/$version

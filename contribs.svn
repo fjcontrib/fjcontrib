@@ -3,7 +3,7 @@
 #
 # The format is mostly two-column
 # where the location is a relative location pointing to a stable
-# relaese (tags/...), the trunk (trunk/...) or a branch (branch/...)
+# release (tags/...), the trunk (trunk/...) or a branch (branch/...)
 # [unsupported at the moment]
 #
 # ContribName                    Location

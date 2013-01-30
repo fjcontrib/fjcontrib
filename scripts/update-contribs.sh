@@ -47,7 +47,7 @@ for contrib in $svn_contrib_list; do
     # check which situation we are in
     if [[ "${version_svn}" == "${version_local}" ]]; then
         # match: nothing to do
-	echo "you have current version (${version_svn})"
+	echo "you have the current version (${version_svn})"
     else
 	# mismatch: show the versions and decide what to do
 	# according to the type of mismatch
@@ -76,7 +76,7 @@ done
 # the supported lists
 #
 # Note that we discard any directory that does not point to a tagged
-# version os a contrib
+# version of a contrib
 
 for contrib in $(ls -d */ || sed 's/\/*//g'); do
     # discard the fjcontrib dirs

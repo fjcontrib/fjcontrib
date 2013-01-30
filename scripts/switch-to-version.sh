@@ -56,7 +56,7 @@ fi
 get_svn_info $contrib current_mode current_version
 if [[ "$version" == "$current_version" ]]; then
     if [[ "$mode" == "$current_mode" ]]; then
-	echo "  Already the requested version. No update needed"
+	echo "  Already at the requested version. No update needed"
 	exit 0
     fi
 fi
@@ -69,7 +69,7 @@ fi
 if [[ "${version}" != "trunk" ]]; then
     tagged_version=${version#*/}
     if [ -z "`svn ls $svn_read/contribs/$contrib/tags | grep '^'$tagged_version'/$'`" ]; then
-	echo "Version $version of $contrib does not exits. Aborting"
+	echo "Version $version of $contrib does not exist. Exiting"
 	exit 1
     fi
 fi
@@ -119,14 +119,14 @@ cd $contrib
 # if we're coming from the trunk, first switch to a read-only access
 if [[ "$current_mode" == "rw" ]]; then
     echo "  (first changing the access-mode to read-only)"
-    svn switch --relocate ${svn_read}/contribs/$contrib/${current_version}
+    svn switch --relocate ${svn_write}/contribs/$contrib/${current_version} ${svn_read}/contribs/$contrib/${current_version}
     svn up
 fi
 
 # now switch to the correct location
 if [[ "$version" == "trunk" ]]; then
     svn switch ${svn_read}/contribs/$contrib/trunk
-    svn switch --relocate ${svn_write}/contribs/$contrib/trunk
+    svn switch --relocate ${svn_read}/contribs/$contrib/trunk ${svn_write}/contribs/$contrib/trunk
     svn up
 else
     svn switch ${svn_read}/contribs/$contrib/$version

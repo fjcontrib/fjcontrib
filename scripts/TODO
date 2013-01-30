@@ -1,0 +1,11 @@
+- get rid of contribs.local
+  get the version number from svn
+- when there are svn modifications, ask if one wants to proceed
+- use tags/..., trunk branches/... in contribs.svn
+- allow update-contribs [contribname]
+  allow update-contribs [contribname] [version]
+- when cd'ing in a dir, make sure it exists
+
+Questions:
+----------
+ - make-release.sh: do we want to check that we're in the trunk?

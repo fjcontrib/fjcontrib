@@ -3,3 +3,20 @@
 Questions:
 ----------
  - make-release.sh: do we want to check that we're in the trunk?
+
+
+Mailing lists
+--------------------
+- <fastjet@projects.hepforge.org> [=Gregory,Matteo,Gavin + possible volunteers]
+
+  anyone can write to it, subscriptions are restricted 
+
+- current <fastjet-announce@projects.hepforge.org> is used to make announcements
+  about it
+
+- <fastjet-contrib-authors@projects.hepforge.org>
+
+  - it's for the librarians to contact contrib authors
+  - anyone signed up can write to it (or just librarians?)
+  - only those who have requested write access to the svn get signed up to it
+

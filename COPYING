@@ -1,3 +1,10 @@
+The fastjet-contrib project serves as a "container" for 3rd party
+contributions to FastJet. The container itself is released under the
+GNU General Public License v2.
+
+Individual contributions may be released under different
+licenses. Check their COPYING files for details.
+
 ======================================================================
 ======================================================================
 ======================================================================

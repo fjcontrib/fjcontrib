@@ -2,8 +2,7 @@ This is the README file for the fastjet-contrib project
 
      http://fastjet.hepforge.org/contrib/
 
-which provides a library of 3rd-party add-ons to FastJet
-(http://fastjet.fr/) 
+which provides a library of 3rd-party add-ons to FastJet (http://fastjet.fr/) 
 
 ======================================================================
 Instructions for generic users
@@ -21,6 +20,12 @@ Once you have installed, a contrib named XYZ will typically be
 accessible through a line
 
 #include "fastjet/contrib/XYZ.hh"
+
+Queries about the fastjet-contrib project as a whole should be sent to
+<fastjet@projects.hepforge.org> 
+
+Queries about individual contribs should be sent to the people
+mentioned in the contrib/AUTHORS file
 
 ======================================================================
 For users who want the latest version (and for developers)
@@ -48,13 +53,12 @@ To get updates at a later stage:
 For developers of existing contribs
 -----------------------------------
 
-If you've followed the above instruction, switch your contrib from its
-current version (usually a tag) to its trunk:
+If you've followed the above "svn checkout" instructions, switch your
+contrib from its current version (usually a tag) to its trunk:
 
    ./scripts/update-contribs.sh ContribName trunk
 
-[If you're savvy, you already know the svn commands for doing this;
-the script just helps you with them...]
+[This can also be done manuall with the relevant svn commands]
 
 Work in ContribName/ as usual, committing your work as you go
 along. When you are ready for a new release, make sure the VERSION
@@ -64,7 +68,7 @@ committed, and then from the fjcontrib directory
   make check                  
   ./scripts/make-release.sh ContribName 
 
-Then write to fastjet-contrib-librarians@hepforge.org to make that
+Then write to fastjet@hepforge.org to make that
 version the default in the fastjet-contrib trunk.
 
 ======================================================================
@@ -81,7 +85,7 @@ repository, but you can already start developing it locally.
 When you're ready for version control, send a mail to 
 
   TO: admin@hepforge.org
-  CC: fastjet-contrib-librarians@projects.hepforge.org
+  CC: fastjet@projects.hepforge.org
 
 to get write access to the fastjet-contrib repository for you and any
 co-developers. Once you have it, register your contrib in the fastjet

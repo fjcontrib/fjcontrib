@@ -50,7 +50,7 @@ echo "$name successfully created from Template. Rerun ./configure"
 echo "for it to be included in your builds."
 echo
 echo "Once you are ready to make it public, write to "
-echo "fastjet-contrib-librarians@projects.hepforge.org "
+echo "fastjet@projects.hepforge.org "
 echo "to obtain write access to the fastjet-contrib svn repository "
 echo
 echo "You may then start to upload your contrib by running "

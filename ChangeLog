@@ -4,6 +4,9 @@
 	added a template reference output file for make check with
 	instruction on what to do with it.
 
+	* scripts/new-contrib-template.sh -> scripts/new-contrib-from-template.sh
+	a more meaningful name.
+
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
 	* scripts/internal/check.sh:

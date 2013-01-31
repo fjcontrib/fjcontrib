@@ -23,6 +23,7 @@
 #include <sstream>
 
 #include "fastjet/PseudoJet.hh"
+#include <sstream>
 #include "Template.hh" // In external code, this should be fastjet/contrib/Template.hh
 
 using namespace std;
@@ -36,11 +37,6 @@ int main(){
 
   //----------------------------------------------------------
   // read in input particles
-  //
-  // since we use here simulated data we can split the hard event
-  // from the full (i.e. with pileup added) one
-  //
-  // (see also example 07 in FastJet)
   vector<PseudoJet> event;
   read_event(event);
   cout << "# read an event with " << event.size() << " particles" << endl;
@@ -51,6 +47,7 @@ int main(){
   return 0;
 }
 
+// read in input particles
 void read_event(vector<PseudoJet> &event){  
   string line;
   while (getline(cin, line)) {

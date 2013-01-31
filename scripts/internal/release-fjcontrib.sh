@@ -76,7 +76,7 @@ fi
 echo "------------------------------------------------------------------------"
 echo "Releasing the fjcontrib version $version"
 svn copy -m "releasing fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
-#  
+
 #========================================================================
 # produce a tarball
 #========================================================================
@@ -106,3 +106,12 @@ echo
 echo "Success."
 echo
 
+#========================================================================
+# update things on HepForge
+#========================================================================
+echo "Updating the Hepforge project"
+
+echo "Uploading the tarball"
+scp fjcontrib-$version.tar.gz login.hepforge.org:~fastjet/downloads/
+
+echo "TODO: update the webpages"

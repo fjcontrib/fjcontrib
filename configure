@@ -256,8 +256,8 @@ TAB="$(printf '\t')"
 # alternatively we could build this from the Makefile.in
 # prefix variable
 
-# note that teh apparently bizarre construct below ensures that the
-# appropriate character are escaped in the sed replacement
+# note that the apparently bizarre construct below ensures that the
+# appropriate characters are escaped in the sed replacement
 escaped_built_list="$(echo ${built_contribs} | sed -e 's/[\/&]/\\&/g')"
 escaped_fjconfig="$(echo ${fjconfig} | sed -e 's/[\/&]/\\&/g')"
 escaped_prefix="$(echo ${prefix} | sed -e 's/[\/&]/\\&/g')"

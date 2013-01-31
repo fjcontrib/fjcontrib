@@ -1,5 +1,9 @@
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
+	* README:
+	mentioned new-contrib-from-template.sh instead of
+	new-contrib-template.sh
+
 	* scripts/internal/check.sh:
 	checked that the expected output contains more than comments and
 	empty lines

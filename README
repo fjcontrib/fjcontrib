@@ -73,7 +73,7 @@ To start a new contrib
 
 To get a template with all the basic files you need, run
 
-  ./scripts/new-contrib-template.sh ContribName
+  ./scripts/new-contrib-from-template.sh ContribName
 
 This doesn't yet create anything in the fastjet contrib svn
 repository, but you can already start developing it locally. 

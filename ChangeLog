@@ -1,5 +1,8 @@
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
+	* scripts/make-release.sh -> scripts/release-contrib.sh:
+	renamed for more consistency
+
 	* scripts/internal/switch-to-version.sh:
 	if the version starts with a digit, prefix it by "tags/"
 

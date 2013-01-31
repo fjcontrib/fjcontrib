@@ -19,9 +19,8 @@ while ($line = <VERSIONS>) {
     $contrib = $1;
     $version = $2;
     if ($version =~ /^[0-9]/) {$version = "tags/$version";}
-    print STDERR $version,"\n";
     ($textversion = $version) =~ s/tags\///;
-    $list .= "<td> $contrib </td> <td> </td> <td> $textversion </td> <td>";
+    $list .= "<tr> <td> $contrib </td> <td> </td> <td> $textversion </td> <td>";
     if (-e "$contrib/README") {
       $list .= '<a href="'.$svn.$contrib.'/'.$version.'/README">README</a> ';
     }
@@ -41,6 +40,7 @@ Version '.$topversion.' of FastJet Contrib is distributed with the following pac
 
 <table>
 <tr><td> Package </td><td></td> <td>  Version </td> <td> </td>  </tr> 
+<tr></tr>
 ';
 
 $tail='

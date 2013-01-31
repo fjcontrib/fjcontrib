@@ -21,6 +21,8 @@ accessible through a line
 
 #include "fastjet/contrib/XYZ.hh"
 
+with the corresponding library available through -lXYZ .
+
 Queries about the fastjet-contrib project as a whole should be sent to
 <fastjet@projects.hepforge.org> 
 
@@ -46,63 +48,12 @@ one svn checkout for each contrib. Then proceed with configure, make, etc.
 
 To get updates at a later stage:
 
-  ./scripts/update-contribs.sh               # top-level directory & all contribs
-  ./scripts/update-contribs.sh  ContribName  # top-level directory & just a specific contrib
+  ./scripts/update-contribs.sh                       # all contribs
+  ./scripts/update-contribs.sh  ContribName          # just a specific contrib
+  ./scripts/update-contribs.sh  ContribName version  # specific version of a contrib
 
-======================================================================
-For developers of existing contribs
------------------------------------
+The command always updates the top level directory. If "version" is
+"trunk", then you get the development area for the Contrib -- do this
+only if you're a developer of that contrib.
 
-If you've followed the above "svn checkout" instructions, switch your
-contrib from its current version (usually a tag) to its trunk:
-
-   ./scripts/update-contribs.sh ContribName trunk
-
-[This can also be done manuall with the relevant svn commands]
-
-Work in ContribName/ as usual, committing your work as you go
-along. When you are ready for a new release, make sure the VERSION
-file contains the new version number, ChangeLog and NEWS files are all
-committed, and then from the fjcontrib directory
-
-  make check                  
-  ./scripts/make-release.sh ContribName 
-
-Then write to fastjet@hepforge.org to make that
-version the default in the fastjet-contrib trunk.
-
-======================================================================
-To start a new contrib
-----------------------
-
-To get a template with all the basic files you need, run
-
-  ./scripts/new-contrib-from-template.sh ContribName
-
-This doesn't yet create anything in the fastjet contrib svn
-repository, but you can already start developing it locally. 
-
-When you're ready for version control, send a mail to 
-
-  TO: admin@hepforge.org
-  CC: fastjet@projects.hepforge.org
-
-to get write access to the fastjet-contrib repository for you and any
-co-developers. Once you have it, register your contrib in the fastjet
-config svn:
-
-  ./scripts/register-new-contrib.sh ContribName
-
-Your ContribName directory will now point to the appropriate place in
-the repository. You will still need to add the individual files inside
-your contrib and commit them.
-
-At this stage, people who check out the top-level fastjet contrib
-directory will by default not see your contrib. Your co-developers can
-get the trunk, by checking out the top-level directory (see above)
-
-  ./scripts/update-contribs.sh ContribName trunk
-
-Once you're happy with the state of your contrib, you can then make
-a release with the ./scripts/make-release.sh command.
-
+For further information on development, see the file DEVEL-GUIDELINES.

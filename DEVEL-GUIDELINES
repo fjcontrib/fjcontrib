@@ -1,0 +1,168 @@
+Guidelines for the FastJet Contrib area
+---------------------------------------
+
+The FastJet contrib area is intended for developers of FastJet-related
+C++ tools, so as to provide easy access to their work in a common,
+publicly accessible location.
+
+If you wish to add code to the fastjet-contrib repository, please
+follow the guidelines indicated below, intended to give users a
+reasonably uniform experience and to facilitate versioning and quality
+control.
+
+For further information about making contributions, please contact
+fastjet@projects.hepforge.org
+
+======================================================================
+Basic developer usage
+=====================
+       
+   # check out the overall contrib directory
+   svn checkout http://fastjet.hepforge.org/svn/contrib/trunk fjcontrib
+   cd fjcontrib
+
+   # get the existing contribs 
+   scripts/update-contribs.sh
+
+   # start your own new contrib (*), which produces a template
+   # for the contrib, including a basic Makefile (further info below)
+   scripts/new-contrib-from-template.sh ContribName
+
+   # once you have something worth committing, write to
+   # <fastjet@projects.hepforge.org> to get write access to the
+   # fjcontrib svn, and then run
+   scripts/register-new-contrib.sh ContribName
+
+   # within your pre-existing ContribName/ directory you can now "svn
+   # add" your files, commit them etc.
+
+   # when you're ready to make a versioned release, make sure that
+   #   - all required files (AUTHORS, COPYING, NEWS etc.) are up to date
+   #   - VERSION includes the version number for the release
+   #   - "make check" and "make install" both work
+   #   - everything is committed
+   # then run
+   scripts/release-contrib.sh ContribName
+   
+   # send a mail to fastjet@projects.hepforge.org with a request for
+   # that version to be made public
+   
+
+(*) When you check out a fresh copy of the overall fjcontrib directory, you
+can obtain the development version of your "registered" contrib with
+
+   scripts/update-contrib.sh ContribName trunk
+
+Please refrain from developing other people's contribs without first
+consulting them!
+
+Note: currently there is no mechanism for handling external
+dependencies (root, gsl, etc.), nor for handling dependencies between
+different contribs.
+
+======================================================================
+Further details
+===============
+
+Each contribution is the responsibility of its authors. The FastJet
+authors will not provide direct support. 
+
+Each contribution must be in a directory of its own. The name of the
+directory will also by default be used for the library component.
+
+Each contribution should be made available under the terms of the GNU
+General Public License (v2 or later), or if the author wishes, under a
+more permissive license that is compatible with the GNU GPL.
+
+Each contribution should include the following files (automatically
+put in place when you run scripts/new-contrib-from-template.sh, see below):
+
+ - COPYING: giving license information
+
+ - AUTHORS: names of authors, including current email addresses
+
+ - README: giving a basic explanation of the scope and usage of the
+   contrib and indication of which work should be cited by users of
+   your code. Please mention any external dependencies, e.g. ROOT,
+   GSL, Boost, etc.   
+
+ - at least one example program (e.g. example.cc) using the contrib
+   tool or plugin, together with a file containing the expected
+   output (example.ref).
+
+ - VERSION: a version number, e.g. 1.0.x, which would be updated to
+   2.0.x in the event of a major change.
+
+ - NEWS: to indicate what has changed in each new version
+
+ - ChangeLog: finer grained details of day-to-day changes
+
+
+======================================================================
+Build system
+============
+
+Each contribution should include a Makefile. A reasonable default
+is generated when you run scripts/new-contrib-from-template.sh
+
+A few variables appearing at the top of the Makefile may need to be
+modified:
+
+  - NAME
+  - SRCS
+  - EXAMPLES
+  - INSTALLED_HEADERS
+
+Additionally you will need to ensure that "make check" works. By
+default it does the following:
+
+  - builds the "example" program,
+  - runs it, reading ../data/single-event.dat from standard input
+  - compares the output to the "example.ref" file (after stripping
+    lines that started with "#")
+  
+In most cases, to get "make check" to work, it is sufficient to
+replace the template's example.ref file with the correct output from
+your program. If you want to use a different input file, modify the
+relevant line in the Makefile.
+
+You may also write your own Makefile (or adapt one from
+scripts/internal/Template/Makefile ). In this case 
+
+ - It should prominently define a variable FASTJETCONFIG
+   near the beginning of the file. By default FASTJETCONFIG should be
+   set to fastjet-config, i.e. the contribution should build out of
+   the box if fastjet-config is in the user's path.
+
+ - It should include the following targets
+    . all
+    . check
+    . install
+    . examples
+    . clean
+    . distclean
+   
+
+======================================================================
+Structure of the svn repository
+===============================
+
+The repository at
+
+   http://fastjet.hepforge.org/svn/contrib/                    (read-only)
+   svn+ssh://svn.hepforge.org/hepforge/svn/fastjet/contrib/    (read-write)
+
+is organised as follows:
+
+  # area for the overall fastjet-contrib scripts and information about
+  # currently used version of individual contribs
+  #
+  trunk/    # development version
+  tags/     # official releases 
+  branches/ # branches
+
+  # areas for individual contribs
+  contribs/ContribName/trunk        # development version
+  contribs/ContribName/tags         # official releases
+  contribs/ContribName/branches     # branches
+

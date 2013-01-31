@@ -1,7 +1,17 @@
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
+	* scripts/internal/check.sh:
+	default extension for expected output set to "ref"
+
+	* scripts/internal/Template/example.cc:
+	added missing header
+
+	* scripts/internal/Template/Makefile
+	* scripts/internal/check.sh:
+	fixed some bash typos
+
 	* scripts/switch-to-version.sh:           *** DELETED ***
-	* scripts/internal/switch-to-version.sh:  *** ADDED ***
+	* scripts/internal/switch-to-version.sh:   *** ADDED ***
 	* scripts/update-contribs.sh:
 	moved switch-to version in internal/
 

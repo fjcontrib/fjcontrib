@@ -1,5 +1,9 @@
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
+	* scripts/update-contribs.sh:
+	if the svn up updated the update-contribs.sh script, re-run with
+	the new version
+
 	* AUTHORS:                   *** ADDED ***
 	* COPYING:                   *** ADDED ***
 	* scripts.internal/Template/COPYING:

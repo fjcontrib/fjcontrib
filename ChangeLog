@@ -1,5 +1,8 @@
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
+	* VERSION:          *** ADDED ***
+	added a VERSION file
+
 	* scripts/internal/switch-to-version.sh:
 	* scripts/register-new-contrib.sh:
 	* scripts/new-contrib-from-template.sh:

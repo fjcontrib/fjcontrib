@@ -166,3 +166,8 @@ is organised as follows:
   contribs/ContribName/tags         # official releases
   contribs/ContribName/branches     # branches
 
+Within the main fastjet contrib directory, the file "contribs.svn"
+file indicates which contribs (and their version) are to be extracted
+by scripts/update-contribs.sh
+
+

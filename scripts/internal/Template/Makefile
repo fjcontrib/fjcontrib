@@ -17,7 +17,6 @@ LDFLAGS=-lm $(shell $(FASTJETCONFIG) --libs)
 
 OBJS  = $(SRCS:.cc=.o)
 EXAMPLES_SRCS  = $(EXAMPLES:=.cc)
-EXAMPLES_OBJS  = $(EXAMPLES:=.o)
 
 install = $(SHELL) ../scripts/internal/install-sh
 install_HEADER  = $(install) -c -m 644

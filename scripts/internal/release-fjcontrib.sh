@@ -9,18 +9,19 @@
 
 # make sure that everything is committed
 if [[ ! -z "`svn status --show-updates | grep -v "^?" | grep -v "^Status"`" ]]; then
-    echo "There are pending morifications or updates. Aborting"
+    echo "There are pending modifications or updates. Aborting"
     exit 1
 fi
 . `dirname $0`/common.sh
-get_yesno_answer "Do you want to proceed with the release of fjcontrib-$version?" &&  exit 1
-
 # make sure there is a VERSION and it does not already exist
 version=`head -n1 VERSION`
 if [[ ! -z $(svn ls $svn_read/tags || grep "^$version/") ]]; then
     echo "Version $version of fjcontrib already exists. Aborting"
     exit 1
 fi
+
+get_yesno_answer "Do you want to proceed with the release of fjcontrib-$version?" &&  exit 1
+
 
 #========================================================================
 # check that the tools in contribs.list behave OK
@@ -42,7 +43,41 @@ fi
 
 echo "------------------------------------------------------------------------"
 echo "Configuring"
-if ./configure; then
+
+# we need to determine whether to use fastjet-config from the path or
+# use the one from the configure invocation in the trunk
+is_in_path="yes"
+which fastjet-config > /dev/null || is_in_path="no"
+
+trunk_version=""
+if [[ -e "../Makefile" ]]; then
+    trunk_version=$(head -n3 ../Makefile | tail -n1 | grep "\--fastjet-config=" | sed 's/.*--fastjet-config=//;s/ .*$//')
+fi
+
+if [[ -z "$trunk_version" ]]; then
+    if [[ "$is_in_path" == "no" ]]; then
+	echo "fasjet-config is not in your path and cannot be obtained from the trunk configuration. Aborting."
+	cd ..
+	exit 1
+    else
+	echo "Using fasjet-config from your path"
+	configure_options=""
+    fi
+else
+    if [[ "$is_in_path" == "no" ]]; then
+	echo "using fasjet-config from the trunk configuration"
+	configure_options=" --fastjet-config=${trunk_version}"
+    else
+	echo "fastjet-config can be either taken from your path or from $trunk_version."
+	configure_options=""
+	get_yesno_answer "Do you want to use the one from your trunk?" || {
+	    configure_options=" --fastjet-config=${trunk_version}"
+	}
+	    
+    fi
+fi
+
+if ./configure $configure_options; then
     echo "Success."
     echo
 else
@@ -74,7 +109,7 @@ fi
 # tag the release
 #=======================================================================
 echo "------------------------------------------------------------------------"
-echo "Releasing the fjcontrib version $version"
+echo "Releasing fjcontrib version $version"
 svn copy -m "releasing fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
 
 #========================================================================
@@ -98,6 +133,19 @@ else
     exit 1
 fi
 
+# get rid of a few things for developers and "svn-users" only
+mkdir tmp
+for fn in check.sh install-sh; do
+    mv scripts/internal/${fn} ./tmp
+done
+rm -Rf scripts
+mkdir scripts
+mkdir scripts/internal
+for fn in tmp/*; do
+    mv $fn scripts/internal/${fn#tmp/}
+done
+rm DEVEL-GUIDELINES
+
 cd ..
 echo "Producing fjcontrib-$version.tar.gz"
 tar --exclude=".svn" -czf fjcontrib-$version.tar.gz fjcontrib-$version
@@ -114,4 +162,16 @@ echo "Updating the Hepforge project"
 echo "Uploading the tarball"
 scp fjcontrib-$version.tar.gz login.hepforge.org:~fastjet/downloads/
 
-echo "TODO: update the webpages"
+mkdir hepforge_tmp
+echo "Generating info for the webpage"
+echo -n "$version" > hepforge_tmp/fjcversion.php
+`dirname $0`/generate-html-contents.pl > hepforge_tmp/contents-$version.html
+
+echo "Uploading info for the webpage"
+scp hepforge_tmp/* login.hepforge.org:~fastjet/public_html/contrib/
+rm -Rf hepforge_tmp
+echo
+echo "Done"
+echo
+
+

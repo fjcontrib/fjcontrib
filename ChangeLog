@@ -1,5 +1,13 @@
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
+	* scripts/internal/release-fjcontrib.sh:
+	  . removed unneeded developer and svn-users files from the
+	    tarball
+	  . fixed a few typos and trivial bugs
+	  . check which fastjet-config to use when running tests
+	  . the script now upload the tarball and the relevant info for
+	    the webpage update
+
 	* scripts/internal/generate-html-contents.pl:
 	played with CSS styles so as to get a result that looks rather
 	close to what is on the FastJet tools page

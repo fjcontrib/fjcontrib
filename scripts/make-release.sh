@@ -23,7 +23,7 @@ fi
 #------------------------------------------------------------------------
 # make sure all the required files are present
 cd $contrib
-mandatory_files="VERSION"
+mandatory_files="AUTHORS COPYING NEWS README VERSION"
 missing_mandatory=""
 missing_mandatory_on_svn=""
 for fname in $mandatory_files; do

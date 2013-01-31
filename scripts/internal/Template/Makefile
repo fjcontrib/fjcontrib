@@ -47,7 +47,7 @@ $(EXAMPLES): % : %.o all
 # check that everything went fine
 check: examples
 	@for prog in $(EXAMPLES); do\
-	  ../utils/check.sh ${prog} ../data/single-event.dat || exit 1 \
+	  ../scripts/internal/check.sh $${prog} ../data/single-event.dat || exit 1; \
 	done
 	@echo "All tests successful"
 

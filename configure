@@ -33,13 +33,14 @@ This is a FastJet-contrib tool to configure the behaviour of
 the build and installation.
 
 Usage:
-  configure [--help] [--list] [--fjconfig=FILE] [--prefix=PREFIX]
+  configure [--help] [--list] [--fastjet-config=FILE] [--prefix=PREFIX]
 
 The arguments can be the following [default in square brackets]:
 
   --help            prints this message and exits
   --list            prints the list of existing contribs and exits
-  --fjconfig=FILE   sets the 'fastjet-config' file to use [$fjconfig]
+  --fastjet-config=FILE  
+                    sets the 'fastjet-config' file to use [$fjconfig]
   --prefix=PREFIX   sets the installation directory [prefix returned by fastjet-config]
   --only=Contrib1,Contrib2,... 
                     only configures for compilation selected contribs 
@@ -93,9 +94,6 @@ is_in_list(){
 # first deal with the case where no argument is passed
 #[ $# -gt 0 ] || usage 1
 
-#arg_flag_list="help list"
-#arg_val_list="prefix only exclude"
-
 for arg do
     case "$arg" in
         --help|-h)
@@ -112,7 +110,7 @@ for arg do
                 prefix)
                     prefix="$arg_value"
                     ;;
-                fjconfig)
+                fastjet_config)
                     fjconfig="$arg_value"
                     ;;
                 only)

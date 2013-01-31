@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Usage:
-#   new-contrib-template.sh <new_contrib_name>
+#   scripts/new-contrib-from-template.sh <new_contrib_name>
 #
 # create the structure of a new contrib
 
@@ -10,25 +10,26 @@
 if [ "x$1" == "x" ]; then
     echo ""
     echo "Usage:"
-    echo "  new-contrib-template.sh <new_contrib_name>"
+    echo "  $0 <new_contrib_name>"
     echo ""
+    exit 1
+fi
+
+name=$1
+#------------------------------------------------------------------------
+# make sure the name has not already been used
+if [ -e $name ]; then
+    echo "The $name contrib already exists. Please choose a different name"
     exit 1
 fi
 
 echo "Creating contrib "$1
 
-name=$1
 name_lower=`echo ${name} | tr A-Z a-z`
 name_upper=`echo ${name} | tr a-z A-Z`
 date=`date "+%Y-%m-%d"`
 user=`whoami`
 
-#------------------------------------------------------------------------
-# make sure the name has not already been used
-if [ -e $name ]; then
-    echo "This contrib already exists. Please choose a different name"
-    exit 1
-fi
 
 #------------------------------------------------------------------------
 # create the structure
@@ -45,7 +46,7 @@ for fn in `dirname $0`/internal/Template/*; do
          ${fn} > ${stripped//Template/${name}}
 done
 echo "----------------------------------------------------------------------"
-echo "Template for $name successfully created. Rerun ./configure"
+echo "$name successfully created from Template. Rerun ./configure"
 echo "for it to be included in your builds."
 echo
 echo "Once you are ready to make it public, write to "

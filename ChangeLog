@@ -1,3 +1,8 @@
+2013-01-31  Gavin Salam  <gavin.salam@cern.ch>
+
+	* scripts/update-contribs.sh: 
+	added -h option to update-contribs.sh
+
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
 	* scripts/update-contribs.sh:

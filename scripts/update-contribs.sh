@@ -16,6 +16,19 @@
 #    no modification in their svn
 #  - update all the contribs that need to be updated
 
+if [[ $# -ge 1 && x"$1" == x'-h' ]]; then
+    echo
+    echo "Usage: "
+    echo "       $0 [ContribName [version]] "
+    echo 
+    echo "- without any arguments, all contribs are updated (or downloaded if missing)"
+    echo "- with the ContribName argument, just that contrib is updated"
+    echo "- with additionally the version argument, the contrib is updated"
+    echo "  (or switched) to the requested version. E.g. 'trunk' or 'tags/1.0' "
+    echo
+    exit 0
+fi
+
 . `dirname $0`/internal/common.sh
 
 internal_directories="_,scripts,Template,data,_"
@@ -39,7 +52,9 @@ fi
 
 #----------------------------------------------------------------------
 # if there are two arguments, just call switch-to-version
+
 if [[ $# -gt 1 ]]; then
+
     # just call switch-to-version
     `dirname $0`/internal/switch-to-version.sh $*
     exit 0

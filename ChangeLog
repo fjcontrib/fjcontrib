@@ -1,5 +1,9 @@
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
+	* scripts/new-contrib-template.sh:   *** ADDED ***
+	* scripts/internal/Template:         *** ADDED ***
+	added a template to create a new contrib and is associated script
+
 	* scripts/TODO:
 	updated to reflect altest changes
 

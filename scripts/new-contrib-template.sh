@@ -44,8 +44,17 @@ for fn in `dirname $0`/internal/Template/*; do
          s/xxxx@localhost/${user}@localhost/g"\
          ${fn} > ${stripped//Template/${name}}
 done
+echo "----------------------------------------------------------------------"
+echo "Template for $name successfully created. Rerun ./configure"
+echo "for it to be included in your builds."
 echo
-echo "Template for $name created successfully."
-echo "To register it on the fastjet-contrib svn repository, run"
-echo "  scripts/register-new-contrib.sh ${name}"
+echo "Once you are ready to make it public, write to "
+echo "fastjet-contrib-librarians@projects.hepforge.org "
+echo "to obtain write access to the fastjet-contrib svn repository "
 echo
+echo "You may then start to upload your contrib by running "
+echo
+echo "    scripts/register-new-contrib.sh ${name}"
+echo
+echo "and following the instructions (details are in the README file)"
+echo "----------------------------------------------------------------------"

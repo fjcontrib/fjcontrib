@@ -21,16 +21,6 @@ fi
 # decide wich version number to use
 version=$2
 if [[ -z "$version" ]]; then
-    # echo "A version has to be specified"
-    # 
-    # # if the contrib is a valid one list the possible tags
-    # if [ ! -z "`svn ls $svn_read/contribs | grep '^'$contrib'/$'`" ]; then
-    # 	echo "Possible tagged (released) versions are:"
-    # 	svn ls $svn_read/contribs/$contrib/tags | sed 's/\/$//g;s/^/  tags\//g'
-    # fi
-    # 
-    # exit 1
-    
     # get the version from the svn list
     get_contrib_version $contrib contribs.svn version_svn
     if [[ "$version_svn" == "[None]" ]]; then
@@ -48,8 +38,13 @@ fi
 
 # decide which access mode we want
 mode="ro"
-if [[ "$version" == "$trunk" ]]; then
+if [[ "$version" == "trunk" ]]; then
     mode="rw"
+fi
+
+# if the version starts with a number, prefix it by "tags/"
+if [[ "$version" =~ ^[0-9] ]]; then
+    version="tags/$version"
 fi
 
 # get the current situation

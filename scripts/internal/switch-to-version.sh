@@ -9,7 +9,7 @@
 # access; otherwise, we use a read-only (http) access.
 
 # load some common utilities
-. `dirname $0`/internal/common.sh
+. `dirname $0`/common.sh
 
 # make sure a contrib is specified
 contrib=$1

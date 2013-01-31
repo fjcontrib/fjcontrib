@@ -1,5 +1,10 @@
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
+	* scripts/switch-to-version.sh:           *** DELETED ***
+	* scripts/internal/switch-to-version.sh:  *** ADDED ***
+	* scripts/update-contribs.sh:
+	moved switch-to version in internal/
+
 	* scripts/new-contrib-template.sh:   *** ADDED ***
 	* scripts/internal/Template:         *** ADDED ***
 	added a template to create a new contrib and is associated script

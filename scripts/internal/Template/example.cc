@@ -19,7 +19,10 @@
 // along with this code. If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------
 
-#include <fastjet/PseudoJet.hh>
+#include <iostream>
+#include <sstream>
+
+#include "fastjet/PseudoJet.hh"
 #include "Template.hh" // In external code, this should be fastjet/contrib/Template.hh
 
 using namespace std;

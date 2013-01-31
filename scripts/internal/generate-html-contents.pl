@@ -20,7 +20,7 @@ while ($line = <VERSIONS>) {
     $version = $2;
     if ($version =~ /^[0-9]/) {$version = "tags/$version";}
     ($textversion = $version) =~ s/tags\///;
-    $list .= "<tr> <td> $contrib </td> <td> </td> <td> $textversion </td> <td>";
+    $list .= "<tr> <td class=\"contribname\"> $contrib </td> <td style=\"{text-align:center;}\"> $textversion </td> <td>";
     if (-e "$contrib/README") {
       $list .= '<a href="'.$svn.$contrib.'/'.$version.'/README">README</a> ';
     }
@@ -34,13 +34,37 @@ while ($line = <VERSIONS>) {
 $head='
 <html>
 <head>
+<style type="text/css">
+.contriblist table,.contriblist tr,.contriblist td,.contriblist th {
+  text-align:center;
+  border:1px solid white;
+  padding:4px;
+  padding-right:26px;
+}
+td.contribname {
+  background-color:#eeeeee;
+  text-align:left;
+}
+th.contriblist {
+  text-align:center;
+  padding:6px;
+  padding-left:16px;
+  padding-right:16px;
+  background-color:#dddddd;
+}
+td.spanned {
+  text-align:center;
+  background-color:#dddddd;
+}
+</style>
 </head>
 <body>
 Version '.$topversion.' of FastJet Contrib is distributed with the following packages<p>
 
-<table>
-<tr><td> Package </td><td></td> <td>  Version </td> <td> </td>  </tr> 
-<tr></tr>
+<table class="contriblist">
+<tr><th class="contriblist">Package</th> 
+    <th class="contriblist">Version</th>
+    <th class="contriblist">Information</th> </tr> 
 ';
 
 $tail='

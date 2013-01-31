@@ -56,7 +56,14 @@ fi
 get_svn_info $contrib current_mode current_version
 if [[ "$version" == "$current_version" ]]; then
     if [[ "$mode" == "$current_mode" ]]; then
-	echo "  Already at the requested version. No update needed"
+	if [[ "$version" != "["*"]" ]]; then
+	    echo "  Already at the requested version. Simply run svn up"
+	    cd $contrib
+	    svn up
+	    cd ..
+	else 
+	    echo "  Already at the requested version."
+	fi	
 	exit 0
     fi
 fi

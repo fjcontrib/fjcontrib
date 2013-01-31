@@ -1,5 +1,12 @@
 2013-01-30  Gregory Soyez  <soyez@fastjet.fr>
 
+	* scripts/switch-to-version.sh:
+	* scripts/update-contribs.sh:
+	if the versions agree, still run svn up
+
+	* scripts/internal/common.sh:
+	make sure the full contrib name is specified
+
 	* scripts/update-contribs.sh:
 	when updating a specified contrib, ask for confirmation
 

@@ -22,7 +22,7 @@ internal_directories="_,scripts,Template,data,_"
 
 #----------------------------------------------------------------------
 # update svn
-svn up || { echo "Failed to update svn. Aborting"; exit 1; }
+#svn up || { echo "Failed to update svn. Aborting"; exit 1; }
 
 #----------------------------------------------------------------------
 # if there are two arguments, just call switch-to-version
@@ -53,7 +53,14 @@ for contrib in $svn_contrib_list; do
     # check which situation we are in
     if [[ "${version_svn}" == "${version_local}" ]]; then
         # match: nothing to do
-	echo "you have the current version (${version_svn})"
+	if [[ "$version" != "["*"]" ]]; then
+	    echo "you have the current version (${version_svn}). Running svn up"
+	    cd $contrib
+	    svn up
+	    cd ..
+	else 
+	    echo "you have the current version (${version_svn})"
+	fi	
     else
 	# mismatch: show the versions and decide what to do
 	# according to the type of mismatch

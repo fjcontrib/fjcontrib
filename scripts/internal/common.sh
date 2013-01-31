@@ -61,7 +61,7 @@ function get_contrib_version(){
     fi
 
     # now deal with it as if it was a 
-    entry=$(grep "^$1" $2)
+    entry=$(grep "^$1 " $2)
     if [ -z "$entry" ]; then
 	eval $__resultvar="[None]"
     else

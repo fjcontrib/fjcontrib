@@ -75,11 +75,12 @@ function get_contrib_version(){
 function get_yesno_answer(){
     while true; do
 	echo -ne "$1 [y/n] "
-	if [[ -z "$default_yesno_answer" ]]; then
+	if [[ -z "$2" ]]; then
 	    read answer
 	else
-	    answer="$default_yesno_answer"
-	    echo "$default_yesno_answer"
+	    answer="$2"
+	    # TODO: add a test that the answer is a valid one
+	    echo "$2"
 	fi
 	case $answer in
 	    y|Y|yes) return 1; break ;;

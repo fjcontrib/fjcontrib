@@ -107,14 +107,14 @@ for contrib in $svn_contrib_list; do
 	echo "    local version: "${version_local}
 	if [[ "${version_local}" == "[None]" ]]; then
 	    # the local version does not exist! Ask if we want to install it
-	    get_yesno_answer "  Do you want to install the svn version?" || {
+	    get_yesno_answer "  Do you want to install the svn version?" "$default_yesno_answer" || {
 		`dirname $0`/internal/switch-to-version.sh $contrib $version_svn
 	    }
 	elif [[ "${version_local}" == "[NoSVN]" ]]; then
 	    echo "You have an unversionned copy of $contrib in the way. It will not be updated."
 	else
 	    # the local version exists! Ask if we want to update it
-	    get_yesno_answer "  Do you want to update your local version to the svn one?" || {
+	    get_yesno_answer "  Do you want to update your local version to the svn one?" "$default_yesno_answer" || {
 		`dirname $0`/internal/switch-to-version.sh $contrib $version_svn
 	    }
 	fi
@@ -139,7 +139,7 @@ for contrib in $(ls -d */ || sed 's/\/*//g'); do
 
     if [[ "$version" == "tags/"* ]]; then
 	echo "${contrib}: your local copy ($version) does not appear in the default svn-suppoerted list."
-	get_yesno_answer "  Do you want to remove the local version?" || {
+	get_yesno_answer "  Do you want to remove the local version?" "$default_yesno_answer" || {
 	    rm -Rf $contrib
 	}
 	echo

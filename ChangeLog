@@ -1,5 +1,18 @@
 2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
 
+	* scripts/internal/generate-html-contents.pl:
+	played with CSS styles so as to get a result that looks rather
+	close to what is on the FastJet tools page
+
+	* scripts/internal/common.sh:
+	* scripts/update-contribs.sh:
+	passed the default answer to get_yesno_answer as an argument
+	rather than a pre-defined variable
+
+	* scripts/internal/release-fjcontrib.sh:
+	added a script to release fj-contrib
+	it includes all the contrib in contribs.svn
+
 	* configure:
 	* README:
 	used --fastjet-config=... rather than --fjconfig=... to specify

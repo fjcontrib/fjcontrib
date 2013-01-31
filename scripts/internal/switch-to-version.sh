@@ -12,7 +12,7 @@
 . `dirname $0`/common.sh
 
 # make sure a contrib is specified
-contrib=$1
+contrib=${1%/}
 if [[ -z "$contrib" ]]; then
     echo "A contrib name has to be specified"
     exit 1

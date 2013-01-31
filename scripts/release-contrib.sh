@@ -6,7 +6,7 @@
 #   scripts/make_release.sh <ContribName>
 
 # make sure we have an argument and it exists
-contrib=$1
+contrib=${1%/}
 if [ -z $contrib ]; then
     echo "Usage:"
     echo "  register-new-contrib.sh <ContribName>"
@@ -58,7 +58,7 @@ check_pending_modifications $contrib || {
 #------------------------------------------------------------------------
 # decide the version number
 cd $contrib
-version=`cat VERSION`
+version=`head -1 VERSION`
 
 #------------------------------------------------------------------------
 # ask confirmation that we can proceed with the release

@@ -14,7 +14,7 @@
 . `dirname $0`/internal/common.sh
 
 # make sure we have an argument
-contrib=$1
+contrib=${1%/}
 if [ -z $contrib ]; then
     echo "Usage:"
     echo "  register-new-contrib.sh <ContribName>"

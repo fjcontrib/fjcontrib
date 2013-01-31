@@ -1,3 +1,12 @@
+2013-01-31  Gregory Soyez  <soyez@fastjet.fr>
+
+	* scripts/internal/switch-to-version.sh:
+	* scripts/register-new-contrib.sh:
+	* scripts/new-contrib-from-template.sh:
+	* scripts/release-contrib.sh:
+	removed potential trailing /
+
+
 2013-01-31  Gavin Salam  <gavin.salam@cern.ch> + Gregory
 
 	* DEVEL-GUIDELINES:  *** ADDED ***

@@ -16,6 +16,12 @@
 #    no modification in their svn
 #  - update all the contribs that need to be updated
 
+# parse some command line options of the form
+#   update-contribs.sh -<option>
+#
+# supported options at the moment are
+#   -h      show a help message
+#   --force assume the answer to every question is "yes"
 if [[ $# -ge 1 && x"$1" == x'-h' ]]; then
     echo
     echo "Usage: "
@@ -28,9 +34,13 @@ if [[ $# -ge 1 && x"$1" == x'-h' ]]; then
     echo
     exit 0
 fi
-
+default_yesno_answer=""
+if [[ $# -ge 1 && x"$1" == x'--force' ]]; then
+    echo "Assuming 'yes' as an answer for all questions"
+    default_yesno_answer="yes"
+fi
 . `dirname $0`/internal/common.sh
-
+    
 internal_directories="_,scripts,Template,data,_"
 
 #----------------------------------------------------------------------
@@ -63,7 +73,7 @@ fi
 #----------------------------------------------------------------------
 # update all the contribs in the contribs.svn file or only the one
 # specified through the command line
-if [[ $# -gt 0 ]]; then
+if [[ $# -gt 0 && x"$1" != x'--force' ]]; then
     svn_contrib_list=$1
 else
     svn_contrib_list=$(cat contribs.svn | grep -v '^#' | grep -v '^$' | awk '{print $1}')

@@ -1,5 +1,9 @@
 2013-02-01  Gavin Salam  <gavin.salam@cern.ch>
 
+	* contribs.svn: 
+	GenericSubtractor -> 0.99.1
+	JetFFMoments      -> 0.99
+
 	* configure:
 	* Makefile.in:
 	* scripts/internal/Template/Makefile:

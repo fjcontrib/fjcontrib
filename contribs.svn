@@ -7,4 +7,5 @@
 # [unsupported at the moment]
 #
 # ContribName                    Location
-GenericSubtractor                tags/0.99
+GenericSubtractor                tags/0.99.1
+JetFFMoments                     tags/0.99

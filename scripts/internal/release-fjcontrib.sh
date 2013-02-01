@@ -168,7 +168,8 @@ echo -n "$version" > hepforge_tmp/fjcversion.php
 `dirname $0`/generate-html-contents.pl > hepforge_tmp/contents-$version.html
 
 echo "Uploading info for the webpage"
-scp hepforge_tmp/* login.hepforge.org:~fastjet/public_html/contrib/
+scp hepforge_tmp/fjcversion.php login.hepforge.org:~fastjet/public_html/contrib/
+scp hepforge_tmp/contents-$version.html login.hepforge.org:~fastjet/public_html/contrib/contents/$version.html
 rm -Rf hepforge_tmp
 echo
 echo "Done"

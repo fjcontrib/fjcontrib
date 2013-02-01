@@ -1,5 +1,8 @@
 2013-02-01  Gavin Salam  <gavin.salam@cern.ch>
 
+	* scripts/internal/release-fjcontrib.sh: 
+	contents now lives in a separate directory
+
 	* scripts/update-contribs.sh:
 	no longer query if the contrib isn't yet there.
 

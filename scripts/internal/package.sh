@@ -12,13 +12,15 @@
 version=`cat VERSION`
 packagename=fjcontrib-$version
 files="AUTHORS COPYING Makefile.in README VERSION NEWS configure data scripts/internal/check.sh scripts/internal/install-sh"
+# get contribs list from contribs.svn
 files="$files "$(cat contribs.svn | grep -v "^#" | grep -v "^$" | awk '{printf $1" "}')
-#`./configure --list`
+# get contribs list from configure (may include "unofficial" local contribs)
+#files="$files "`./configure --list`
 
 echo Creating version $version
 echo Including: $files
 
-tar --transform "s,^,$packagename/," -zcf $packagename.tar.gz $files
+tar --exclude=".svn"  --transform "s,^,$packagename/," -zcf $packagename.tar.gz $files
 exit
 
 

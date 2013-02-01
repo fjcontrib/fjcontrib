@@ -107,9 +107,9 @@ for contrib in $svn_contrib_list; do
 	echo "    local version: "${version_local}
 	if [[ "${version_local}" == "[None]" ]]; then
 	    # the local version does not exist! Ask if we want to install it
-	    get_yesno_answer "  Do you want to install the svn version?" "$default_yesno_answer" || {
-		`dirname $0`/internal/switch-to-version.sh $contrib $version_svn
-	    }
+	    #get_yesno_answer "  Do you want to install the svn version?" "$default_yesno_answer" || {
+	    `dirname $0`/internal/switch-to-version.sh $contrib $version_svn
+	    #}
 	elif [[ "${version_local}" == "[NoSVN]" ]]; then
 	    echo "You have an unversionned copy of $contrib in the way. It will not be updated."
 	else

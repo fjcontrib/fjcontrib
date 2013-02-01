@@ -1,5 +1,12 @@
 2013-02-01  Gavin Salam  <gavin.salam@cern.ch>
 
+	* configure:
+	* Makefile.in:
+	* scripts/internal/Template/Makefile:
+	variables are now communicated to sub-directory Makefiles via a
+	.Makefile.inc; trunks of JetFFMoments and GenericSubtractor also
+	modified.
+
 	* scripts/internal/release-fjcontrib.sh: 
 	contents now lives in a separate directory
 

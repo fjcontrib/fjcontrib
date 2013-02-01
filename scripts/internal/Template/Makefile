@@ -1,7 +1,14 @@
-# If fastjet-config is not in your path, edit this line so that a full path
-# to it is given
+# If you are using this Makefile standalone and fastjet-config is not
+# in your path, edit this line to specify the full path
 FASTJETCONFIG=fastjet-config
 PREFIX=`$(FASTJETCONFIG) --prefix`
+CXX=g++
+CXXFLAGS= -O3 -Wall -g
+
+# global contrib-wide Makefile include may override some of the above
+# variables (leading "-" means don't give an error if you can't find
+# the file)
+-include ../.Makefile.inc
 
 #------------------------------------------------------------------------
 # things that are specific to this contrib
@@ -11,9 +18,8 @@ EXAMPLES=example
 INSTALLED_HEADERS=Template.hh
 #------------------------------------------------------------------------
 
-CXX=g++
-CXXFLAGS=-O3 -Wall -g $(shell $(FASTJETCONFIG) --cxxflags)
-LDFLAGS=-lm $(shell $(FASTJETCONFIG) --libs)
+CXXFLAGS+= $(shell $(FASTJETCONFIG) --cxxflags)
+LDFLAGS += -lm $(shell $(FASTJETCONFIG) --libs)
 
 OBJS  = $(SRCS:.cc=.o)
 EXAMPLES_SRCS  = $(EXAMPLES:=.cc)

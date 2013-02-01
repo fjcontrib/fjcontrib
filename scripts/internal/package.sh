@@ -3,8 +3,9 @@
 
 # This script, meant for "internal use", packages all the
 # latest version of the contributions into a tar.gz file,
+# either reading the list from contris.svn, or
 # exploiting the list returned by running "./configure --list"
-# in the top directory
+# in the top directory (see commented line)
 #
 #  Usage: run ./scripts/internal/package.sh from the top directory
 #

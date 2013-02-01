@@ -1,4 +1,23 @@
-- add support for branches
+For a first release
+
+- increase version number to 1.000
+
+
+
+---------------------
+
+- contribs.local overrides contribs.svn 
+
+- some ability for contribs to require a minimal FJ version?
+
+- fjcontrib-config (--libs | ...) ???
+  g++ `fjcontrib-config --cxxflags` 
+  That could also hold version information
+
+   overall package version: 0.001
+   contribs:
+    JetFFMoments      1.0.1
+    GenericSubtractor trunk@revision
 
 Questions:
 ----------

@@ -187,7 +187,7 @@ echo "Producing fjcontrib-$version.tar.gz"
 echo "------------------------------------------------------------------------"
 tar --exclude=".svn" \
     --exclude="fjcontrib-$version/contribs.svn" \
-    --exclude="fjcontrib-$version/scripts/" \
+    --exclude="fjcontrib-$version/scripts" \
     --exclude="fjcontrib-$version/DEVEL-GUIDELINES" \
   -czf fjcontrib-$version.tar.gz fjcontrib-$version
 rm -Rf fjcontrib-$version

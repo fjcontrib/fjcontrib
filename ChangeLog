@@ -1,3 +1,9 @@
+2013-02-06  Gavin SALAM  <salam@lpthe.jussieu.fr> + Matteo
+
+	* scripts/internal/release-fjcontrib.sh:
+	a few fixes wrt paths for the tarball, info on release date,
+	parallel make, etc.
+
 2013-02-06  Gavin SALAM  <salam@tycho.lpthe.jussieu.fr> + Matteo
 
 	* scripts/update-contribs.sh: 

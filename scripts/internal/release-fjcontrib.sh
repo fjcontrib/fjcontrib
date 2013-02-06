@@ -112,7 +112,7 @@ fi
 echo "------------------------------------------------------------------------"
 echo "Running make check"
 echo "------------------------------------------------------------------------"
-if make check; then
+if make -j4 check; then
     echo "Success."
     echo
 else
@@ -206,24 +206,26 @@ echo "Uploading to HepForge"
 echo "------------------------------------------------------------------------"
 
 echo "Uploading fjcontrib-$version.tar.gz"
-scp fjcontrib-$version.tar.gz login.hepforge.org:~fastjet/downloads/
+scp fjcontrib-$version.tar.gz login.hepforge.org:~fastjet/public_html/contrib/downloads/
 
 mkdir hepforge_tmp
 echo "Generating info for the webpage"
 echo -n "$version" > hepforge_tmp/fjcversion.php
 `dirname $0`/generate-html-contents.pl > hepforge_tmp/contents-$version.html
+reldate=`date +"%e %B %Y"`
+echo -n $reldate  > hepforge_tmp/fjcreldate.php
 
 echo "Uploading info for the webpage"
-scp hepforge_tmp/fjcversion.php login.hepforge.org:~fastjet/public_html/contrib/
+scp hepforge_tmp/fjcversion.php hepforge_tmp/fjcreldate.php login.hepforge.org:~fastjet/public_html/contrib/
 scp hepforge_tmp/contents-$version.html login.hepforge.org:~fastjet/public_html/contrib/contents/$version.html
 
 
 echo "Ensuring fastjet group write access for new files on hepforge"
 # the following is needed because group sticky bit is erroneously not set
 # on the fastjet downloads directory, so group does not get set to fastjet
-ssh login.hepforge.org chgrp fastjet "~fastjet/downloads/fjcontrib-$version.tar.gz"
+#ssh login.hepforge.org chgrp fastjet "~fastjet/downloads/fjcontrib-$version.tar.gz"
 # now give fastjet group write permission on these files
-ssh login.hepforge.org chmod g+w "~fastjet/public_html/contrib/fjcversion.php" "~fastjet/public_html/contrib/contents/$version.html" "~fastjet/downloads/fjcontrib-$version.tar.gz"
+ssh login.hepforge.org chmod g+w "~fastjet/public_html/contrib/fjcversion.php" "~fastjet/public_html/contrib/fjcreldate.php" "~fastjet/public_html/contrib/contents/$version.html" "~fastjet/public_html/contrib/downloads/fjcontrib-$version.tar.gz"
 rm -Rf hepforge_tmp
 echo
 echo "Done"

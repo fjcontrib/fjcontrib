@@ -116,15 +116,16 @@ fi
 # tag the release
 #=======================================================================
 echo "------------------------------------------------------------------------"
-echo "Releasing fjcontrib version $version"
+echo "Making a tag of fjcontrib version $version"
 svn copy -m "releasing fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
 
 #========================================================================
 # produce a tarball
 #========================================================================
 echo "------------------------------------------------------------------------"
-echo "Checking out the new fjcontrib"
-svn co $svn_read/tags/$version fjcontrib-$version || { echo "Failed to checkout the new released version"; exit 1; }
+echo "Checking out tags/$version of fjcontrib"
+echo svn co $svn_read/tags/$version fjcontrib-$version
+svn co $svn_read/tags/$version fjcontrib-$version || { echo "Failed to checkout the new released version tags/$version"; exit 1; }
 cd fjcontrib-$version
 echo
 

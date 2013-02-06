@@ -7,11 +7,11 @@
 # svn sanity checks
 #========================================================================
 
-# make sure that everything is committed
-if [[ ! -z "`svn status --show-updates | grep -v "^?" | grep -v "^Status"`" ]]; then
-    echo "There are pending modifications or updates. Aborting"
-    exit 1
-fi
+# # make sure that everything is committed
+# if [[ ! -z "`svn status --show-updates | grep -v "^?" | grep -v "^Status"`" ]]; then
+#     echo "There are pending modifications or updates. Aborting"
+#     exit 1
+# fi
 
 . `dirname $0`/common.sh
 # make sure there is a VERSION and it does not already exist
@@ -124,8 +124,10 @@ svn copy -m "releasing fjcontrib-$version" $svn_write/trunk $svn_write/tags/$ver
 #========================================================================
 echo "------------------------------------------------------------------------"
 echo "Checking out tags/$version of fjcontrib"
-echo svn co $svn_read/tags/$version fjcontrib-$version
-svn co $svn_read/tags/$version fjcontrib-$version || { echo "Failed to checkout the new released version tags/$version"; exit 1; }
+# using svn_write, because the http access sometimes doesn't
+# immediately see the up to date svn repository(?!)
+echo svn co $svn_write/tags/$version fjcontrib-$version
+svn co $svn_write/tags/$version fjcontrib-$version || { echo "Failed to checkout the new released version tags/$version"; exit 1; }
 cd fjcontrib-$version
 echo
 
@@ -178,6 +180,11 @@ echo -n "$version" > hepforge_tmp/fjcversion.php
 echo "Uploading info for the webpage"
 scp hepforge_tmp/fjcversion.php login.hepforge.org:~fastjet/public_html/contrib/
 scp hepforge_tmp/contents-$version.html login.hepforge.org:~fastjet/public_html/contrib/contents/$version.html
+# the following is needed because group sticky bit is erroneously not set
+# on the fastjet downloads directory, so group does not get set to fastjet
+ssh login.hepforge.org chgrp fastjet "~fastjet/downloads/fjcontrib-$version.tar.gz"
+# now give fastjet group write permission on these files
+ssh login.hepforge.org chmod g+w "~fastjet/public_html/contrib/fjcversion.php" "~fastjet/public_html/contrib/contents/$version.html" "~fastjet/downloads/fjcontrib-$version.tar.gz"
 rm -Rf hepforge_tmp
 echo
 echo "Done"

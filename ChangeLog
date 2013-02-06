@@ -1,5 +1,9 @@
 2013-02-06  Gavin SALAM  <salam@tycho.lpthe.jussieu.fr> + Matteo
 
+	* configure: 
+	fixed bug in output of prefix to .Makefile.inc (wasn't being
+	output when it was derived from fastjet-config).
+
 	* contribs.svn: 
 	JetFFMoments -> tags/0.99.1
 

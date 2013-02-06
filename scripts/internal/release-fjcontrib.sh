@@ -138,9 +138,9 @@ echo
 echo "------------------------------------------------------------------------"
 echo "Making a tag of fjcontrib version $version"
 echo "------------------------------------------------------------------------"
-tagcommand="svn copy -m 'tagging fjcontrib-$version' $svn_write/trunk $svn_write/tags/$version"
-echo $tagcommand
-$tagcommand 
+echo svn copy -m 'tagging fjcontrib-$version' $svn_write/trunk $svn_write/tags/$version
+     svn copy -m 'tagging fjcontrib-$version' $svn_write/trunk $svn_write/tags/$version
+
 
 #========================================================================
 # produce a tarball

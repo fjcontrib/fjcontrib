@@ -12,10 +12,11 @@ if [[ ! -z "`svn status --show-updates | grep -v "^?" | grep -v "^Status"`" ]]; 
     echo "There are pending modifications or updates. Aborting"
     exit 1
 fi
+
 . `dirname $0`/common.sh
 # make sure there is a VERSION and it does not already exist
 version=`head -n1 VERSION`
-if [[ ! -z $(svn ls $svn_read/tags || grep "^$version/") ]]; then
+if [[ ! -z $(svn ls $svn_read/tags | grep "^$version/") ]]; then
     echo "Version $version of fjcontrib already exists. Aborting"
     exit 1
 fi
@@ -24,7 +25,7 @@ get_yesno_answer "Do you want to proceed with the release of fjcontrib-$version?
 
 
 #========================================================================
-# check that the tools in contribs.list behave OK
+# check that the tools in contribs.svn behave OK
 #========================================================================
 # get a clean checkout to perform sanity checks
 svn co $svn_read/trunk fjcontrib-$version || { echo "Failed to do the svn checkout"; exit 1; }

@@ -1,3 +1,11 @@
+2013-02-06  Gavin SALAM  <salam@tycho.lpthe.jussieu.fr> + Matteo
+
+	* scripts/internal/release-fjcontrib.sh : 
+	fixed typo in checking of existing version
+
+	* VERSION 
+	upped to 0.001 for more testing
+
 2013-02-01  Gavin Salam  <gavin.salam@cern.ch>
 
 	* contribs.svn: 

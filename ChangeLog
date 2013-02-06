@@ -1,5 +1,21 @@
 2013-02-06  Gavin SALAM  <salam@tycho.lpthe.jussieu.fr> + Matteo
 
+	* configure (makefileinc):
+	the .Makefile.inc file now has variables to override the install
+	and check scripts (intended to help possible future changes +
+	standalone functionality).
+
+	* scripts/internal/check.sh -> utils/check.sh
+	* scripts/internal/install-sh -> utils/install-sh
+	moved these into a separate directory so that in the tarball we
+	include utils, but can completely discard scripts/
+
+	* scripts/internal/Template/Makefile:
+	this has been updated to use scripts in utils/*
+
+	* scripts/internal/generate-html-contents.pl: 
+	now includes a link to the directory for the contrib
+
 	* configure: 
 	fixed bug in output of prefix to .Makefile.inc (wasn't being
 	output when it was derived from fastjet-config).

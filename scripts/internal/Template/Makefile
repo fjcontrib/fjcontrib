@@ -4,6 +4,8 @@ FASTJETCONFIG=fastjet-config
 PREFIX=`$(FASTJETCONFIG) --prefix`
 CXX=g++
 CXXFLAGS= -O3 -Wall -g
+install_script = $(SHELL) ../utils/install-sh
+check_script = ../utils/check.sh
 
 # global contrib-wide Makefile include may override some of the above
 # variables (leading "-" means don't give an error if you can't find
@@ -24,13 +26,12 @@ LDFLAGS += -lm $(shell $(FASTJETCONFIG) --libs)
 OBJS  = $(SRCS:.cc=.o)
 EXAMPLES_SRCS  = $(EXAMPLES:=.cc)
 
-install = $(SHELL) ../scripts/internal/install-sh
-install_HEADER  = $(install) -c -m 644
-install_LIB     = $(install) -c -m 644
-install_DIR     = $(install) -d
-install_DATA    = $(install) -c -m 644
-install_PROGRAM = $(install) -c -s
-install_SCRIPT  = $(install) -c
+install_HEADER  = $(install_script) -c -m 644
+install_LIB     = $(install_script) -c -m 644
+install_DIR     = $(install_script) -d
+install_DATA    = $(install_script) -c -m 644
+install_PROGRAM = $(install_script) -c -s
+install_SCRIPT  = $(install_script) -c
 
 .PHONY: clean distclean examples check install
 
@@ -52,7 +53,7 @@ $(EXAMPLES): % : %.o all
 # check that everything went fine
 check: examples
 	@for prog in $(EXAMPLES); do\
-	  ../scripts/internal/check.sh $${prog} ../data/single-event.dat || exit 1; \
+	  $(check_script) $${prog} ../data/single-event.dat || exit 1; \
 	done
 	@echo "All tests successful"
 

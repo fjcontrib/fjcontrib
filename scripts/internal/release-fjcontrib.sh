@@ -3,17 +3,28 @@
 # make a full release of the current trunk
 # Then produce a tarball
 
+# include function and svn location definitions, etc.
+. `dirname $0`/common.sh
+
 #========================================================================
 # svn sanity checks
 #========================================================================
 
-# # make sure that everything is committed
-# if [[ ! -z "`svn status --show-updates | grep -v "^?" | grep -v "^Status"`" ]]; then
-#     echo "There are pending modifications or updates. Aborting"
-#     exit 1
-# fi
+# make sure that everything is committed
+echo
+echo "Checking for pending modifications or updates (this may take a few seconds...)"
+if [[ ! -z  "`svn status --show-updates | grep -v "^?" | grep -v "^Status"`" ]]; then
+    echo
+    echo "WARNING: There are pending modifications or updates:"
+    echo
+    svn status --show-updates | grep -v '^\?'
+    echo
+    get_yesno_answer "Are you really sure you want to proceed?" &&  exit 1
+    echo
+else
+    echo "All files are up to date relative to the svn"
+fi
 
-. `dirname $0`/common.sh
 # make sure there is a VERSION and it does not already exist
 version=`head -n1 VERSION`
 if [[ ! -z $(svn ls $svn_read/tags | grep "^$version/") ]]; then
@@ -21,7 +32,9 @@ if [[ ! -z $(svn ls $svn_read/tags | grep "^$version/") ]]; then
     exit 1
 fi
 
+echo
 echo "The contribs.svn file points to the following contrib versions"
+echo
 echo "----------------------------------------------------------------"
 grep -v '^#' contribs.svn
 echo "----------------------------------------------------------------"

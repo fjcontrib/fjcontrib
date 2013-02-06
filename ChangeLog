@@ -1,5 +1,17 @@
 2013-02-06  Gavin SALAM  <salam@tycho.lpthe.jussieu.fr> + Matteo
 
+	* scripts/update-contribs.sh: 
+	now does "exit 1" if it couldn't find a given contrib version on
+	the svn. 
+
+	* scripts/internal/release-fjcontrib.sh: 
+	now allows user to carry on even if there are local modifications,
+	but with a warning.
+
+	* scripts/update-contribs.sh:
+	tried to make sure that failure of switch-to-contrib results in
+	failure of update-contribs too (important e.g. for release script)
+
 	* configure (makefileinc):
 	the .Makefile.inc file now has variables to override the install
 	and check scripts (intended to help possible future changes +

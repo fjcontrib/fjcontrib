@@ -36,7 +36,7 @@ if [[ $# -ge 1 && x"$1" == x'-h' ]]; then
 fi
 default_yesno_answer=""
 if [[ $# -ge 1 && x"$1" == x'--force' ]]; then
-    echo "Assuming 'yes' as an answer for all questions"
+    echo "Assuming 'yes' as an answer to all questions"
     default_yesno_answer="yes"
 fi
 . `dirname $0`/internal/common.sh
@@ -66,7 +66,7 @@ fi
 if [[ $# -gt 1 ]]; then
 
     # just call switch-to-version
-    `dirname $0`/internal/switch-to-version.sh $*
+    `dirname $0`/internal/switch-to-version.sh $* || exit 1
     exit 0
 fi
 
@@ -108,14 +108,14 @@ for contrib in $svn_contrib_list; do
 	if [[ "${version_local}" == "[None]" ]]; then
 	    # the local version does not exist! Ask if we want to install it
 	    #get_yesno_answer "  Do you want to install the svn version?" "$default_yesno_answer" || {
-	    `dirname $0`/internal/switch-to-version.sh $contrib $version_svn
+	    `dirname $0`/internal/switch-to-version.sh $contrib $version_svn || exit 1
 	    #}
 	elif [[ "${version_local}" == "[NoSVN]" ]]; then
 	    echo "You have an unversionned copy of $contrib in the way. It will not be updated."
 	else
 	    # the local version exists! Ask if we want to update it
 	    get_yesno_answer "  Do you want to update your local version to the svn one?" "$default_yesno_answer" || {
-		`dirname $0`/internal/switch-to-version.sh $contrib $version_svn
+		`dirname $0`/internal/switch-to-version.sh $contrib $version_svn || exit 1
 	    }
 	fi
         echo

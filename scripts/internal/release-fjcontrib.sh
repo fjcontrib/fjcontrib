@@ -21,9 +21,9 @@ if [[ ! -z $(svn ls $svn_read/tags | grep "^$version/") ]]; then
     exit 1
 fi
 
-echo "The contrib.svn contains the following contrib versions"
+echo "The contribs.svn file points to the following contrib versions"
 echo "----------------------------------------------------------------"
-grep -v '^#' contrib.svn
+grep -v '^#' contribs.svn
 echo "----------------------------------------------------------------"
 echo
 

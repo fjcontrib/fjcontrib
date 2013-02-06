@@ -143,10 +143,6 @@ for arg do
     esac
 done
 
-# generate the rest of $makefileinc
-echo "FASTJETCONFIG=$fjconfig" >> $makefileinc
-echo "PREFIX=$prefix" >> $makefileinc
-
 #------------------------------------------------------------------------
 # check for fastjet-config and set up prefix
 #------------------------------------------------------------------------
@@ -161,6 +157,13 @@ fi
 if [ "x"$prefix == "x" ] ; then 
      prefix=`$fjconfig --prefix`
 fi
+
+# generate the rest of $makefileinc
+echo "FASTJETCONFIG=$fjconfig" >> $makefileinc
+echo "PREFIX=$prefix" >> $makefileinc
+echo 'install_script = $(SHELL) ../utils/install-sh' >> $makefileinc
+echo 'check_script = ../utils/check.sh' >> $makefileinc
+
     
 #------------------------------------------------------------------------
 # construct the list of directories to recurse into

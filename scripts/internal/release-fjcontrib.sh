@@ -3,17 +3,28 @@
 # make a full release of the current trunk
 # Then produce a tarball
 
+# include function and svn location definitions, etc.
+. `dirname $0`/common.sh
+
 #========================================================================
 # svn sanity checks
 #========================================================================
 
 # make sure that everything is committed
-if [[ ! -z "`svn status --show-updates | grep -v "^?" | grep -v "^Status"`" ]]; then
-    echo "There are pending modifications or updates. Aborting"
-    exit 1
+echo
+echo "Checking for pending modifications or updates (this may take a few seconds...)"
+if [[ ! -z  "`svn status --show-updates | grep -v "^?" | grep -v "^Status"`" ]]; then
+    echo
+    echo "WARNING: There are pending modifications or updates:"
+    echo
+    svn status --show-updates | grep -v '^\?'
+    echo
+    get_yesno_answer "Are you really sure you want to proceed?" &&  exit 1
+    echo
+else
+    echo "All files are up to date relative to the svn"
 fi
 
-. `dirname $0`/common.sh
 # make sure there is a VERSION and it does not already exist
 version=`head -n1 VERSION`
 if [[ ! -z $(svn ls $svn_read/tags | grep "^$version/") ]]; then
@@ -21,7 +32,9 @@ if [[ ! -z $(svn ls $svn_read/tags | grep "^$version/") ]]; then
     exit 1
 fi
 
+echo
 echo "The contribs.svn file points to the following contrib versions"
+echo
 echo "----------------------------------------------------------------"
 grep -v '^#' contribs.svn
 echo "----------------------------------------------------------------"
@@ -38,6 +51,7 @@ svn co $svn_read/trunk fjcontrib-$version || { echo "Failed to do the svn checko
 cd fjcontrib-$version
 echo "------------------------------------------------------------------------"
 echo "Getting the contribs"
+echo "------------------------------------------------------------------------"
 if ./scripts/update-contribs.sh --force; then
     echo "Success."
     echo
@@ -50,6 +64,7 @@ fi
 
 echo "------------------------------------------------------------------------"
 echo "Configuring"
+echo "------------------------------------------------------------------------"
 
 # we need to determine whether to use fastjet-config from the path or
 # use the one from the configure invocation in the trunk
@@ -96,6 +111,7 @@ fi
 
 echo "------------------------------------------------------------------------"
 echo "Running make check"
+echo "------------------------------------------------------------------------"
 if make check; then
     echo "Success."
     echo
@@ -115,22 +131,33 @@ fi
 #========================================================================
 # tag the release
 #=======================================================================
+echo
+get_yesno_answer "Confirm you want to tag the release and make a tarball?" &&  exit 1
+echo
+
 echo "------------------------------------------------------------------------"
 echo "Making a tag of fjcontrib version $version"
-svn copy -m "releasing fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
+echo "------------------------------------------------------------------------"
+tagcommand="svn copy -m 'tagging fjcontrib-$version' $svn_write/trunk $svn_write/tags/$version"
+echo $tagcommand
+$tagcommand 
 
 #========================================================================
 # produce a tarball
 #========================================================================
 echo "------------------------------------------------------------------------"
 echo "Checking out tags/$version of fjcontrib"
-echo svn co $svn_read/tags/$version fjcontrib-$version
-svn co $svn_read/tags/$version fjcontrib-$version || { echo "Failed to checkout the new released version tags/$version"; exit 1; }
+echo "------------------------------------------------------------------------"
+# using svn_write, because the http access sometimes doesn't
+# immediately see the up to date svn repository(?!)
+echo svn co $svn_write/tags/$version fjcontrib-$version
+svn co $svn_write/tags/$version fjcontrib-$version || { echo "Failed to checkout the new released version tags/$version"; exit 1; }
 cd fjcontrib-$version
 echo
 
 echo "------------------------------------------------------------------------"
 echo "Getting the contribs"
+echo "------------------------------------------------------------------------"
 if ./scripts/update-contribs.sh --force; then
     echo "Success."
     echo
@@ -141,22 +168,28 @@ else
     exit 1
 fi
 
-# get rid of a few things for developers and "svn-users" only
-mkdir tmp
-for fn in check.sh install-sh; do
-    mv scripts/internal/${fn} ./tmp
-done
-rm -Rf scripts
-mkdir scripts
-mkdir scripts/internal
-for fn in tmp/*; do
-    mv $fn scripts/internal/${fn#tmp/}
-done
-rm DEVEL-GUIDELINES
+# # get rid of a few things for developers and "svn-users" only
+# mkdir tmp
+# for fn in check.sh install-sh; do
+#     mv scripts/internal/${fn} ./tmp
+# done
+# rm -Rf scripts
+# mkdir scripts
+# mkdir scripts/internal
+# for fn in tmp/*; do
+#     mv $fn scripts/internal/${fn#tmp/}
+# done
+# rm DEVEL-GUIDELINES
 
 cd ..
+echo "------------------------------------------------------------------------"
 echo "Producing fjcontrib-$version.tar.gz"
-tar --exclude=".svn" -czf fjcontrib-$version.tar.gz fjcontrib-$version
+echo "------------------------------------------------------------------------"
+tar --exclude=".svn" \
+    --exclude="fjcontrib-$version/contribs.svn" \
+    --exclude="fjcontrib-$version/scripts/" \
+    --exclude="fjcontrib-$version/DEVEL-GUIDELINES" \
+  -czf fjcontrib-$version.tar.gz fjcontrib-$version
 rm -Rf fjcontrib-$version
 echo
 echo "Success."
@@ -165,9 +198,14 @@ echo
 #========================================================================
 # update things on HepForge
 #========================================================================
-echo "Updating the Hepforge project"
+echo
+get_yesno_answer "Confirm you want to upload to hepforge?" &&  exit 1
+echo
+echo "------------------------------------------------------------------------"
+echo "Uploading to HepForge"
+echo "------------------------------------------------------------------------"
 
-echo "Uploading the tarball"
+echo "Uploading fjcontrib-$version.tar.gz"
 scp fjcontrib-$version.tar.gz login.hepforge.org:~fastjet/downloads/
 
 mkdir hepforge_tmp
@@ -178,6 +216,14 @@ echo -n "$version" > hepforge_tmp/fjcversion.php
 echo "Uploading info for the webpage"
 scp hepforge_tmp/fjcversion.php login.hepforge.org:~fastjet/public_html/contrib/
 scp hepforge_tmp/contents-$version.html login.hepforge.org:~fastjet/public_html/contrib/contents/$version.html
+
+
+echo "Ensuring fastjet group write access for new files on hepforge"
+# the following is needed because group sticky bit is erroneously not set
+# on the fastjet downloads directory, so group does not get set to fastjet
+ssh login.hepforge.org chgrp fastjet "~fastjet/downloads/fjcontrib-$version.tar.gz"
+# now give fastjet group write permission on these files
+ssh login.hepforge.org chmod g+w "~fastjet/public_html/contrib/fjcversion.php" "~fastjet/public_html/contrib/contents/$version.html" "~fastjet/downloads/fjcontrib-$version.tar.gz"
 rm -Rf hepforge_tmp
 echo
 echo "Done"

@@ -20,7 +20,9 @@ while ($line = <VERSIONS>) {
     $version = $2;
     if ($version =~ /^[0-9]/) {$version = "tags/$version";}
     ($textversion = $version) =~ s/tags\///;
-    $list .= "<tr> <td class=\"contribname\"> $contrib </td> <td style=\"{text-align:center;}\"> $textversion </td> <td>";
+    $list .= "<tr> <td class=\"contribname\"> 
+                   <a href=\"$svn$contrib/$version/\">$contrib</a>
+               </td> <td style=\"{text-align:center;}\"> $textversion </td> <td>";
     if (-e "$contrib/README") {
       $list .= '<a href="'.$svn.$contrib.'/'.$version.'/README">README</a> ';
     }

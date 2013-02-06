@@ -71,12 +71,12 @@ fi
 if [[ "${version}" != "trunk" ]]; then
     tagged_version=${version#*/}
     if [ -z "`svn ls $svn_read/contribs/$contrib/tags | grep '^'$tagged_version'/$'`" ]; then
-	echo "Version $version of $contrib does not exist. Exiting"
+	echo "Version $version of $contrib does not exist. Exiting."
 	exit 1
     fi
 fi
 
-# if the directory does not exist, check it out
+# if the directory does not yet exist, check it out
 if [[ "$current_version" == "[None]" ]]; then
     echo "  Checking out version ${version} of ${contrib}"
     if [[ "${version}" == "trunk" ]]; then

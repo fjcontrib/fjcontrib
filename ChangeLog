@@ -1,7 +1,11 @@
 2013-02-06  Gavin SALAM  <salam@tycho.lpthe.jussieu.fr> + Matteo
 
+	* contribs.svn: 
+	JetFFMoments -> tags/0.99.1
+
 	* scripts/internal/release-fjcontrib.sh : 
-	fixed typo in checking of existing version
+	fixed typo in checking of existing version; before asking about a
+	release it now lists the contrib versions.
 
 	* VERSION 
 	upped to 0.001 for more testing

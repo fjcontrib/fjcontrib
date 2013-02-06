@@ -21,6 +21,12 @@ if [[ ! -z $(svn ls $svn_read/tags | grep "^$version/") ]]; then
     exit 1
 fi
 
+echo "The contrib.svn contains the following contrib versions"
+echo "----------------------------------------------------------------"
+grep -v '^#' contrib.svn
+echo "----------------------------------------------------------------"
+echo
+
 get_yesno_answer "Do you want to proceed with the release of fjcontrib-$version?" &&  exit 1
 
 

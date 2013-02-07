@@ -3,6 +3,10 @@
 	* VERSION
 	Pushed version to 1.000 for release
 
+        * contribs.svn
+	set version numbers to 1.0.0 for both GenericSubtractor and 
+ 	JetFFMoments
+
 2013-02-06  Gavin SALAM  <salam@lpthe.jussieu.fr> + Matteo
 
 	* scripts/internal/release-fjcontrib.sh:

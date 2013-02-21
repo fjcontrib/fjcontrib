@@ -68,7 +68,7 @@ distclean: clean
 install: all
 	$(install_DIR) $(PREFIX)/include/fastjet/contrib
 	for header in $(INSTALLED_HEADERS); do\
-	  $(install_HEADER) $$header $(PREFIX)/include/fastjet/contrib/\
+	  $(install_HEADER) $$header $(PREFIX)/include/fastjet/contrib/;\
 	done
 	$(install_DIR) $(PREFIX)/lib
 	$(install_LIB) lib$(NAME).a $(PREFIX)/lib

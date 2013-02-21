@@ -1,5 +1,8 @@
 2013-02-21  Gavin Salam  <gavin.salam@cern.ch>
 
+	* DEVEL-GUIDELINES: 
+	added info on use of htpasswd to send us a password
+
 	* scripts/internal/common.sh (svn_write): 
 	switched write URL from svn+ssh -> https
 

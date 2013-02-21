@@ -30,7 +30,15 @@ Basic developer usage
 
    # once you have something worth committing, write to
    # <fastjet@projects.hepforge.org> to get write access to the
-   # fjcontrib svn, and then run
+   # fjcontrib svn.
+   # 
+   # [  To help us set up your account, if the htpasswd command is available
+   #    to you, then send us your encrypted password using the output of
+   #    
+   #    htpasswd -mn YOUR-CHOSEN-USERNAME
+   # ]
+   # 
+   # and then run
    scripts/register-new-contrib.sh ContribName
 
    # within your pre-existing ContribName/ directory you can now "svn

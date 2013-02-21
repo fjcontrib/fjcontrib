@@ -1,5 +1,10 @@
 2013-02-21  Gavin Salam  <gavin.salam@cern.ch>
 
+	* scripts/internal/common.sh (svn_write): 
+	switched write URL from svn+ssh -> https
+
+2013-02-21  Gavin Salam  <gavin.salam@cern.ch>
+
 	* README: 
 	fixed type for http checkout
 

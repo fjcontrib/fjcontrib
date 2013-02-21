@@ -52,7 +52,7 @@ get_svn_info $contrib current_mode current_version
 if [[ "$version" == "$current_version" ]]; then
     if [[ "$mode" == "$current_mode" ]]; then
 	if [[ "$version" != "["*"]" ]]; then
-	    echo "  Already at the requested version. Simply run svn up"
+	    echo "  Already at the requested version. Simply running svn up"
 	    cd $contrib
 	    svn up
 	    cd ..

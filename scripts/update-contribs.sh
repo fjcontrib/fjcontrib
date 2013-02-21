@@ -50,6 +50,9 @@ internal_directories="_,scripts,Template,data,_"
 script_current_version=$(svn info $0 | grep "^Revision: " | sed 's/Revision: //')
 
 # perform the svn update
+echo "-----------------------------"
+echo "Updating top-level directory:"
+echo "-----------------------------"
 svn up || { echo "Failed to update svn. Aborting"; exit 1; }
 
 # check if this script has been updated
@@ -79,13 +82,16 @@ else
     svn_contrib_list=$(cat contribs.svn | grep -v '^#' | grep -v '^$' | awk '{print $1}')
 fi
 
-echo "Checking for updates"
 echo
+echo "--------------------------------------------"
+echo "Checking for updates of individual contribs:"
+echo "--------------------------------------------"
 for contrib in $svn_contrib_list; do
     # get the version numbers in both contrib files
     get_contrib_version ${contrib} contribs.svn   version_svn
     get_contrib_version ${contrib} contribs.local version_local
 
+    echo
     echo -n "${contrib}: "
 
     # check which situation we are in
@@ -114,7 +120,7 @@ for contrib in $svn_contrib_list; do
 	    echo "You have an unversionned copy of $contrib in the way. It will not be updated."
 	else
 	    # the local version exists! Ask if we want to update it
-	    get_yesno_answer "  Do you want to update your local version to the svn one?" "$default_yesno_answer" || {
+	    get_yesno_answer "  Do you want to switch from your local version to the svn one?" "$default_yesno_answer" || {
 		`dirname $0`/internal/switch-to-version.sh $contrib $version_svn || exit 1
 	    }
 	fi

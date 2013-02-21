@@ -35,7 +35,7 @@ For users who want the latest version (and for developers)
 
 Get an svn checkout of the top-level directory
   
-    svn co http://fastjet.hepforge.org/svn/contribs/trunk fjcontrib
+    svn co http://fastjet.hepforge.org/svn/contrib/trunk fjcontrib
 
 which contains the scripts and a current list of contribs and their
 versions. Within the fjcontrib directory, get the contribs themselves

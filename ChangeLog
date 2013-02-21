@@ -1,3 +1,8 @@
+2013-02-21  Gavin Salam  <gavin.salam@cern.ch>
+
+	* README: 
+	fixed type for http checkout
+
 2013-02-07  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
 	* VERSION

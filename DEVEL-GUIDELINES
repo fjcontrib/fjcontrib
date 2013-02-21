@@ -150,18 +150,21 @@ Structure of the svn repository
 The repository at
 
    http://fastjet.hepforge.org/svn/contrib/                    (read-only)
+   https://fastjet.hepforge.org/svn/contrib/                   (read-write)
    svn+ssh://svn.hepforge.org/hepforge/svn/fastjet/contrib/    (read-write)
 
 is organised as follows:
 
   # area for the overall fastjet-contrib scripts and information about
-  # currently used version of individual contribs
+  # currently used version of individual contribs. Currently only 
+  # maintainers of the overall fjcontrib area have write acces
   #
   trunk/    # development version
   tags/     # official releases 
   branches/ # branches
 
-  # areas for individual contribs
+  # areas for individual contribs. Developers each have access
+  # to all contribs by default (for simplicity)
   contribs/ContribName/trunk        # development version
   contribs/ContribName/tags         # official releases
   contribs/ContribName/branches     # branches

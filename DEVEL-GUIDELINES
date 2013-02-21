@@ -59,7 +59,7 @@ Basic developer usage
 (*) When you check out a fresh copy of the overall fjcontrib directory, you
 can obtain the development version of your "registered" contrib with
 
-   scripts/update-contrib.sh ContribName trunk
+   scripts/update-contribs.sh ContribName trunk
 
 Please refrain from developing other people's contribs without first
 consulting them!

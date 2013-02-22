@@ -21,11 +21,13 @@ Basic developer usage
    svn checkout http://fastjet.hepforge.org/svn/contrib/trunk fjcontrib
    cd fjcontrib
 
-   # get the existing contribs 
+   # get the existing contribs (optional, but useful)
    scripts/update-contribs.sh
 
-   # start your own new contrib (*), which produces a template
-   # for the contrib, including a basic Makefile (further info below)
+   # start your new contrib, choosing your own "ContribName" (*)
+   # Running this script produces a template for the new contrib
+   # in the form of a new ContribName/ subdirectory of fjcontrib, 
+   # including a basic Makefile (further info below)
    scripts/new-contrib-from-template.sh ContribName
 
    # once you have something worth committing, write to
@@ -56,8 +58,9 @@ Basic developer usage
    # that version to be made public
    
 
-(*) When you check out a fresh copy of the overall fjcontrib directory, you
-can obtain the development version of your "registered" contrib with
+(*) Note that if you have previously "registered" your contrib (i.e.
+you have run "scripts/register-new-contrib.sh ContribName") you can get 
+it in a fresh checkout of the overall fjcontrib directory by running 
 
    scripts/update-contribs.sh ContribName trunk
 
@@ -65,7 +68,7 @@ Please refrain from developing other people's contribs without first
 consulting them!
 
 Note: currently there is no mechanism for handling external
-dependencies (root, gsl, etc.), nor for handling dependencies between
+dependencies (ROOT, gsl, etc.), nor for handling dependencies between
 different contribs.
 
 ======================================================================

@@ -1,3 +1,11 @@
+2013-02-21  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+	* DEVEL-GUIDELINES: 
+	Rephrased sentence about registering a new contrib and the note
+        note about retrieving a registered contrib using 
+        scripts/update-contribs.sh ContribName trunk"
+
+
 2013-02-21  Gregory Soyez  <soyez@fastjet.fr>
 
 	* scripts/internal/Template/Makefile:

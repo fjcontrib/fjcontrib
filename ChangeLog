@@ -1,3 +1,8 @@
+2013-02-22  Gavin Salam  <gavin.salam@cern.ch>
+
+	* utils/check.sh: 
+	now prints out the directory that it's running in
+
 2013-02-21  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
 	* DEVEL-GUIDELINES: 

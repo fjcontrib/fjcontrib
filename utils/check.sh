@@ -10,7 +10,8 @@
 # Note that <program> is actually run using "./<program> < <datafile>"
 
 echo
-echo "Checking the output of '$1' using the input file"
+echo -n "In directory" `pwd | sed 's/.*\///'`
+echo "/ checking the output of '$1' using the input file"
 echo "$2 and reference file $1.ref"
 
 # check that all the necessary files are in place

@@ -45,8 +45,8 @@ lib$(NAME).a: $(OBJS)
 # building the examples
 examples: $(EXAMPLES)
 
-# the following construct alloews to build each of the examples listed
-# in $EXAMPLES automatically
+# the following construct makes it possible to automatically build
+# each of the examples listed in $EXAMPLES
 $(EXAMPLES): % : %.o all
 	$(CXX) -o $@ $< -L. -l$(NAME) $(LDFLAGS)
 

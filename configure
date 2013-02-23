@@ -292,13 +292,24 @@ sed -e "s/@CONTRIB_BUILD_LIST@/$escaped_built_list/g;\
 #------------------------------------------------------------------------
 # write output and config.log file
 #------------------------------------------------------------------------
-
-echo -e "\nEnabled contribs: "$built_contribs
+echo 
+echo "Configuring fjcontrib version" `cat VERSION`
+echo
+echo -e "Enabled contribs: "
+for contrib in $built_contribs
+do
+    printf "        %-20s v%s\n" $contrib `cat $contrib/VERSION`
+done
+echo
 echo -e "Installation prefix: "$prefix
+echo "--------------------------------------------------"
 echo -e "Now run 'make', optionally 'make check', and 'make install'\n"
 
 echo -e "This file was created by the fastjet contrib configure on "`date`"\n"  > config.log
 echo -e "The command line invocation was\n"                                >> config.log
 echo -e "    $0 $@\n"                                                      >> config.log
-echo -e "List of enabled contribs: "$built_contribs"\n"                    >> config.log
+for contrib in $built_contribs
+do
+    printf "        %-20s v%s\n" $contrib `cat $contrib/VERSION`           >> config.log
+done
 echo -e "Installation prefix: "$prefix"\n"                                 >> config.log

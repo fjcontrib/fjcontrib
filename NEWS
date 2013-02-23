@@ -1,3 +1,8 @@
+2013-02-23: release of version 1.001, with
+* new contrib: VariableR     1.0.1  (from Jesse Thaler)
+* new contrib: Nsubjettiness 1.0.2  (from Jesse Thaler)
+* improved output from configure, fixes of typos in documentation
+
 2013-02-07: release of version 1.000, containing
 * JetFFMoments, version 1.0.0
 * GenericSubtractor, version 1.0.0

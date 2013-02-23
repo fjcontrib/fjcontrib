@@ -21,6 +21,11 @@ install: all $(SUBDIRS)
 
 examples check clean distclean: $(SUBDIRS)
 
+# distclean removes the Makefile, but leaves in config.log
+distclean:
+	rm -f Makefile
+	rm -f .Makefile.inc
+
 $(SUBDIRS):
 	+$(SUBMAKE) -C $@ $(MAKECMDGOALS)
 

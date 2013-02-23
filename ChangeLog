@@ -1,6 +1,21 @@
+2013-02-23  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS:
+	* VERSION:
+	prepared for 1.001 release
+
+	* contribs.svn:
+	added VariableR 1.0.1 and Nsubjettiness 1.0.2  (from Jesse Thaler)
+
+	* configure:
+	now outputs version of each contrib (+ other small formatting)
+
+	* Makefile.in:
+	distclean now removes Makefile and .Makefile.inc
+
 2013-02-22  Gavin Salam  <gavin.salam@cern.ch>
 
-	* utils/check.sh: 
+	* utils/check.sh:
 	now prints out the directory that it's running in
 
 2013-02-21  Matteo Cacciari <cacciari@lpthe.jussieu.fr>

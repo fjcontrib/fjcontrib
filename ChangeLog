@@ -1,3 +1,12 @@
+2013-04-12  Gregory Soyez  <soyez@fastjet.fr>
+
+	* NEWS:
+	* VERSION:
+	prepared for 1.002 release
+
+	* contribs.svn:
+	GenericSubtractor switched to version 1.1.0 (was 1.0.0)
+
 2013-02-23  Gavin Salam  <gavin.salam@cern.ch>
 
 	* NEWS:

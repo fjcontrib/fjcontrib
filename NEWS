@@ -1,5 +1,5 @@
 2013-04-12: release of version 1.002, with
-* GenericSubtractor version 1.1.0 (was 1.0.0)
+* GenericSubtractor updated to version 1.1.0 (fixes an important bug wrt 1.0.0)
 
 2013-02-23: release of version 1.001, with
 * new contrib: VariableR     1.0.1  (from Jesse Thaler)

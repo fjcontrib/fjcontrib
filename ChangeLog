@@ -1,3 +1,8 @@
+2013-04-27  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+        * utils/check.sh
+        Fixed a few typos in comments
+
 2013-04-12  Gregory Soyez  <soyez@fastjet.fr>
 
 	* NEWS:

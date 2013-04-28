@@ -1,4 +1,18 @@
+Plans/ideas for improvements to fjcontrib:
+------------------------------------------
 
+- allow for a contribs.local overrides contribs.svn 
+
+- scripts/update-contribs.sh ContribName
+  has some option to list available versions
+  
+- some ability for contribs to require a minimal FJ version?
+
+- get an fjcontrib-config script working
+
+----------------------------------------------------------------------
+Older/obsolete things
+---------------------
 
 For a first release
 
@@ -13,9 +27,7 @@ For a first release
 
 ---------------------
 
-- contribs.local overrides contribs.svn 
 
-- some ability for contribs to require a minimal FJ version?
 
 - fjcontrib-config (--libs | ...) ???
   g++ `fjcontrib-config --cxxflags` 

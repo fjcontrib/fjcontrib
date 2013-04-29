@@ -7,7 +7,7 @@
 #
 # The format is mostly two-column, where the location is a 
 # relative location pointing to a stable release (tags/...), 
-# the trunk (trunk/...) or a branch (branch/...) 
+# the trunk (trunk) or a branch (branch/...) 
 # [branch is unsupported at the moment]
 #
 # A contribution can be skipped by replacing the location name

@@ -1,8 +1,6 @@
 Plans/ideas for improvements to fjcontrib:
 ------------------------------------------
 
-- allow for a contribs.local overrides contribs.svn 
-
 - scripts/update-contribs.sh ContribName
   has some option to list available versions
   

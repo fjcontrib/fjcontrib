@@ -48,21 +48,23 @@ function get_svn_info(){
     return 0    
 }
 
-# get an entry from a contrib file
+# get an entry from a contrib file, filling the "version" variable
+# vwith the version number
 #
-#   get_contrib_version  contrib  file  version
+#   get_contrib_version  contrib_name  file  version
 function get_contrib_version(){
     local __resultvar=$3
 
-    # nasty hack: if the file is "contribs.local", get it from the svn
-    if [[ "$2" == "contribs.local" ]]; then
+    # nasty hack: if the name of the "file" is "local_svn", 
+    # get the version number  from the local svn checkout of the contribution
+    if [[ "$2" == "local_svn" ]]; then
 	get_svn_info $1 mode version
 	eval $__resultvar="$version"
 	return 0
     fi
 
-    # now deal with it as if it was a 
-    entry=$(grep "^$1 " $2)
+    # now deal with the version number as if it was an entry in contribs.svn
+    entry=$(grep "^\s*$1\s" $2)
     if [ -z "$entry" ]; then
 	eval $__resultvar="[None]"
     else

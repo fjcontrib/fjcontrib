@@ -1,3 +1,15 @@
+2013-04-28  Matteo Cacciari <cacciari@lpthe.jussieu.fr> + Gregory
+
+        * scripts/update-contribs.sh
+	* scripts/internal/common.sh	
+	replaced contribs.local with local_svn to avoid confusion with
+	the name of the file that will eventually be used to contain
+	local modifications to contribs.svn. 
+	Fixed a regular expression in grep (allowing for mixture of spaces
+	and tabs before the contrib name)
+	Also reworded some comments.
+	
+	
 2013-04-27  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
         * utils/check.sh

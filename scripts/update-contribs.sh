@@ -87,9 +87,10 @@ echo "--------------------------------------------"
 echo "Checking for updates of individual contribs:"
 echo "--------------------------------------------"
 for contrib in $svn_contrib_list; do
-    # get the version numbers in both contrib files
+    # get the version numbers in contribs.svn file and also from the locally
+    # checked out contributions
     get_contrib_version ${contrib} contribs.svn   version_svn
-    get_contrib_version ${contrib} contribs.local version_local
+    get_contrib_version ${contrib} local_svn version_local
 
     echo
     echo -n "${contrib}: "

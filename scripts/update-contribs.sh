@@ -74,54 +74,79 @@ if [[ $# -gt 1 ]]; then
 fi
 
 #----------------------------------------------------------------------
-# update all the contribs in the contribs.svn file or only the one
+# update all the contribs in the contribs.svn file (plus the ones in contribs.local) or only the one
 # specified through the command line
 if [[ $# -gt 0 && x"$1" != x'--force' ]]; then
-    svn_contrib_list=$1
+    contribs_list=$1
 else
-    svn_contrib_list=$(cat contribs.svn | grep -v '^#' | grep -v '^$' | awk '{print $1}')
-fi
+    contribs_list=$(cat contribs.svn | grep -v '^#' | grep -v '^$' | awk '{print " "$1" "}')
+    # Check if a contribution mentioned in contribs.local was already present in contribs.svn
+    # Only add the entry to contribs_list if it wasn't there before (the version number will
+    # be dealt with later on)
+    if [[ -e contribs.local ]]; then
+      for contrib_in_local in `cat contribs.local | grep -v '^#' | grep -v '^$' | awk '{print $1}'`; do
+	if [[ " $contribs_list " != *" $contrib_in_local "* ]]; then
+	   contribs_list=$contribs_list" $contrib_in_local"
+        fi
+      done	
+    fi		
+fi 
 
 echo
 echo "--------------------------------------------"
 echo "Checking for updates of individual contribs:"
 echo "--------------------------------------------"
-for contrib in $svn_contrib_list; do
+for contrib in $contribs_list; do
     # get the version numbers in contribs.svn file and also from the locally
     # checked out contributions
     get_contrib_version ${contrib} contribs.svn   version_svn
     get_contrib_version ${contrib} local_svn version_local
+    get_contrib_version ${contrib} contribs.local version_mine
 
     echo
     echo -n "${contrib}: "
-
+    
+    # if thers is a line in contribs.local, use the version specified there
+    # to supersede the one in contribs.svn (which could be implicitly [None],
+    # i.e. a particular contribution could be not mentioned there)
+    requested_tag="default"
+    old_version=""
+    if [[ "${version_mine}" != "[None]" ]]; then 
+        old_version="  [Overriding $version_svn from contribs.svn]" 
+        version_svn="$version_mine"
+	requested_tag="requested"
+    fi
+    
     # check which situation we are in
     if [[ "${version_svn}" == "${version_local}" ]]; then
         # match: nothing to do
-	if [[ "$version" != "["*"]" ]]; then
-	    echo "you have the current version (${version_svn}). Running svn up"
+	if [[ "$version_svn" != "["*"]" ]]; then
+	    echo -e "you already have the $requested_tag version (${version_svn}).\nRunning svn up"
 	    cd $contrib
 	    svn up
 	    cd ..
 	else 
-	    echo "you have the current version (${version_svn})"
+	    echo "you already have the $requested_tag version (${version_svn})"
 	fi	
     else
+        #skip this particular contribution (flagged by at least a "-" in place of the version number)
+        if [[ "${version_svn}" =~ -+ ]]; then echo "Skipped"; continue; fi
+	    
 	# mismatch: show the versions and decide what to do
 	# according to the type of mismatch
 	echo ""
-	echo "    svn   version: "${version_svn}
-	echo "    local version: "${version_local}
+	echo "    $requested_tag version: "${version_svn}$old_version
+	echo "    installed version: "${version_local}
 	if [[ "${version_local}" == "[None]" ]]; then
 	    # the local version does not exist! Ask if we want to install it
-	    #get_yesno_answer "  Do you want to install the svn version?" "$default_yesno_answer" || {
+	    #get_yesno_answer "  Do you want to install the $requested_tag version?" "$default_yesno_answer" || {
 	    `dirname $0`/internal/switch-to-version.sh $contrib $version_svn || exit 1
 	    #}
 	elif [[ "${version_local}" == "[NoSVN]" ]]; then
 	    echo "You have an unversionned copy of $contrib in the way. It will not be updated."
 	else
 	    # the local version exists! Ask if we want to update it
-	    get_yesno_answer "  Do you want to switch from your local version to the svn one?" "$default_yesno_answer" || {
+	    get_yesno_answer "  Switch from the installed version to the $requested_tag one?" "$default_yesno_answer" || {
 		`dirname $0`/internal/switch-to-version.sh $contrib $version_svn || exit 1
 	    }
 	fi

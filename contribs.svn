@@ -1,10 +1,17 @@
-# This is the main configuration file that contains the list of the
-# contribs and their status
+# This file contains the list of all contribs and their current 
+# (default) version. It is read by scripts/update-contribs.sh
 #
-# The format is mostly two-column
-# where the location is a relative location pointing to a stable
-# release (tags/...), the trunk (trunk/...) or a branch (branch/...)
-# [unsupported at the moment]
+# You should NOT MODIFY this file, but rather write your
+# local modifications in contribs.local, with the same format.
+# They will take precedence.
+#
+# The format is mostly two-column, where the location is a 
+# relative location pointing to a stable release (tags/...), 
+# the trunk (trunk/...) or a branch (branch/...) 
+# [branch is unsupported at the moment]
+#
+# A contribution can be skipped by replacing the location name
+# with at least a "-", e.g. "----"
 #
 # ContribName                    Location
 #-------------------------------------------

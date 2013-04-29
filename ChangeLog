@@ -2,6 +2,7 @@
 
         * scripts/update-contribs.sh
 	* scripts/internal/common.sh	
+	* contribs.svn	
 	replaced contribs.local with local_svn to avoid confusion with
 	the name of the file that will eventually be used to contain
 	local modifications to contribs.svn. 
@@ -9,6 +10,10 @@
 	and tabs before the contrib name)
 	Also reworded some comments.
 	
+	Added support for a contribs.local overriding default entries in
+	contribs.svn. Added option to skip processing of a specific 
+	contribution by scripts/update-contribs.sh, by replacing version
+	number with any number of dashes.
 	
 2013-04-27  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 

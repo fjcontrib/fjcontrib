@@ -63,13 +63,17 @@ function get_contrib_version(){
 	return 0
     fi
 
-    # now deal with the version number as if it was an entry in contribs.svn
-    entry=$(grep "^\s*$1\s" $2)
-    if [ -z "$entry" ]; then
-	eval $__resultvar="[None]"
-    else
-	eval $__resultvar="`echo $entry | awk '{print $2}'`"
-    fi
+    # now deal with the version number as if it was an entry in "file" $2
+    if [[ -e $2 ]]; then # check if the file actually exists
+      entry=$(grep "^\s*$1\s" $2)
+      if [ -z "$entry" ]; then
+	  eval $__resultvar="[None]"
+      else
+	  eval $__resultvar="`echo $entry | awk '{print $2}'`"
+      fi
+    else # file does not exist
+      eval $__resultvar="[None]"
+    fi    
 }
 
 # get a yes/no answer

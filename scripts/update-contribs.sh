@@ -6,16 +6,19 @@
 # update the list of all contribs.
 # 
 # This does the following
+#
 #  - run svn up to get the updates of all the scripts and latest contrib list
-#  - updates the local list of contribs:
-#    . For the first checkout, the list of contribs will be copied in
-#      a contribs.local
-#    . for future checkouts, checks all potential updates and ask you
-#      what to do in case of doubt
-#  - for all the contribs that have to be updated, check that there is
-#    no modification in their svn
-#  - update all the contribs that need to be updated
-
+#
+#  - build the list of contribs:
+#     . by default, these are read from 'contribs.svn'
+#     . local requests can be specified in 'contribs.local'
+#       (in which case they take precedence)
+#
+#  - for all the contribs that have to be updated, check the currently
+#    installed version and, if it does not match the one in
+#    contribs.svn (or contribs.local), ask if the user wants to update
+#    them. If yes, update the installed version.
+#
 # parse some command line options of the form
 #   update-contribs.sh -<option>
 #

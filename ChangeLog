@@ -1,3 +1,9 @@
+2013-04-29  Gregory Soyez  <soyez@fastjet.fr> + Matteo
+
+	* scripts/update-contribs.sh:
+	reworded comments at the top of the script to reflect the changes
+	made with 'contribs.local'
+
 2013-04-28  Matteo Cacciari <cacciari@lpthe.jussieu.fr> + Gregory
 
         * scripts/update-contribs.sh

@@ -1,3 +1,8 @@
+2013-04-30  Gavin Salam  <gavin.salam@cern.ch>
+
+	* contribs.svn: 
+	put in EnergyCorrelator 1.0.0
+
 2013-04-29  Gregory Soyez  <soyez@fastjet.fr> + Matteo
 
 	* scripts/update-contribs.sh:

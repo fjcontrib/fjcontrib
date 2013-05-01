@@ -1,5 +1,12 @@
 2013-05-01  Gavin Salam  <gavin.salam@cern.ch>
 
+	* NEWS: 
+	* VERSION:
+	release of 1.003
+
+	* contribs.svn: 
+	changed version of EnergyCorrelator to 1.0.1
+
 	* scripts/internal/common.sh:
 	implemented suggested fix by J. Thaler for issue of
 	already-checked out contribs not being recognized on some

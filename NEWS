@@ -1,3 +1,6 @@
+2013-05-01: release of version 1.003 with 
+* new contrib: EnergyCorrelator 1.0.1 (from Jesse Thaler, Gavin Salam and Andrew Larkoski)
+
 2013-04-12: release of version 1.002, with
 * GenericSubtractor updated to version 1.1.0 (fixes an important bug wrt 1.0.0)
 

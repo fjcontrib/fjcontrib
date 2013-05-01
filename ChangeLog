@@ -1,3 +1,10 @@
+2013-05-01  Gavin Salam  <gavin.salam@cern.ch>
+
+	* scripts/internal/common.sh:
+	implemented suggested fix by J. Thaler for issue of
+	already-checked out contribs not being recognized on some
+	systems. 
+
 2013-04-30  Gavin Salam  <gavin.salam@cern.ch>
 
 	* contribs.svn: 

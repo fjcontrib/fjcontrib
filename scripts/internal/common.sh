@@ -65,7 +65,7 @@ function get_contrib_version(){
 
     # now deal with the version number as if it was an entry in "file" $2
     if [[ -e $2 ]]; then # check if the file actually exists
-      entry=$(grep "^\s*$1\s" $2)
+      entry=$(grep "^[ \t]*$1[ \t]" $2)
       if [ -z "$entry" ]; then
 	  eval $__resultvar="[None]"
       else

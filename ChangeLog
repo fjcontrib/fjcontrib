@@ -1,3 +1,10 @@
+2013-05-07  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+	* scripts/internal/common.sh:
+	further replacement [ \t] -> [[:space:]] for the fix
+	mentioned below, since the first one fails to recognize tabs
+	(only blanks worked)
+
 2013-05-01  Gavin Salam  <gavin.salam@cern.ch>
 
 	* NEWS: 

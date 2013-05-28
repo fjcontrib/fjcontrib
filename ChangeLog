@@ -1,6 +1,15 @@
+2013-05-28  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS:
+	* VERSION:
+	release of version 1.004
+
+	* contribs.svn:
+	switched GenericSubtractor to version 1.2.0
+
 2013-05-22  Gavin Salam  <gavin.salam@cern.ch>
 
-	* configure: 
+	* configure:
 	for contribs obtained through an svn checkout (e.g. for
 	developers), it now supplements version info from the
 	ContribName/VERSION file with info about the svn location.

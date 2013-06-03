@@ -23,3 +23,5 @@ VariableR                        tags/1.0.1
 Nsubjettiness                    tags/1.0.2
 # [contrib from Andrew Larkoski, Gavin Salam & Jesse Thaler]
 EnergyCorrelator                 tags/1.0.1
+# [contrib from Jeff Tseng]
+ScJet                            tags/1.1.0

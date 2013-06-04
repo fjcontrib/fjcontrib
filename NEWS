@@ -1,3 +1,6 @@
+2013-06-04: release of version 1.005 with
+* new contrib: ScJet 1.1.0 (from Jeff Tseng)
+
 2013-05-28: release of version 1.004 with
 * GenericSubtractor updated to version 1.2.0 (new constructors, example bug-fix)
 

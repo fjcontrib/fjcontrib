@@ -149,7 +149,11 @@ done
 
 # exit if fastjet-config is not found (bad file name or not in path)
 if ! [ `command -v $fjconfig` ]; then
-    echo $fjconfig" has not been found. Exiting."; exit 1 
+    echo "Error:" $fjconfig" has not been found."
+    echo "       You may explicitly specify the location of fastjet-config "
+    echo "       with the option --fastjet-config=...."
+    echo "Exiting"
+    exit 1 
 fi
 
 # if prefix has not been set explicitly from command line, set it to

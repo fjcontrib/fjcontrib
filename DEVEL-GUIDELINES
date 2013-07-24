@@ -30,8 +30,8 @@ Basic developer usage
    # including a basic Makefile (further info below)
    scripts/new-contrib-from-template.sh ContribName
 
-   # once you have something worth committing, write to
-   # <fastjet@projects.hepforge.org> to get write access to the
+   # once you have something worth committing, write to the fastjet contrib
+   # maintainers at <fastjet@projects.hepforge.org> to get write access to the
    # fjcontrib svn.
    # 
    # [  To help us set up your account, if the htpasswd command is available
@@ -51,7 +51,12 @@ Basic developer usage
    #   - VERSION includes the version number for the release
    #   - "make check" and "make install" both work
    #   - everything is committed
-   # then run
+   #
+   # At this point the fjcontrib maintainers are usually happy to have a
+   # quick look through your code and provide comments based on
+   # experience with other contribs.
+   #
+   # Once you're ready to make a release, run
    scripts/release-contrib.sh ContribName
    
    # send a mail to fastjet@projects.hepforge.org with a request for

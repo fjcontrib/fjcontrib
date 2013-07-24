@@ -1,3 +1,9 @@
+2013-07-24  Gavin Salam  <gavin.salam@cern.ch>
+
+	* DEVEL-GUIDELINES: 
+	mentioned that authors can ask for input from fjcontrib
+	maintainers before making a release
+
 2013-06-04  Gavin Salam  <gavin.salam@cern.ch>
 
 	* configure:

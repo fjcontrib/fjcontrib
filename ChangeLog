@@ -1,5 +1,10 @@
 2013-08-13  Gavin Salam  <gavin.salam@cern.ch>
 
+	* configure: 
+	identification of svn info fixed to work also with svn 1.8 (that
+	version prints an absolute and relative URL, and configure was
+	picking up both; now it picks up just the absolute URL).
+
 	* scripts/internal/release-fjcontrib.sh:
 	hopefully fixed bug where tagging comment didn't have version
 	number (but '$version')

@@ -304,7 +304,7 @@ for contrib in $built_contribs
 do
     # check if a contrib has an associated svn directory; if so include info about the svn repo
     if [ -e $contrib/.svn ] ; then 
-        svninfo="svn:"`svn info $contrib | grep URL | sed -e 's/URL: //' -e 's/.*\/contribs\/'$contrib'\///'`""
+        svninfo="svn:"`svn info $contrib | grep '^ *URL' | sed -e 's/URL: //' -e 's/.*\/contribs\/'$contrib'\///'`""
     else
         svninfo=""
     fi

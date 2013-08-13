@@ -138,8 +138,8 @@ echo
 echo "------------------------------------------------------------------------"
 echo "Making a tag of fjcontrib version $version"
 echo "------------------------------------------------------------------------"
-echo svn copy -m 'tagging fjcontrib-$version' $svn_write/trunk $svn_write/tags/$version
-     svn copy -m 'tagging fjcontrib-$version' $svn_write/trunk $svn_write/tags/$version
+echo svn copy -m "tagging fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
+     svn copy -m "tagging fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
 
 
 #========================================================================

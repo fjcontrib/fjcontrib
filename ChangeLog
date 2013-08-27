@@ -1,5 +1,9 @@
 2013-08-27  Gregory Soyez  <soyez@fastjet.fr>
 
+	* VERSION:
+	* NEWS:
+	released fjcontrib 1.006 including Nsubjettiness 1.0.3
+
 	* contribs.svn:
 	switched NSubjetiness to version 1.0.3
 

@@ -123,10 +123,10 @@ for arg do
                     fjconfig="$arg_value"
                     ;;
                 only)
-                    only_contribs="${arg_value//,/ /}"
+                    only_contribs="${arg_value//,/ }" # replace all commas with a blank
                     ;;
                 exclude)
-                    excluded_contribs="${arg_value//,/ /}"
+                    excluded_contribs="${arg_value//,/ }" # replace all commas with a blank
                     ;;
 		*)
 		    write_error "$arg: unrecognised argument"
@@ -278,20 +278,21 @@ TAB="$(printf '\t')"
 # alternatively we could build this from the Makefile.in
 # prefix variable
 
-# note that the apparently bizarre construct below ensures that the
-# appropriate characters are escaped in the sed replacement
+commandline="$0 $*"
+# he apparently bizarre constructs below ensure that the
+# slashes are escaped in the sed replacement, so as not to conflicit
+# with those in the s/// syntax
 escaped_built_list="$(echo ${built_contribs} | sed -e 's/[\/&]/\\&/g')"
 escaped_fjconfig="$(echo ${fjconfig} | sed -e 's/[\/&]/\\&/g')"
 escaped_prefix="$(echo ${prefix} | sed -e 's/[\/&]/\\&/g')"
-
-commandline="$0 $*"
+escaped_commandline="$(echo ${commandline} | sed -e 's/[\/&]/\\&/g')"
+# write out the Makefile
 sed -e "s/@CONTRIB_BUILD_LIST@/$escaped_built_list/g;\
         s/@FJCONFIG@/$escaped_fjconfig/g;\
-        s,@PREFIX@,${escaped_prefix},g;\
+        s/@PREFIX@/${escaped_prefix}/g;\
         s/template gets processed/was generated automatically/;\
-        s,@contrib_commandline@,$commandline,;\
+        s/@contrib_commandline@/$escaped_commandline/;\
         s/any edits fit with the rest of the build system/you only edit Makefile.in/" Makefile.in > Makefile
-
 
 #------------------------------------------------------------------------
 # write output and config.log file

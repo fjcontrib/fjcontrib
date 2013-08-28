@@ -1,3 +1,12 @@
+2013-08-28  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+        * configure
+          fixed two bugs that were preventing specifying more than
+          one contrib with the --only and --exclude options. The issues
+          were a spurious "/" appearing in the replacement of commas with
+          blanks in the contribs list, and a non-escaped command-line
+          passed through sed when writing out the Makefile.
+
 2013-08-27  Gregory Soyez  <soyez@fastjet.fr>
 
 	* VERSION:

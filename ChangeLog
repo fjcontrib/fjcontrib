@@ -1,3 +1,12 @@
+2013-09-03  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+	* VERSION:
+	* NEWS:
+	released fjcontrib 1.007 with new contrib SubjetCounting 1.0.0
+
+	* contribs.svn:
+	added SubjetCounting 1.0.0
+
 2013-08-28  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
         * configure

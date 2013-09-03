@@ -1,3 +1,9 @@
+2013-09-03: release of version 1.007, with
+* new contrib: SubjetCounting 1.0.0 (from Sonia El Hedri, Anson Hook, 
+  Martin Jankowiak, Jay G. Wacker)
+* fix for a bug that was preventing configuration with explicit inclusion 
+  or exclusion of more than one contrib
+
 2013-08-27: release of version 1.006 with
 * Nsubjettiness updated to 1.0.3 (compiler fixes, minor code reorganisation)
 
@@ -8,7 +14,8 @@
 * GenericSubtractor updated to version 1.2.0 (new constructors, example bug-fix)
 
 2013-05-01: release of version 1.003 with 
-* new contrib: EnergyCorrelator 1.0.1 (from Jesse Thaler, Gavin Salam and Andrew Larkoski)
+* new contrib: EnergyCorrelator 1.0.1 (from Jesse Thaler, Gavin Salam 
+  and Andrew Larkoski)
 
 2013-04-12: release of version 1.002, with
 * GenericSubtractor updated to version 1.1.0 (fixes an important bug wrt 1.0.0)

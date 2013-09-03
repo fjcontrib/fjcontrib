@@ -25,3 +25,5 @@ Nsubjettiness                    tags/1.0.3
 EnergyCorrelator                 tags/1.0.1
 # [contrib from Jeff Tseng]
 ScJet                            tags/1.1.0
+# [contrib from S. El Hedri, A. Hook, M. Jankowiak, J.G. Wacker]
+SubjetCounting                   tags/1.0.0

@@ -1,5 +1,5 @@
 2013-09-03: release of version 1.007, with
-* new contrib: SubjetCounting 1.0.0 (from Sonia El Hedri, Anson Hook, 
+* new contrib: SubjetCounting 1.0.1 (from Sonia El Hedri, Anson Hook, 
   Martin Jankowiak, Jay G. Wacker)
 * fix for a bug that was preventing configuration with explicit inclusion 
   or exclusion of more than one contrib

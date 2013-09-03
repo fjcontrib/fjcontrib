@@ -1,8 +1,20 @@
 2013-09-03  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
+	* contribs.svn:
+	switched SubjetCounting to version 1.0.1
+
+	* NEWS:
+	released fjcontrib 1.007 with new contrib SubjetCounting 1.0.1
+        and bugfix for exclusion and inclusion of more than one contrib
+
+
+2013-09-03  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
 	* VERSION:
 	* NEWS:
 	released fjcontrib 1.007 with new contrib SubjetCounting 1.0.0
+        and bugfix for exclusion and inclusion of more than one contrib
+        (not actually released as a tarball, see entry above)        
 
 	* contribs.svn:
 	added SubjetCounting 1.0.0

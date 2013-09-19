@@ -13,13 +13,23 @@ SUBDIRS.all=$(SUBDIRS:=.all)
 
 SUBMAKE=$(MAKE) 
 
-.PHONY: $(SUBDIRS) $(SUBDIRS.all) clean distclean check install examples
+.PHONY: $(SUBDIRS) $(SUBDIRS.all) clean distclean check check_init install examples
 
 all: $(SUBDIRS.all)
 
 install: all $(SUBDIRS)
 
-examples check clean distclean: $(SUBDIRS)
+examples clean distclean: $(SUBDIRS)
+
+check: check_init $(SUBDIRS)
+	@echo ""
+	@cat test_summary.tmp
+	@printf "\n%d out of %d tests passed\n\n" `grep "Success" test_summary.tmp | wc -l` `grep "^  " test_summary.tmp | wc -l`
+	@rm -f test_summary.tmp
+
+check_init:
+	@echo "Summary of tests" >  test_summary.tmp
+	@echo "----------------" >> test_summary.tmp
 
 # distclean removes the Makefile, but leaves in config.log
 distclean:

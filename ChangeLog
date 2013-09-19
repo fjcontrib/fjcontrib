@@ -1,3 +1,11 @@
+2013-09-19  Gregory Soyez  <soyez@fastjet.fr>
+
+	* Makefile.in:
+	* utils/check.sh:
+	instead of having "make check" exit with an error whenever a test
+	fails, let it keep going and print a summary of what has failed
+	and succeded at the end of everything
+
 2013-09-03  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
 	* contribs.svn:

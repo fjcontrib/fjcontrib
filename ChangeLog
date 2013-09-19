@@ -1,3 +1,12 @@
+2013-09-19  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+        * utils/check.sh
+        added colors to Success/Failed output from "make check"
+
+        * scripts/internal/generate-html-contents.pl 
+        a flag can now be set to get an alphabetically ordered
+        output (currently set to false, i.e. same output as before)
+
 2013-09-19  Gregory Soyez  <soyez@fastjet.fr>
 
 	* Makefile.in:

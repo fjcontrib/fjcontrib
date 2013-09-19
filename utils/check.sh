@@ -9,8 +9,17 @@
 #
 # Note that <program> is actually run using "./<program> < <datafile>"
 
+GREEN=$(tput setaf 2)
+RED=$(tput setaf 1)
+NORMAL=$(tput sgr0)
+
 function print_status_and_exit {
-    printf "  %-20s %-25s %s\n" `pwd | sed 's/.*\///g'` "$1" "$2" >> ../test_summary.tmp
+if [ $2 == "Success" ]; then
+   col=$GREEN
+else
+   col=$RED
+fi      
+    printf "  %-20s %-25s %s\n" `pwd | sed 's/.*\///g'` "$1" "${col}$2${NORMAL}" >> ../test_summary.tmp
     #-----------------------------------------------------------------
     # NOTE:
     #   This will cause the check test to exit with no error. 

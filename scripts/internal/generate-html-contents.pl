@@ -1,10 +1,12 @@
 #!/usr/bin/perl -w
 #
-# Generate an html contents file for the current version
+# Generate an html contents file for the current version of fjcontrib
 #
-# Best run from a directory that is a clean checkout of a tag; behaviour
-# may not 
+# To be run from the main directory of a checkout of fjcontrib.
+# Best run from a directory that is a clean checkout of a tag.
 
+# set to 1 to sort contribs alphabetically, 0 otherwise
+$sort=0;
 
 $versions="contribs.svn";
 $svn="http://fastjet.hepforge.org/svn/contrib/contribs/";
@@ -12,12 +14,27 @@ $svn="http://fastjet.hepforge.org/svn/contrib/contribs/";
 $topversion=`head -1 VERSION`;
 chomp $topversion;
 
+# read in contribs.svn file, fill contribs hash
 open (VERSIONS, "<$versions") || die "Could not open $versions";
-$list='';
+%contribs_hash=();
+$contribs_array=();
 while ($line = <VERSIONS>) {
   if ($line =~ /^\s*([a-z][^\s]*)\s+([^\s]*)/i) {
     $contrib = $1;
     $version = $2;
+    push @contribs_array, $contrib;
+    $contribs_hash{$contrib} = $version;
+  }
+}
+
+# sort contribs by alphabetical order
+if ($sort) { @contribs_array = sort keys %contribs_hash; }
+
+# write out html table
+$list='';
+foreach ( @contribs_array ) { 
+    $contrib = $_;
+    $version = $contribs_hash{$_};
     if ($version =~ /^[0-9]/) {$version = "tags/$version";}
     ($textversion = $version) =~ s/tags\///;
     $list .= "<tr> <td class=\"contribname\"> 
@@ -30,8 +47,8 @@ while ($line = <VERSIONS>) {
       $list .= '<a href="'.$svn.$contrib.'/'.$version.'/NEWS">NEWS</a> ';
     }
     $list .= "</td></tr>\n";
-  }
 }
+
 
 $head='
 <html>

@@ -9,9 +9,12 @@
 #
 # Note that <program> is actually run using "./<program> < <datafile>"
 
-GREEN=$(tput setaf 2)
-RED=$(tput setaf 1)
-NORMAL=$(tput sgr0)
+# check if tput is present before setting colors, just to be on the safe side
+if [ x`which tput` != "x" ]; then
+   GREEN=$(tput setaf 2)
+   RED=$(tput setaf 1)
+   NORMAL=$(tput sgr0)
+fi
 
 function print_status_and_exit {
 if [ $2 == "Success" ]; then

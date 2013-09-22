@@ -1,3 +1,9 @@
+2013-09-22  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+        * utils/check.sh
+        added a safety check to verify if tput is present on the system
+        before using it to set colors
+
 2013-09-19  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
         * utils/check.sh

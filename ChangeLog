@@ -1,5 +1,13 @@
 2013-09-22  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
+        * data/Pythia-Zp2jets-lhc-pileup-1ev.dat
+        replaced with new file including also particle ID and charge.
+        The events remain the same (up to, sometimes, differences in
+        the last digit), the "make check" still work without changing
+        the old reference files
+
+2013-09-22  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
         * utils/check.sh
         added a safety check to verify if tput is present on the system
         before using it to set colors

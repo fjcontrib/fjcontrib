@@ -1,3 +1,12 @@
+2013-09-24  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+	* VERSION:
+	* NEWS:
+	released fjcontrib 1.008 with new contrib JetCleanser 1.0.0
+
+	* contribs.svn:
+	added JetCleanser 1.0.0
+
 2013-09-22  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
         * data/Pythia-Zp2jets-lhc-pileup-1ev.dat
@@ -37,7 +46,6 @@
 	* NEWS:
 	released fjcontrib 1.007 with new contrib SubjetCounting 1.0.1
         and bugfix for exclusion and inclusion of more than one contrib
-
 
 2013-09-03  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 

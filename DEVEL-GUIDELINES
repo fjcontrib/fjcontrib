@@ -190,3 +190,34 @@ file indicates which contribs (and their version) are to be extracted
 by scripts/update-contribs.sh
 
 
+======================================================================
+Guidelines for reviewing contribs
+==================================
+
+[This part of the guidelines is in the process of being drafted]
+
+- Does the contrib do something non-trivial? I.e. does it do something
+  that cannot already be easily done with a few lines of FJ code?
+
+- Is the contrib well documented? All classes, constructors, member
+  functions, etc., that are exposed to the user should have an
+  instructive comment about what they do (or be so well named that a
+  comment is redundant).
+
+- Does the example(s) demonstrate all the main features of the code?
+
+- Does the contrib make sensible use of existing FastJet features and,
+  where relevant, does its interface follow the pattern of standard
+  FJ3 interfaces?  (E.g. with FunctionOfPseudoJet, Selectors,
+  etc.). Conforming with existing interfaces helps give users a
+  uniform experience.
+
+- Are the tests carried out as part of make check reasonably
+  exhaustive? Are the contents of the reference results file
+  sufficient to have a reasonable chance of spotting future changes?
+  (E.g. a single bool as the output has a 50% chance of coming out
+  right even if the code is misbehaving).
+
+- If you run the example with valgrind, does it run free of errors and
+  memory leaks? We've found that valgrind tests are often better
+  carried out on linux machines than on macs.

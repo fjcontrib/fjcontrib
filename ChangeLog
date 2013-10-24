@@ -1,3 +1,13 @@
+2013-10-24  Gregory Soyez  <soyez@fastjet.fr>
+
+	* scripts/internal/switch-to-version.sh:
+	updated to add support for branches
+
+	* scripts/update-contribs.sh (script_new_version):
+	fixed an issue with checking out versions containing a '-' [the
+	regular expression matching pattern was consifering these as
+	"to-be-skipped"]
+
 2013-10-21  Gavin Salam  <gavin.salam@cern.ch>
 
 	* DEVEL-GUIDELINES:

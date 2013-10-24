@@ -133,7 +133,7 @@ for contrib in $contribs_list; do
 	fi	
     else
         #skip this particular contribution (flagged by at least a "-" in place of the version number)
-        if [[ "${version_svn}" =~ -+ ]]; then echo "Skipped"; continue; fi
+        if [[ "${version_svn}" =~ ^-+ ]]; then echo "Skipped"; continue; fi
 	    
 	# mismatch: show the versions and decide what to do
 	# according to the type of mismatch

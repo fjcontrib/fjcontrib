@@ -41,6 +41,9 @@ mode="ro"
 if [[ "$version" == "trunk" ]]; then
     mode="rw"
 fi
+if [[ "${version}" =~ ^branches ]]; then
+    mode="rw"
+fi    
 
 # if the version starts with a number, prefix it by "tags/"
 if [[ "$version" =~ ^[0-9] ]]; then
@@ -69,20 +72,32 @@ if [ -z "`svn ls $svn_read/contribs | grep '^'$contrib'/$'`" ]; then
     exit 1
 fi
 if [[ "${version}" != "trunk" ]]; then
-    tagged_version=${version#*/}
-    if [ -z "`svn ls $svn_read/contribs/$contrib/tags | grep '^'$tagged_version'/$'`" ]; then
-	echo "Version $version of $contrib does not exist. Exiting."
-	exit 1
+    # check if we're requesting a tag or a branch
+    if [[ "$version" =~ ^branches ]]; then
+        # we deal with a branch
+        branch_version=${version#*/}
+        if [ -z "`svn ls $svn_read/contribs/$contrib/branches | grep '^'$branch_version'/$'`" ]; then
+	    echo "Version $version of $contrib does not exist. Exiting."
+	    exit 1
+        fi
+    else
+        # we deal with a tag
+        tagged_version=${version#*/}
+        if [ -z "`svn ls $svn_read/contribs/$contrib/tags | grep '^'$tagged_version'/$'`" ]; then
+	    echo "Version $version of $contrib does not exist. Exiting."
+	    exit 1
+        fi
     fi
 fi
+
 
 # if the directory does not yet exist, check it out
 if [[ "$current_version" == "[None]" ]]; then
     echo "  Checking out version ${version} of ${contrib}"
-    if [[ "${version}" == "trunk" ]]; then
-	svn co ${svn_write}/contribs/${contrib}/${version} $contrib
+    if [[ "${mode}" == "rw" ]]; then
+        svn co ${svn_write}/contribs/${contrib}/${version} $contrib
     else
-	svn co ${svn_read}/contribs/${contrib}/${version} $contrib
+        svn co ${svn_read}/contribs/${contrib}/${version} $contrib
     fi
     exit 0
 fi
@@ -126,12 +141,11 @@ if [[ "$current_mode" == "rw" ]]; then
 fi
 
 # now switch to the correct location
-if [[ "$version" == "trunk" ]]; then
-    svn switch ${svn_read}/contribs/$contrib/trunk
-    svn switch --relocate ${svn_read}/contribs/$contrib/trunk ${svn_write}/contribs/$contrib/trunk
+svn switch ${svn_read}/contribs/$contrib/$version
+# grant write access when needed
+if [[ "${mode}" == "rw" ]]; then
+    svn switch --relocate ${svn_read}/contribs/$contrib/${version} ${svn_write}/contribs/$contrib/${version}
     svn up
-else
-    svn switch ${svn_read}/contribs/$contrib/$version
 fi
 
 cd ..

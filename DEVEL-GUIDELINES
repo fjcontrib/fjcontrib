@@ -221,3 +221,7 @@ Guidelines for reviewing contribs
 - If you run the example with valgrind, does it run free of errors and
   memory leaks? We've found that valgrind tests are often better
   carried out on linux machines than on macs.
+
+- Are the README, AUTHORS, NEWS and ChangeLog files sensible?
+
+- Are the $Id$ tags set correctly in the files? 

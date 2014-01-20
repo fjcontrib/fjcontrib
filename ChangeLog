@@ -1,3 +1,19 @@
+2014-01-20  Gavin Salam  <gavin.salam@cern.ch>
+
+	* Makefile.in:
+	* utils/check.sh: 
+
+	arranged for make check to exit with error on failure from within
+	subdirectories, but to exit OK on failure when called from the
+	main directory (previous behaviour was to always exit OK).
+
+	Removed redundant "exit 1" from the check.sh code (exit always
+	handled by print_status_and_exit(...)).
+
+	Also, when called directly from a subdirectory, make check no
+	longer records its output in the test_summary.tmp file, and it now
+	prints a colour-coded success/failure message.
+
 2013-10-24  Gregory Soyez  <soyez@fastjet.fr>
 
 	* scripts/internal/switch-to-version.sh:

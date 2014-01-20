@@ -11,7 +11,10 @@ SUBDIRS.all=$(SUBDIRS:=.all)
 # get any variables defined in the contrib-wide include
 -include .Makefile.inc
 
-SUBMAKE=$(MAKE) 
+# make invocations in subdirectories have an environment variable
+# set so that they can alter their behaviour if need be 
+# (e.g. for make check)
+SUBMAKE= $(MAKE) FJCONTRIB_SUBMAKE=1
 
 .PHONY: $(SUBDIRS) $(SUBDIRS.all) clean distclean check check_init install examples
 

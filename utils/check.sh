@@ -17,17 +17,27 @@ if [ x`which tput` != "x" ]; then
 fi
 
 function print_status_and_exit {
-if [ $2 == "Success" ]; then
-   col=$GREEN
-else
-   col=$RED
-fi      
-    printf "  %-20s %-25s %s\n" `pwd | sed 's/.*\///g'` "$1" "${col}$2${NORMAL}" >> ../test_summary.tmp
-    #-----------------------------------------------------------------
-    # NOTE:
-    #   This will cause the check test to exit with no error. 
-    #   Comment this line out if you want errors to cause Make to stop
+  if [ x"$2" == x"Success" ]; then
+     col=$GREEN
+     exit_code=0
+  else
+     col=$RED
+     exit_code=1
+  fi      
+  OUTPUT="${col}$2${NORMAL}"
+
+  if [[ x"$FJCONTRIB_SUBMAKE" == x ]]; then
+    # if this is a standalone make call then just give the output and 
+    # exit with the relevant exit code;
+    echo "$OUTPUT"  
+    exit $exit_code
+  else
+    # if this is is a subdirectory make, then discard the exit code,
+    # and record success/failure in a file that will be output from 
+    # the parent makefile
+    printf "  %-20s %-25s %s\n" `pwd | sed 's/.*\///g'` "$1" "$OUTPUT" >> ../test_summary.tmp
     exit
+  fi
 }
 
 echo
@@ -39,10 +49,10 @@ echo "$2 and reference file $1.ref"
 #
 # Note that, for the executable, the Makefile should in principle
 # rebuild the program if it is absent or not executable
-test -e ./$1 || { echo "ERROR: the executable $1 cannot be found."; print_status_and_exit "$1" "Failed (executable not found)"; exit 1;}
-test -x ./$1 || { echo "ERROR: $1 is not executable."; print_status_and_exit "$1" "Failed (program not executable)"; exit 1;}
-test -e ./$1.ref || { echo "ERROR: the expected output $1.ref cannot be found."; print_status_and_exit "$1" "Failed (reference output not found)"; exit 1;}
-test -e ./$2 || { echo "ERROR: the datafile $2 cannot be found."; print_status_and_exit "$1" "Failed (datafile not found)"; exit 1;}
+test -e ./$1 || { echo "ERROR: the executable $1 cannot be found."; print_status_and_exit "$1" "Failed (executable not found)";}
+test -x ./$1 || { echo "ERROR: $1 is not executable."; print_status_and_exit "$1" "Failed (program not executable)";}
+test -e ./$1.ref || { echo "ERROR: the expected output $1.ref cannot be found."; print_status_and_exit "$1" "Failed (reference output not found)";}
+test -e ./$2 || { echo "ERROR: the datafile $2 cannot be found."; print_status_and_exit "$1" "Failed (datafile not found)";}
 
 # make sure that the reference output file is not empty (after removal of
 # comments and empty lines)
@@ -51,7 +61,6 @@ test -e ./$2 || { echo "ERROR: the datafile $2 cannot be found."; print_status_a
     echo "should contain more than comments and empty lines"
     echo
     print_status_and_exit "$1" "Failed (no valid reference)"
-    exit 1
 }
 
 # run the example
@@ -64,7 +73,6 @@ if [[ -n $DIFF ]]; then
     echo
     rm $1.tmp_ref
     print_status_and_exit "$1" "Failed (see difference file)"
-    exit 1
 fi
 
 rm $1.tmp_ref

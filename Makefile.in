@@ -22,7 +22,9 @@ all: $(SUBDIRS.all)
 
 install: all $(SUBDIRS)
 
-examples clean distclean: $(SUBDIRS)
+examples clean: $(SUBDIRS)
+
+distclean: $(SUBDIRS) CMS-shared-distclean
 
 check: check_init $(SUBDIRS)
 	@echo ""
@@ -38,6 +40,21 @@ check_init:
 distclean:
 	rm -f Makefile
 	rm -f .Makefile.inc
+
+# dirty hack to provide a shared library to CMS; this is extremely fragile
+# and will be hopefully replaced with a more robust solution at some
+# point in the future
+fragile-shared: libfastjetcontribfragile.@DYNLIBEXT@
+
+fragile_SHARED_SRC_LIST=@FRAGILE_SHARED_SRC_LIST@
+libfastjetcontribfragile.@DYNLIBEXT@: $(fragile_SHARED_SRC_LIST)
+	$(CXX) @DYNLIBOPT@ -fPIC -DPIC $(CXXFLAGS) `$(FASTJETCONFIG) --cxxflags` $(fragile_SHARED_SRC_LIST) -o libfastjetcontribfragile.@DYNLIBEXT@
+
+fragile-shared-install: fragile-shared install
+	utils/install-sh -c -m 644 libfastjetcontribfragile.@DYNLIBEXT@ $(PREFIX)/lib
+
+fragile-shared-distclean:
+	rm -f libfastjetcontribfragile.@DYNLIBEXT@
 
 $(SUBDIRS):
 	+$(SUBMAKE) -C $@ $(MAKECMDGOALS)

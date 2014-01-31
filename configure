@@ -279,19 +279,39 @@ TAB="$(printf '\t')"
 # prefix variable
 
 commandline="$0 $*"
-# he apparently bizarre constructs below ensure that the
+# the apparently bizarre constructs below ensure that the
 # slashes are escaped in the sed replacement, so as not to conflicit
 # with those in the s/// syntax
 escaped_built_list="$(echo ${built_contribs} | sed -e 's/[\/&]/\\&/g')"
 escaped_fjconfig="$(echo ${fjconfig} | sed -e 's/[\/&]/\\&/g')"
 escaped_prefix="$(echo ${prefix} | sed -e 's/[\/&]/\\&/g')"
 escaped_commandline="$(echo ${commandline} | sed -e 's/[\/&]/\\&/g')"
+
+# this is the list of all sources that go into libraries. It is quite
+# fragile and only intended for CMS's dirty shared-library hack.
+srclist=""; 
+for contrib in $included_contribs 
+do 
+srclist="${srclist} "`grep "^SRCS=" ${contrib}/Makefile | sed 's/^SRCS=/ /' | sed 's/ \([^ ]\)/ '${contrib}'\/\1/g'`
+done
+escaped_srclist="$(echo ${srclist} | sed -e 's/[\/&]/\\&/g')"
+if [ "x"`uname` == "xDarwin" ] ;  then
+    dynlibopt="-dynamiclib"
+    dynlibext="dylib"
+else 
+    dynlibopt="-shared"
+    dynlibext="so"
+fi
+
+
 # write out the Makefile
 sed -e "s/@CONTRIB_BUILD_LIST@/$escaped_built_list/g;\
         s/@FJCONFIG@/$escaped_fjconfig/g;\
         s/@PREFIX@/${escaped_prefix}/g;\
         s/template gets processed/was generated automatically/;\
         s/@contrib_commandline@/$escaped_commandline/;\
+        s/@FRAGILE_SHARED_SRC_LIST@/$escaped_srclist/;\
+        s/@DYNLIBOPT@/$dynlibopt/g;s/@DYNLIBEXT@/$dynlibext/g;\
         s/any edits fit with the rest of the build system/you only edit Makefile.in/" Makefile.in > Makefile
 
 #------------------------------------------------------------------------

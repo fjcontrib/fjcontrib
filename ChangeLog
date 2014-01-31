@@ -1,3 +1,13 @@
+2014-01-31  Gavin SALAM  <salam@lpthe.jussieu.fr> + Gregory + Matteo
+
+	* configure:
+	* Makefile.in:
+	added targets CMS-shared CMS-shared-install and CMS-shared-distclean;
+	the CMS-shared(-install) builds (installs) a
+	libfastjetcontrib4CMS.so file. This is currently very fragile, in 
+	that it relies on just the SRCS formatting in the individual
+	contrib makefiles (all sources on a single line, without wildcards).
+
 2014-01-20  Gavin Salam  <gavin.salam@cern.ch>
 
 	* Makefile.in:

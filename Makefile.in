@@ -57,6 +57,7 @@ libfastjetcontribfragile.@DYNLIBEXT@: $(fragile_SHARED_SRC_LIST)
 
 fragile-shared-install: fragile-shared
 	utils/install-sh -c -m 644 libfastjetcontribfragile.@DYNLIBEXT@ $(PREFIX)/lib
+	@DYNLIBPOSTPROC@ $(PREFIX)/lib/libfastjetcontribfragile.@DYNLIBEXT@ 
 
 fragile-shared-distclean:
 	rm -f libfastjetcontribfragile.@DYNLIBEXT@

@@ -298,11 +298,12 @@ escaped_srclist="$(echo ${srclist} | sed -e 's/[\/&]/\\&/g')"
 if [ "x"`uname` == "xDarwin" ] ;  then
     dynlibopt="-dynamiclib"
     dynlibext="dylib"
+    dynlibpostproc="install_name_tool -id \\1 \\1"
 else 
     dynlibopt="-shared"
     dynlibext="so"
+    dynlibpostproc="" # some dummy command needed
 fi
-
 
 # write out the Makefile
 sed -e "s/@CONTRIB_BUILD_LIST@/$escaped_built_list/g;\
@@ -312,6 +313,7 @@ sed -e "s/@CONTRIB_BUILD_LIST@/$escaped_built_list/g;\
         s/@contrib_commandline@/$escaped_commandline/;\
         s/@FRAGILE_SHARED_SRC_LIST@/$escaped_srclist/;\
         s/@DYNLIBOPT@/$dynlibopt/g;s/@DYNLIBEXT@/$dynlibext/g;\
+        s/@DYNLIBPOSTPROC@ \(.*\)/$dynlibpostproc/g;\
         s/any edits fit with the rest of the build system/you only edit Makefile.in/" Makefile.in > Makefile
 
 #------------------------------------------------------------------------

@@ -48,7 +48,8 @@ distclean:
 
 # dirty hack to provide a shared library to CMS; this is extremely fragile
 # and will be hopefully replaced with a more robust solution at some
-# point in the future
+# point in the future; note, that you must still do make install
+# in order for all the headers to be installed
 fragile-shared: libfastjetcontribfragile.@DYNLIBEXT@
 
 fragile_SHARED_SRC_LIST=@FRAGILE_SHARED_SRC_LIST@

@@ -1,3 +1,9 @@
+2014-MM-DD: release of version 1.009 with
+* new make targets fragile-shared and fragile-shared-install
+  which build and install a single libfastjetcontribfragile.so
+  for the whole of fjcontrib. This is a temporary fix to 
+  provide a shared lib and will change at some future date.
+
 2013-09-24: release of version 1.008, with
 * new contrib: JetCleanser 1.0.0 (from David Krohn, Matthew Low, 
   Matthew D. Schwartz, and Lian-Tao Wang)

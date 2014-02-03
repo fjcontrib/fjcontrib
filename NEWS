@@ -1,4 +1,4 @@
-2014-MM-DD: release of version 1.009 with
+2014-02-03: release of version 1.009 with
 * new make targets fragile-shared and fragile-shared-install
   which build and install a single libfastjetcontribfragile.so
   for the whole of fjcontrib. This is a temporary fix to 

@@ -29,3 +29,5 @@ ScJet                            tags/1.1.0
 SubjetCounting                   tags/1.0.1
 # [contrib from D. Krohn, M. Low, M.D. Schwartz, and L-T Wang]
 JetCleanser                      tags/1.0.0
+# [contrib from D. Bertolini, T. Chan and J. Thaler]
+JetsWithoutJets                  tags/1.0.0

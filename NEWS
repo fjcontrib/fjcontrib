@@ -1,3 +1,7 @@
+2014-02-27: release of version 1.010 with
+* new contrib: JetsWithoutJets (from Daniele Bertolini, Tucker Chan, 
+  Jesse Thaler)
+
 2014-02-03: release of version 1.009 with
 * new make targets fragile-shared and fragile-shared-install
   which build and install a single libfastjetcontribfragile.so

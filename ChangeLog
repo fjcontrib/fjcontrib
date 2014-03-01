@@ -1,3 +1,10 @@
+2014-03-01  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+        * scripts/internal/generate-html-contents.pl
+        added (and set) option to list the contribs alphabetically.
+        Also added (but not activated) option to include the date using the
+        time stamp of the svn tag
+
 2014-02-26  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
 	* NEWS:

@@ -192,7 +192,7 @@ by scripts/update-contribs.sh
 
 ======================================================================
 Guidelines for reviewing contribs
-==================================
+=================================
 
 [This part of the guidelines is in the process of being drafted]
 
@@ -224,4 +224,7 @@ Guidelines for reviewing contribs
 
 - Are the README, AUTHORS, NEWS and ChangeLog files sensible?
 
-- Are the $Id$ tags set correctly in the files? 
+- Are the $Id$ tags set correctly in the files? You can set them by
+  doing the following in your directory
+
+     svn propset svn:keywords Id *.cc *.hh

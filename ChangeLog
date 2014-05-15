@@ -1,3 +1,19 @@
+2014-05-15  Gregory Soyez  <soyez@fastjet.fr>
+
+	in preparation of the pileup workshop at CERN in May 2014
+
+	* VERSION:
+	* NEWS:
+	upped version to 1.012-alpha-PUWS14.1 for release with new
+	contribs RecursivTools andSoftKiller and upgrade of
+	GenericSubtractor to include SafeSubtractors.
+	Prepared NEWS for the release.
+
+	* contribs.svn:
+	added release 2.0.0-alpha-PUWS14.1 of the GenericSubtractor contrib
+	added release 1.0.0-alpha-PUWS14.1 of the SoftKiller contrib
+	added release 1.0-alpha-PUWS14.1 of the RecursiveTools contrib
+
 2014-04-06  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION:

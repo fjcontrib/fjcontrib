@@ -16,7 +16,7 @@
 # ContribName                    Location
 #-------------------------------------------
 # [contribs from the FastJet authors]
-GenericSubtractor                tags/1.2.0
+GenericSubtractor                tags/2.0.0-alpha-PUWS14.1
 JetFFMoments                     tags/1.0.0
 # [contribs from Jesse Thaler]
 VariableR                        tags/1.0.1
@@ -33,3 +33,9 @@ JetCleanser                      tags/1.0.0
 JetsWithoutJets                  tags/1.0.0
 # [contrib from Peter Berta, Martin Spousta, David W. Miller and Rupert Leitner]
 ConstituentSubtractor            tags/1.0.0
+# [modified-MassDrop tagger from Mrinal Dasgupta, Alessandro Fregoso,
+#  Simone Marzani and Gavin Salam, and SoftDrop from Andrew Larkoski,
+#  Simone Marzani, Gregory Soyez and Jesse Thaler]
+RecursiveTools                   tags/1.0-alpha-PUWS14.1
+# [contrib from the FastJet authors]
+SoftKiller                       tags/1.0.0-alpha-PUWS14.1

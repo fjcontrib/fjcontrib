@@ -1,3 +1,12 @@
+2014-06-03  Gavin Salam  <gavin.salam@cern.ch>
+
+	* VERSION:
+	* NEWS:
+	updated version to 1.012 and prepared NEWS for release.
+
+	* contribs.svn:
+	updated VariableR to version 1.1.1
+
 2014-04-06  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION:

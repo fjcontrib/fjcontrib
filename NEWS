@@ -1,3 +1,7 @@
+2014-06-03: release of version 1.012 with
+* VariableR updated to version 1.1.1 (from 1.0.1), with optimized code 
+  and new recommended interface.
+
 2014-04-06: release of version 1.011 with 
 * new contrib: ConstituentSubtractor (from Peter Berta, Martin
   Spousta, David W. Miller and Rupert Leitner) 

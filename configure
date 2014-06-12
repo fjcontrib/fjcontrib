@@ -336,7 +336,7 @@ do
     else
         svninfo=""
     fi
-    printf "        %-20s v%-15s $svninfo\n" $contrib `cat $contrib/VERSION` 
+    printf "        %-22s v%-15s $svninfo\n" $contrib `cat $contrib/VERSION` 
 done
 #
 # output to config.log
@@ -351,6 +351,6 @@ echo -e "The command line invocation was\n"                                >> co
 echo -e "    $0 $@\n"                                                      >> config.log
 for contrib in $sorted_built_contribs
 do
-    printf "        %-20s v%s\n" $contrib `cat $contrib/VERSION`           >> config.log
+    printf "        %-22s v%s\n" $contrib `cat $contrib/VERSION`           >> config.log
 done
 echo -e "\nInstallation prefix: "$prefix"\n"                                 >> config.log

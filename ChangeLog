@@ -1,3 +1,8 @@
+2014-06-12  Gregory Soyez  <soyez@fastjet.fr>
+
+	* configure (sorted_built_contribs):
+	slightly enlarged the space for printing contribs summary
+
 2014-06-03  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION:

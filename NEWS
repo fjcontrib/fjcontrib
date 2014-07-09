@@ -1,3 +1,8 @@
+2014-07-09: release of version 1.013 with
+* Nsubjettiness updated to version 2.1.0 (from 1.0.3)
+* new contrib: RecursiveTools with v1.0.0 (from Gavin Salam, Gregory
+  Soyez and Jesse Thaler)
+
 2014-06-03: release of version 1.012 with
 * VariableR updated to version 1.1.1 (from 1.0.1), with optimized code 
   and new recommended interface.

@@ -20,7 +20,7 @@ GenericSubtractor                tags/1.2.0
 JetFFMoments                     tags/1.0.0
 # [contribs from Jesse Thaler]
 VariableR                        tags/1.1.1
-Nsubjettiness                    tags/1.0.3
+Nsubjettiness                    tags/2.1.0
 # [contrib from Andrew Larkoski, Gavin Salam & Jesse Thaler]
 EnergyCorrelator                 tags/1.0.1
 # [contrib from Jeff Tseng]
@@ -33,3 +33,5 @@ JetCleanser                      tags/1.0.0
 JetsWithoutJets                  tags/1.0.0
 # [contrib from Peter Berta, Martin Spousta, David W. Miller and Rupert Leitner]
 ConstituentSubtractor            tags/1.0.0
+# [contrib from Gavin Salam, Gregory Soyez and Jesse Thaler]
+RecursiveTools                   tags/1.0.0

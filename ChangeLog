@@ -1,3 +1,14 @@
+2014-07-09  Gregory Soyez  <soyez@fastjet.fr>
+
+	* VERSION:
+	* NEWS:
+	updated version to 1.013 and prepared NEWS for release.
+
+	* contribs.svn:
+	  . updated Nsubjettiness to version 2.1.0
+	  . added release 1.0.0 of the new RecursiveTools contrib by
+	    G. Salam, G. Soyez and J. Thaler
+
 2014-06-12  Gregory Soyez  <soyez@fastjet.fr>
 
 	* configure (sorted_built_contribs):

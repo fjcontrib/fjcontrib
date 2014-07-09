@@ -1,7 +1,6 @@
 2014-07-09: release of version 1.013 with
 * Nsubjettiness updated to version 2.1.0 (from 1.0.3). Maintains
-  backward compatibility and adds a new recommended interface. See
-  Nsubjettiness/NEWS for details.
+  backward compatibility and adds a new recommended interface.
 * new contrib: RecursiveTools with v1.0.0 including ModifiedMassDropTagger
   and SoftDrop (from Gavin Salam, Gregory Soyez and Jesse Thaler)
 

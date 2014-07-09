@@ -1,5 +1,7 @@
 2014-07-09: release of version 1.013 with
-* Nsubjettiness updated to version 2.1.0 (from 1.0.3)
+* Nsubjettiness updated to version 2.1.0 (from 1.0.3). Maintains
+  backward compatibility and adds a new recommended interface. See
+  Nsubjettiness/NEWS for details.
 * new contrib: RecursiveTools with v1.0.0 (from Gavin Salam, Gregory
   Soyez and Jesse Thaler)
 

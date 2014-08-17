@@ -1,3 +1,7 @@
+2014-08-17: release of version 1.014 with
+* new contrib: SoftKiller 1.0.0 pileup removal tool
+* update of JetCleanser to version 1.0.1, fixing a C++11 compilation issue
+
 2014-07-09: release of version 1.013 with
 * Nsubjettiness updated to version 2.1.0 (from 1.0.3). Maintains
   backward compatibility and adds a new recommended interface.

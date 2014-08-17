@@ -35,3 +35,5 @@ JetsWithoutJets                  tags/1.0.0
 ConstituentSubtractor            tags/1.0.0
 # [contrib from Gavin Salam, Gregory Soyez and Jesse Thaler]
 RecursiveTools                   tags/1.0.0
+# [contrib from Matteo Cacciari, Gavin Salam and Gregory Soyez]
+SoftKiller                       tags/1.0.0

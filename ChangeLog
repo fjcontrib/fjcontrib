@@ -1,3 +1,13 @@
+2015-02-20  Gavin Salam  <gavin.salam@cern.ch> + Matteo
+
+	* DEVEL-GUIDELINES:
+	mentioned that people should set svn:keywords to Id on relevant
+	files. 
+
+	* scripts/internal/Template/example.cc
+	modified template example header to include a line showing
+	how to run the example.
+
 2014-11-25  Gavin Salam  <gavin.salam@cern.ch>
 
 	* NEWS:

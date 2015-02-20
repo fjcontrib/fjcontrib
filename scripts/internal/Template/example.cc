@@ -1,3 +1,8 @@
+// To run this example, use the following command:
+//
+//   ./example < THE_INPUT_FILE [replace this with the file you want used!]
+//
+//----------------------------------------------------------------------
 // $Id$
 //
 // Copyright (c) -, 
@@ -52,7 +57,7 @@ void read_event(vector<PseudoJet> &event){
   string line;
   while (getline(cin, line)) {
     istringstream linestream(line);
-    // take substrings to avoid problems when there are extra "pollution"
+    // take substrings to avoid problems when there is extra "pollution"
     // characters (e.g. line-feed).
     if (line.substr(0,4) == "#END") {return;}
     if (line.substr(0,1) == "#") {continue;}

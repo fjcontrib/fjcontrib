@@ -46,6 +46,9 @@ Basic developer usage
    # within your pre-existing ContribName/ directory you can now "svn
    # add" your files, commit them etc.
 
+   # you should probably also run "svn propset svn:keywords Id *.cc *.hh"
+   # so that their $Id$ tag automatically gets updated when you commit
+
    # when you're ready to make a versioned release, make sure that
    #   - all required files (AUTHORS, COPYING, NEWS etc.) are up to date
    #   - VERSION includes the version number for the release

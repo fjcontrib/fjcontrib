@@ -1,3 +1,6 @@
+2015-04-07: release of version 1.016 with
+* new contrib: ValenciaPlugin, version 2.0.0 (new e+e- clustering algorithms)
+
 2014-11-25: release of version 1.015 with
 * update of EnergyCorrelator to 1.1.0 (adds C1, C2 and D2 observables)
 

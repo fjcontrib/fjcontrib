@@ -1,3 +1,12 @@
+2015-04-07  Gavin Salam  <gavin.salam@cern.ch>
+
+	* VERSION:
+	* NEWS:
+	updated version to 1.016 and mentioned ValenciaPlugin 2.0.0 in NEWS
+
+	* contribs.svn:
+	added ValenciaPlugin (tags/2.0.0)
+
 2015-02-20  Gavin Salam  <gavin.salam@cern.ch> + Matteo
 
 	* DEVEL-GUIDELINES:

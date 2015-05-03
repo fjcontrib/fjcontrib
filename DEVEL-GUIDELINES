@@ -232,7 +232,9 @@ Guidelines for reviewing contribs
   memory leaks? We've found that valgrind tests are often better
   carried out on linux machines than on macs.
 
-- Are the README, AUTHORS, NEWS and ChangeLog files sensible?
+- Are the README, AUTHORS, NEWS and ChangeLog files sensible? Are line
+  lengths suitable for web viewing (e.g. no more than 80 characters
+  per line).
 
 - Are the $Id$ tags set correctly in the files? You can set them by
   doing the following in your directory

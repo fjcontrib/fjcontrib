@@ -168,25 +168,25 @@ Structure of the svn repository
 
 The repository at
 
-   http://fastjet.hepforge.org/svn/contrib/                    (read-only)
-   https://fastjet.hepforge.org/svn/contrib/                   (read-write)
-   svn+ssh://svn.hepforge.org/hepforge/svn/fastjet/contrib/    (read-write)
+    http://fastjet.hepforge.org/svn/contrib/                    (read-only)
+    https://fastjet.hepforge.org/svn/contrib/                   (read-write)
+    svn+ssh://svn.hepforge.org/hepforge/svn/fastjet/contrib/    (read-write)
 
 is organised as follows:
 
-  # area for the overall fastjet-contrib scripts and information about
-  # currently used version of individual contribs. Currently only 
-  # maintainers of the overall fjcontrib area have write acces
-  #
-  trunk/    # development version
-  tags/     # official releases 
-  branches/ # branches
-
-  # areas for individual contribs. Developers each have access
-  # to all contribs by default (for simplicity)
-  contribs/ContribName/trunk        # development version
-  contribs/ContribName/tags         # official releases
-  contribs/ContribName/branches     # branches
+    # area for the overall fastjet-contrib scripts and information about
+    # currently used version of individual contribs. Currently only 
+    # maintainers of the overall fjcontrib area have write acces
+    #
+    trunk/    # development version
+    tags/     # official releases 
+    branches/ # branches
+    
+    # areas for individual contribs. Developers each have access
+    # to all contribs by default (for simplicity)
+    contribs/ContribName/trunk        # development version
+    contribs/ContribName/tags         # official releases
+    contribs/ContribName/branches     # branches
 
 Within the main fastjet contrib directory, the file "contribs.svn"
 file indicates which contribs (and their version) are to be extracted
@@ -209,11 +209,18 @@ Guidelines for reviewing contribs
 
 - Does the example(s) demonstrate all the main features of the code?
 
+- Does the example indicate what command-line should be used to run
+  it?
+
 - Does the contrib make sensible use of existing FastJet features and,
   where relevant, does its interface follow the pattern of standard
   FJ3 interfaces?  (E.g. with FunctionOfPseudoJet, Selectors,
   etc.). Conforming with existing interfaces helps give users a
   uniform experience.
+
+- Are namings logical and similar to those in FastJet: e.g. if the
+  contrib is simply a plugin, the class name should end in "Plugin"
+  and the contrib name should probably be the same as the class name.
 
 - Are the tests carried out as part of make check reasonably
   exhaustive? Are the contents of the reference results file

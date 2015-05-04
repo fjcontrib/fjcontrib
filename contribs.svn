@@ -39,3 +39,5 @@ RecursiveTools                   tags/1.0.0
 SoftKiller                       tags/1.0.0
 # [contrib from Ignacio Garcia Garcia and Marcel Vos]
 ValenciaPlugin                   tags/2.0.0
+# [contrib from Martin Stoll and Seng-Pei Liew]
+ClusteringVetoPlugin             tags/1.0.0

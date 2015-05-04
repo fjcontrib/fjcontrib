@@ -1,3 +1,8 @@
+2015-05-04  Gavin Salam  <gavin.salam@cern.ch>
+
+	* contribs.svn:
+	added ClusteringVetoPlugin 1.0.0
+
 2015-04-07  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION:

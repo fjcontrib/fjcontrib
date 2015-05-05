@@ -1,3 +1,6 @@
+2015-05-05: release of version 1.017 with
+* new contrib: ClusteringVetoPlugin, version 1.0.0
+
 2015-04-07: release of version 1.016 with
 * new contrib: ValenciaPlugin, version 2.0.0 (new e+e- clustering algorithms)
 

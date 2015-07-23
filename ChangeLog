@@ -1,3 +1,8 @@
+2015-07-23  Gregory Soyez  <soyez@fastjet.fr>
+
+	* data/single-ee-event.dat:    *** ADDED ***
+	added a simple e+e- event for tests in e+e- coordinates
+
 2015-05-05  Gavin Salam  <gavin.salam@cern.ch>
 
 	* NEWS: 

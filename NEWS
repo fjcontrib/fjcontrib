@@ -1,6 +1,6 @@
 2015-09-07: release of version 1.018 with
 * update of Nsubjettiness to version 2.2.0 (inclusion of the XCone jet
-  algorith; inclusion of new measures; interface improvements; bugs fixed)
+  algorithm; inclusion of new measures; interface improvements; bugs fixed)
 
 2015-05-05: release of version 1.017 with
 * new contrib: ClusteringVetoPlugin, version 1.0.0

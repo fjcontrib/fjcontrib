@@ -1,3 +1,12 @@
+2015-09-21  Gregory Soyez  <soyez@fastjet.fr>
+
+	* NEWS:
+	* VERSION:
+	prepared for release 1.019 GenericSubtractor 1.3.0
+
+	* contribs.svn:
+	switched GenericSubtractor to version 1.3.0
+
 2015-09-07  Gregory Soyez  <soyez@fastjet.fr>
 
 	* NEWS:

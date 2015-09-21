@@ -16,7 +16,7 @@
 # ContribName                    Location
 #-------------------------------------------
 # [contribs from the FastJet authors]
-GenericSubtractor                tags/1.2.0
+GenericSubtractor                tags/1.3.0
 JetFFMoments                     tags/1.0.0
 # [contribs from Jesse Thaler]
 VariableR                        tags/1.1.1

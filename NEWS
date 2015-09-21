@@ -1,3 +1,7 @@
+2015-09-21: release of version 1.019 with
+* update of GenericSubtractor to version 1.3.0 (adds rho_m support for
+  FastJet v3.1)
+
 2015-09-07: release of version 1.018 with
 * update of Nsubjettiness to version 2.2.0 (inclusion of the XCone jet
   algorithm; inclusion of new measures; interface improvements; bugs fixed)

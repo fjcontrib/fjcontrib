@@ -4,6 +4,9 @@
 #
 # To be run from the main directory of a checkout of fjcontrib.
 # Best run from a directory that is a clean checkout of a tag.
+#
+# If you want to get the last change date from svn you can instead use this:
+#   svn info | grep "Last Changed Date" | sed 's/.*(//;s/)//'
 
 # set to 1 to sort contribs alphabetically, 0 otherwise
 $sort=1;

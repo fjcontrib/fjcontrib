@@ -9,7 +9,7 @@
 $sort=1;
 # set to 1 to include release date taken from svn tags, 0 otherwise.
 # This is experimental, and should probably not be used at this stage.
-$include_date=0;
+$include_date=1;
 
 $versions="contribs.svn";
 $svn="http://fastjet.hepforge.org/svn/contrib/contribs/";
@@ -42,7 +42,7 @@ foreach ( @contribs_array ) {
     ($textversion = $version) =~ s/tags\///;
     if($include_date) {
       # extract date of last tag from svn
-      $date = `svn -v list $svn$contrib/tags | grep $textversion | awk '{print \$3" "\$4", "\$5}'`;
+      $date = `svn -v list $svn$contrib/tags | grep "$textversion/" | awk '{print \$3" "\$4", "\$5}'`;
       # replace hour with current year for dates more recent than 6 months
       # (will probably have to be fixed when six months back is previous year...)
       # Even better, one could  use the --xml option and parse appropriately the output:

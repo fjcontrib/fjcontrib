@@ -1,3 +1,9 @@
+2015-09-24  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+        * scripts/internal/generate-html-contents.pl
+        set up to extract from svn date of tag of last version and 
+        output it in the table with the list of contribs
+
 2015-09-21  Gregory Soyez  <soyez@fastjet.fr>
 
 	* NEWS:

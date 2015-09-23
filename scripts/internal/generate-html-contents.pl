@@ -5,13 +5,9 @@
 # To be run from the main directory of a checkout of fjcontrib.
 # Best run from a directory that is a clean checkout of a tag.
 #
-# If you want to get the last change date from svn you can instead use this:
-#   svn info | grep "Last Changed Date" | sed 's/.*(//;s/)//'
-
 # set to 1 to sort contribs alphabetically, 0 otherwise
 $sort=1;
 # set to 1 to include release date taken from svn tags, 0 otherwise.
-# This is experimental, and should probably not be used at this stage.
 $include_date=1;
 
 $versions="contribs.svn";
@@ -44,15 +40,12 @@ foreach ( @contribs_array ) {
     if ($version =~ /^[0-9]/) {$version = "tags/$version";}
     ($textversion = $version) =~ s/tags\///;
     if($include_date) {
-      # extract date of last tag from svn
-      $date = `svn -v list $svn$contrib/tags | grep "$textversion/" | awk '{print \$3" "\$4", "\$5}'`;
-      # replace hour with current year for dates more recent than 6 months
-      # (will probably have to be fixed when six months back is previous year...)
-      # Even better, one could  use the --xml option and parse appropriately the output:
-      # $date = `svn --xml list $svn$contrib/tags`;
+      # extract date of last version tag from svn
+      $date = `svn info $svn$contrib/$version | grep "Last Changed Date" | awk '{print \$4}'`;
+      # One could  also use the --xml option and parse appropriately the output:
+      # $date = `svn --xml list $svn$contrib/$version`;
       # At this stage, XML parsing is not implemented though.
-      $year = `date +%Y`;
-      $date =~ s/[0-9][0-9]:[0-9][0-9]/$year/;
+      #
       #print $contrib." ".$date."\n";
     }
     $list .= "<tr> <td class=\"contribname\"> 

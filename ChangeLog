@@ -1,3 +1,8 @@
+2015-09-28  Gregory Soyez  <soyez@fastjet.fr>
+
+	* contribs.svn:
+	switched to version 2.2.1 of Nsubjettiness [minor bug in Makefile]
+
 2015-09-24  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
         * scripts/internal/generate-html-contents.pl

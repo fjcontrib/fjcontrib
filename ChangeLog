@@ -1,5 +1,8 @@
 2015-10-04  Gavin Salam  <gavin.salam@cern.ch>
 
+	* DEVEL-GUIDELINES:
+	mentioned the need to check that "make fragile-shared" works. 
+
 	* scripts/internal/release-fjcontrib.sh:
 	added a check that "make fragile-shared" works. 
 

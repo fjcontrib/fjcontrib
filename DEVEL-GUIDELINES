@@ -232,6 +232,8 @@ Guidelines for reviewing contribs
   memory leaks? We've found that valgrind tests are often better
   carried out on linux machines than on macs.
 
+- Does "make fragile-shared" work? Some people rely on it.
+
 - Are the README, AUTHORS, NEWS and ChangeLog files sensible? Are line
   lengths suitable for web viewing (e.g. no more than 80 characters
   per line).

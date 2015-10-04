@@ -1,3 +1,8 @@
+2015-10-04  Gavin Salam  <gavin.salam@cern.ch>
+
+	* scripts/internal/release-fjcontrib.sh:
+	added a check that "make fragile-shared" works. 
+
 2015-09-28  Gregory Soyez  <soyez@fastjet.fr>
 
 	* contribs.svn:

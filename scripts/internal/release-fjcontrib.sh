@@ -122,6 +122,19 @@ else
     exit 1
 fi
 
+echo "------------------------------------------------------------------------"
+echo "Running make fragile-shared"
+echo "------------------------------------------------------------------------"
+if make -j4 fragile-shared; then
+    echo "Success."
+    echo
+else
+    echo "Failed."
+    echo
+    cd ..
+    exit 1
+fi
+
 cd ..
 rm -Rf fjcontrib-$version
 if [ -d fjcontrib-$version ]; then

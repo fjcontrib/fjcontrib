@@ -4,6 +4,8 @@
 	install permissions of libfastjetcontribfragile.so switched
 	from 0644 to 0755 (reported by Dario Berzano).
 	This will go into 1.020
+        * NEWS
+	mentioned item above
 
 2015-10-04  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 

@@ -1,9 +1,15 @@
-2015-09-07  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+2015-10-05  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+        * Makefile.in
+	install permissions of libfastjetcontribfragile.so switched
+	from 0644 to 0755 (reported by Dario Berzano).
+	This will go into 1.020
+
+2015-10-04  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
 	* NEWS:
 	* VERSION:
 	prepared for release 1.020 with Nsubjettiness 2.2.1
-
 
 2015-10-04  Gavin Salam  <gavin.salam@cern.ch>
 

@@ -1,7 +1,7 @@
 2015-10-05: release of version 1.020 with
 * update of Nsubjettiness to version 2.2.1 (fixes a bug in the Makefile
   that broke building of shared libraries)
-* install permissions of libfastjetcontribfragile.so swtiched from
+* install permissions of libfastjetcontribfragile.so switched from
   0644 to 0755
 
 2015-09-21: release of version 1.019 with

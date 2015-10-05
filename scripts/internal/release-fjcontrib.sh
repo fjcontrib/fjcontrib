@@ -78,16 +78,16 @@ fi
 
 if [[ -z "$trunk_version" ]]; then
     if [[ "$is_in_path" == "no" ]]; then
-	echo "fasjet-config is not in your path and cannot be obtained from the trunk configuration. Aborting."
+	echo "fastjet-config is not in your path and cannot be obtained from the trunk configuration. Aborting."
 	cd ..
 	exit 1
     else
-	echo "Using fasjet-config from your path"
+	echo "Using fastjet-config from your path"
 	configure_options=""
     fi
 else
     if [[ "$is_in_path" == "no" ]]; then
-	echo "using fasjet-config from the trunk configuration"
+	echo "using fastjet-config from the trunk configuration"
 	configure_options=" --fastjet-config=${trunk_version}"
     else
 	echo "fastjet-config can be either taken from your path or from $trunk_version."

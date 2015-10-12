@@ -1,3 +1,6 @@
+2015-10-12: release of version 1.021 with
+* new contrib: QCDAwarePlugin, version 1.0.0 (from A.Buckley and C.Pollard)
+
 2015-10-05: release of version 1.020 with
 * update of Nsubjettiness to version 2.2.1 (fixes a bug in the Makefile
   that broke building of shared libraries)

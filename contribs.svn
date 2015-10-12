@@ -41,3 +41,5 @@ SoftKiller                       tags/1.0.0
 ValenciaPlugin                   tags/2.0.0
 # [contrib from Martin Stoll and Seng-Pei Liew]
 ClusteringVetoPlugin             tags/1.0.0
+# [contrib from Andy Buckley and Chris Pollard]
+QCDAwarePlugin                   tags/1.0.0

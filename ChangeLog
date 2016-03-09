@@ -1,3 +1,14 @@
+2016-03-10  Gregory Soyez  <soyez@fastjet.fr>
+
+	* scripts/internal/check-updates.sh:   *** ADDED ***
+	added an internal script that checks if the list in contribs.svn
+	is up-to-date
+
+2016-03-09  Gregory Soyez  <soyez@fastjet.fr>
+
+	* contribs.svn:
+	switched ConstituentSubtractor over to version 1.1.1
+
 2015-10-12  Gregory Soyez  <soyez@fastjet.fr>
 
 	* NEWS:

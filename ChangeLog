@@ -1,3 +1,8 @@
+2016-03-29  Gregory Soyez  <soyez@fastjet.fr>
+
+	* contribs.svn:
+	switched VariableR over to 1.2.0 and Nsubjettiness to 2.2.2
+
 2016-03-10  Gregory Soyez  <soyez@fastjet.fr>
 
 	* scripts/internal/check-updates.sh:   *** ADDED ***

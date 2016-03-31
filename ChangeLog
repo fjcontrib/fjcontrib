@@ -1,5 +1,8 @@
 2016-03-30  Gavin Salam  <gavin.salam@cern.ch>
 
+	* utils/check.sh (DIFF):
+	provided more output in cases where the check fails.
+
 	* NEWS:
 	minor tweak to NEWS
 

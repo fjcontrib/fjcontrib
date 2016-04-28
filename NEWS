@@ -1,3 +1,7 @@
+2016-04-28: release of version 1.023 with
+* update of Nsubjettiness to version 2.2.3 (fixed bug with tau_N for
+  jets with less than N constituents)
+
 2016-03-30: release of version 1.022 with
 * VariableR version 1.2.0 (faster clustering when used with FastJet>=3.2.0)
 * ConstituentSubtractor version 1.1.1 (FastJet rho_m support, faster algorithm, ...)

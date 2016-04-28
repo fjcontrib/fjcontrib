@@ -1,3 +1,13 @@
+2016-04-28  Gregory Soyez  <soyez@fastjet.fr>
+
+	* VERSION:
+	* NEWS:
+	Switched version number over to 1.023 (in view of a release)
+	Updated the release notes
+
+	* contribs.svn:
+	switched to Nsubjettiness 2.2.3
+
 2016-03-31  Gregory Soyez  <soyez@fastjet.fr>
 
 	* VERSION:

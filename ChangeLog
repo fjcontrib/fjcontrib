@@ -6,7 +6,7 @@
 	accordingly.
 
 	* contribs.svn:
-	updated ConstituentSubtractor to v1.1.4, which includes new pileup
+	updated ConstituentSubtractor to v1.1.5, which includes new pileup
 	subtraction options and rho-rescaling.
 
 2016-10-07  Gavin Salam  <gavin.salam@cern.ch>

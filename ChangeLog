@@ -1,3 +1,14 @@
+2017-01-25  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS: 
+	* VERSION:
+	switched to version 1.026 in view of release and updated NEWS
+	accordingly.
+
+	* contribs.svn:
+	updated ConstituentSubtractor to v1.1.4, which includes new pileup
+	subtraction options and rho-rescaling.
+
 2016-10-07  Gavin Salam  <gavin.salam@cern.ch>
 
 	* NEWS: 

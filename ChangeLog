@@ -1,3 +1,15 @@
+2017-08-10  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS:
+	* VERSION:
+	switched to version 1.027 in view of release and updated NEWS
+	accordingly.
+
+	* contribs.svn:
+	updated ConstituentSubtractor to v1.2.1, which includes changes to
+	the treatment of massive particles and speed improvements for
+	whole-event subtraction.
+
 2017-01-25  Gavin Salam  <gavin.salam@cern.ch>
 
 	* NEWS: 

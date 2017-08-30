@@ -1,3 +1,7 @@
+2017-08-30: release of 1.028 with
+* update of ConstituentSubtractor to 1.2.2 (added back an
+  erronously-renamed function)
+
 2017-08-10: release of 1.027 with
 * update of ConstituentSubtractor to 1.2.1 (new behaviour for massive
   particles and speed improvements for whole-event subtraction)

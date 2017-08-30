@@ -1,3 +1,14 @@
+2017-08-30  Gregory Soyez  <soyez@fastjet.fr>
+
+	* NEWS:
+	* VERSION:
+	switched to version 1.028 in view of release and updated NEWS
+	accordingly.
+
+	* contribs.svn:
+	switched ConstituentSubtractor to 1.2.2 [added back an
+	erronously-renamed function]
+
 2017-08-10  Gavin Salam  <gavin.salam@cern.ch>
 
 	* NEWS:

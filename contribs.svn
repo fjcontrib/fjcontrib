@@ -32,7 +32,7 @@ JetCleanser                      tags/1.0.1
 # [contrib from D. Bertolini, T. Chan and J. Thaler]
 JetsWithoutJets                  tags/1.0.0
 # [contrib from Peter Berta, Martin Spousta, David W. Miller and Rupert Leitner]
-ConstituentSubtractor            tags/1.2.2
+ConstituentSubtractor            tags/1.2.3
 # [contrib from Gavin Salam, Gregory Soyez and Jesse Thaler]
 RecursiveTools                   tags/1.0.0
 # [contrib from Matteo Cacciari, Gavin Salam and Gregory Soyez]
@@ -43,3 +43,5 @@ ValenciaPlugin                   tags/2.0.0
 ClusteringVetoPlugin             tags/1.0.0
 # [contrib from Andy Buckley and Chris Pollard]
 QCDAwarePlugin                   tags/1.0.0
+# [from Phil Ilten, Jesse Thaler]
+FlavorCone                       tags/1.0.0

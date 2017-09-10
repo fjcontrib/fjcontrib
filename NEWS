@@ -1,3 +1,7 @@
+2017-09-10: release of 1.029 with
+* release of FlavorCone 1.0.0
+* update of ConstituentSubtractor to 1.2.3
+
 2017-08-30: release of 1.028 with
 * update of ConstituentSubtractor to 1.2.2 (added back an
   erronously-renamed function)

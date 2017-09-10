@@ -1,5 +1,6 @@
 2017-09-10  Gavin Salam  <gavin.salam@cern.ch>
 
+
 	* VERSION:
 	* NEWS:
 	prepared release 1.029
@@ -7,6 +8,9 @@
 	* contribs.svn:
 	added FlavorCone tags/1.0.0
 	updated ConstituentSubtractor to 1.2.3
+
+	* scripts/release-contrib.sh:
+	changed error and usage messages to reflect correct script name.
 
 2017-08-30  Gregory Soyez  <soyez@fastjet.fr>
 

@@ -3,13 +3,13 @@
 # Make a release of a given contrib
 #
 # Usage:
-#   scripts/make_release.sh <ContribName>
+#   scripts/release-contrib.sh <ContribName>
 
 # make sure we have an argument and it exists
 contrib=${1%/}
 if [ -z $contrib ]; then
     echo "Usage:"
-    echo "  register-new-contrib.sh <ContribName>"
+    echo "  release-contrib.sh <ContribName>"
     echo "A contrib name has to be specified"
     exit 1
 fi

@@ -1,3 +1,7 @@
+2017-10-13: release of 1.030 with
+* update of RecursiveTools to 2.0.0-beta1 (included RecursiveSoftDrop,
+  IteratedSoftDrop, BottomUpSoftDrop, as well as ee versions)
+
 2017-09-10: release of 1.029 with
 * release of FlavorCone 1.0.0
 * update of ConstituentSubtractor to 1.2.3

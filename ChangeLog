@@ -1,3 +1,12 @@
+2017-10-13  Gregory Soyez  <soyez@fastjet.fr>
+
+	* VERSION:
+	* NEWS:
+	preapred to release v1.030
+
+	* contribs.svn:
+	switched to v2.0.0-beta1 of RecursiveTools
+
 2017-09-10  Gavin Salam  <gavin.salam@cern.ch>
 
 

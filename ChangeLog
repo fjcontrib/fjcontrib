@@ -1,3 +1,9 @@
+2017-11-13  Gavin Salam  <gavin.salam@cern.ch>
+
+	* configure:
+	included patch from attila.krasznahorkay@cern.ch for issue with
+	macOS sed.
+
 2017-10-13  Gregory Soyez  <soyez@fastjet.fr>
 
 	* VERSION:

@@ -1,3 +1,7 @@
+2017-12-20: release of 1.031 with
+* update of ConstituentSubtractor to 1.2.4 (which
+  adds back in the full set of example programs)
+
 2017-10-13: release of 1.030 with
 * update of RecursiveTools to 2.0.0-beta1 (included RecursiveSoftDrop,
   IteratedSoftDrop, BottomUpSoftDrop, as well as ee versions)

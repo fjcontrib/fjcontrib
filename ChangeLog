@@ -1,3 +1,12 @@
+2018-01-17  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS: 
+	* VERSION:
+	prepared for release of 1.032
+
+	* contribs.svn:
+	updated EnergyCorrelator to 1.3.0
+
 2017-12-20  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION:

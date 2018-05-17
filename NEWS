@@ -1,3 +1,8 @@
+2018-05-18: release of 1.034 with
+* update of GenericSubtractor to 1.2.5
+  (big fixing + support for "pt,y,phi" inputs)
+* minor modification to the template Makefile for new contribs
+
 2018-02-15: release of 1.033 with
 * update of EnergyCorrelator to 1.3.1
   (memory leak fixed, functionality unchanged)

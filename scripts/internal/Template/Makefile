@@ -48,7 +48,7 @@ examples: $(EXAMPLES)
 # the following construct makes it possible to automatically build
 # each of the examples listed in $EXAMPLES
 $(EXAMPLES): % : %.o all
-	$(CXX) -o $@ $< -L. -l$(NAME) $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) -o $@ $< -L. -l$(NAME) $(LDFLAGS)
 
 # check that everything went fine
 check: examples

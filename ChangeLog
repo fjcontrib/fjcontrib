@@ -1,3 +1,15 @@
+2018-05-18  Gregory Soyez  <soyez@fastjet.fr>
+
+	* VERSION:
+	* NEWS:
+	prepared for the release of 1.034
+
+	* contribs.svn:
+	upped ConstituentSubtractor to 1.2.5 (fixing a bug)
+
+	* scripts/internal/Template/Makefile
+	added CXXFLAGS to the compilation of the examples
+
 2018-02-15  Gregory Soyez  <soyez@fastjet.fr>
 
 	* VERSION:

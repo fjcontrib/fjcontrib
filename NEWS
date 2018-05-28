@@ -1,5 +1,11 @@
+2018-05-28: release of 1.035 with
+* update of ConstituentSubtractor to 1.2.7
+  (ability to correct just phase space defined by fastjet::Selector,
+  change of grid size possible with subtract_event_using_charged_info,
+  updated examples)
+
 2018-05-18: release of 1.034 with
-* update of GenericSubtractor to 1.2.5
+* update of ConstituentSubtractor to 1.2.5
   (big fixing + support for "pt,y,phi" inputs)
 * minor modification to the template Makefile for new contribs
 

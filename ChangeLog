@@ -1,8 +1,14 @@
-2018-05-28  Gavin Salam  <gavin.salam@cern.ch>
+2018-05-29  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION:
 	* NEWS:
 	prepared for the release of 1.035
+
+	* contribs.svn:
+	updated RecursiveTools to 2.0.0-beta2 with bug fix for recent
+	clang compilers.
+
+2018-05-28  Gavin Salam  <gavin.salam@cern.ch>
 
 	* contribs.svn:
 	updated ConstituentSubtractor to 1.2.7 (extra features, clearer examples)

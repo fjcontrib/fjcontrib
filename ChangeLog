@@ -1,3 +1,13 @@
+2018-06-06  Gavin Salam  <gavin.salam@cern.ch>
+
+	* VERSION: 
+	* NEWS:
+	prepared release of 1.036.
+
+	* contribs.svn:
+	updated Nsubjettiness to 2.2.5, with fix for bug involving
+	undefined pointer for in AxesDefinition
+
 2018-05-29  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION:

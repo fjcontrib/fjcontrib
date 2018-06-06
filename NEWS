@@ -1,3 +1,7 @@
+2018-06-06: release of 1.036 with
+* update of Nsubjettiness to 2.2.5, fixing bug involving
+  undefined pointer for in AxesDefinition
+
 2018-05-28: release of 1.035 with
 * update of ConstituentSubtractor to 1.2.7
   (ability to correct just phase space defined by fastjet::Selector,

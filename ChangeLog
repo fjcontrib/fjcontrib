@@ -1,3 +1,10 @@
+2018-07-20  Gavin Salam  <gavin.salam@cern.ch>
+
+	* VERSION: 
+	* NEWS:
+	* contribs.svn:
+	prepared release of 1.037 with ConstituentSubtractor updated to 1.3.1
+
 2018-06-06  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION: 

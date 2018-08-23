@@ -28,7 +28,7 @@
 if [[ $# -ge 1 && x"$1" == x'-h' ]]; then
     echo
     echo "Usage: "
-    echo "       $0 [ContribName [version]] "
+    echo "       $0 [--force] [ContribName [version]] "
     echo 
     echo "- without any arguments, all contribs are updated (or downloaded if missing)"
     echo "- with the ContribName argument, just that contrib is updated"

@@ -45,3 +45,5 @@ ClusteringVetoPlugin             tags/1.0.0
 QCDAwarePlugin                   tags/1.0.0
 # [from Phil Ilten, Jesse Thaler]
 FlavorCone                       tags/1.0.0
+# [from Frederic Dreyer, Gavin Salam and Gregory Soyez]
+LundPlane                        tags/1.0.1

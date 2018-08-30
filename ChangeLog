@@ -1,3 +1,12 @@
+2018-08-30  Gavin Salam  <gavin.salam@cern.ch>
+
+	* VERSION:
+	* NEWS:
+	prepared release of 1.038 with LundPlane 1.0.1
+
+	* contribs.svn:
+	added LundPlane version 1.0.1
+
 2018-08-23  Gavin Salam  <gavin.salam@cern.ch> + Matteo
 
 	* scripts/internal/get-author-emails.py:

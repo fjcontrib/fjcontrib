@@ -3,6 +3,7 @@
         * DEVEL-GUIDELINES
         * README
         * scripts/internal/common.sh
+	* scripts/internal/check-updates.sh
         * scripts/internal/generate-html-contents.pl
         * scripts/internal/release-fjcontrib.sh
 	work in progress to move things over to the new hepforge system.

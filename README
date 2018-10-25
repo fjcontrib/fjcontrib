@@ -33,24 +33,31 @@ mentioned in the contrib/AUTHORS file
 For users who want the latest version (and for developers)
 ----------------------------------------------------------
 
+To get started, you will need an account on hepforge. If you don't
+have one yet, go to
+
+   https://www.hepforge.org/register
+
+to create it.
+
 Get an svn checkout of the top-level directory
   
-    svn co http://fastjet.hepforge.org/svn/contrib/trunk fjcontrib
+    svn co svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib/trunk fjcontrib
 
 which contains the scripts and a current list of contribs and their
 versions. Within the fjcontrib directory, get the contribs themselves
 by running
 
-  ./scripts/update-contribs.sh
+   ./scripts/update-contribs.sh
 
 usually, the contribs are tagged (released) versions and there is
 one svn checkout for each contrib. Then proceed with configure, make, etc.
 
 To get updates at a later stage:
 
-  ./scripts/update-contribs.sh                       # all contribs
-  ./scripts/update-contribs.sh  ContribName          # just a specific contrib
-  ./scripts/update-contribs.sh  ContribName version  # specific version of a contrib
+   ./scripts/update-contribs.sh                       # all contribs
+   ./scripts/update-contribs.sh  ContribName          # just a specific contrib
+   ./scripts/update-contribs.sh  ContribName version  # specific version of a contrib
 
 The command always updates the top level directory. If "version" is
 "trunk", then you get the development area for the Contrib -- do this

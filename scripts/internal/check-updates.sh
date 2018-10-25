@@ -11,7 +11,7 @@ fi
 . `dirname $0`/common.sh
 
 # get the list of contribs (discard "graveyard"
-contrib_list=`svn ls http://fastjet.hepforge.org/svn/contrib/contribs/ | grep -v graveyard | sed 's/\///g'`
+contrib_list=`svn ls $svn_read/contribs/ | grep -v graveyard | sed 's/\///g'`
 
 # loop over contribs
 printf "  %-25s %-15s %-15s\n" "contrib" "contribs.svn" "svn tag"
@@ -22,7 +22,7 @@ for contrib in $contrib_list; do
     version_included=`echo $version_included | sed 's/.*\///'`
     
     # check latest svn tag
-    version_tag=`svn ls http://fastjet.hepforge.org/svn/contrib/contribs/${contrib}/tags | grep -E "^[0-9].[0-9].[0-9]/$" | tail -n1 | sed 's/\///g'`
+    version_tag=`svn ls $svn_read/contribs/${contrib}/tags | grep -E "^[0-9].[0-9].[0-9]/$" | tail -n1 | sed 's/\///g'`
 
     # see if that agrees
     if [ x"$version_included" == x"$version_tag" ]; then

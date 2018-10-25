@@ -11,7 +11,9 @@ $sort=1;
 $include_date=1;
 
 $versions="contribs.svn";
-$svn="http://fastjet.hepforge.org/svn/contrib/contribs/";
+#$svn="http://fastjet.hepforge.org/svn/contrib/contribs/";
+$svn_read="svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib";
+$svn=$svn_read."/contribs/";
 
 $topversion=`head -1 VERSION`;
 chomp $topversion;

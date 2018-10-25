@@ -12,8 +12,13 @@ $include_date=1;
 
 $versions="contribs.svn";
 #$svn="http://fastjet.hepforge.org/svn/contrib/contribs/";
+# links to read from the svn
 $svn_read="svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib";
 $svn=$svn_read."/contribs/";
+# link to browse the svn
+$svnBrowse='https://phab.hepforge.org/source/fastjetsvn/browse/contrib/';
+# this ensures that one doesn't get the whole "blame" info, which is ugly
+$svnPost='?as=source&blame=off';
 
 $topversion=`head -1 VERSION`;
 chomp $topversion;
@@ -51,15 +56,15 @@ foreach ( @contribs_array ) {
       #print $contrib." ".$date."\n";
     }
     $list .= "<tr> <td class=\"contribname\"> 
-                   <a href=\"$svn$contrib/$version/\">$contrib</a>
+                   <a href=\"$svnBrowse$contrib/$version/\">$contrib</a>
                </td> <td style=\"{text-align:center;}\"> $textversion </td>";
     if ($include_date) {$list .= "<td>$date</td>";}
     $list .=  "<td>";
     if (-e "$contrib/README") {
-      $list .= '<a href="'.$svn.$contrib.'/'.$version.'/README">README</a> ';
+      $list .= '<a href="'.$svnBrowse.$contrib.'/'.$version.'/README'.$svnPost.'">README</a> ';
     }
     if (-e "$contrib/NEWS") {
-      $list .= '<a href="'.$svn.$contrib.'/'.$version.'/NEWS">NEWS</a> ';
+      $list .= '<a href="'.$svnBrowse.$contrib.'/'.$version.'/NEWS'.$svnPost.'">NEWS</a> ';
     }
     $list .= "</td></tr>\n";
 }

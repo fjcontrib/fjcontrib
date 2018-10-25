@@ -38,9 +38,11 @@ have one yet, go to
 
    https://www.hepforge.org/register
 
-to create it.
+to create it. You will also need to set up your ssh key on hepforge
+(go to https://phab.hepforge.org/settings/user/USERNAME/page/ssh/
+where USERNAME is replaced by your username).
 
-Get an svn checkout of the top-level directory
+Now you can get an svn checkout of the top-level directory
   
     svn co svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib/trunk fjcontrib
 

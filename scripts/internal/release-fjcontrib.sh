@@ -219,7 +219,7 @@ echo "Uploading to HepForge"
 echo "------------------------------------------------------------------------"
 
 echo "Uploading fjcontrib-$version.tar.gz"
-scp fjcontrib-$version.tar.gz login.hepforge.org:~fastjet/public_html/contrib/downloads/
+scp fjcontrib-$version.tar.gz login.hepforge.org:$fastjet_web_dir/contrib/downloads/
 
 mkdir hepforge_tmp
 echo "Generating info for the webpage"
@@ -229,8 +229,8 @@ reldate=`date +"%e %B %Y"`
 echo -n $reldate  > hepforge_tmp/fjcreldate.php
 
 echo "Uploading info for the webpage"
-scp hepforge_tmp/fjcversion.php hepforge_tmp/fjcreldate.php login.hepforge.org:~fastjet/public_html/contrib/
-scp hepforge_tmp/contents-$version.html login.hepforge.org:~fastjet/public_html/contrib/contents/$version.html
+scp hepforge_tmp/fjcversion.php hepforge_tmp/fjcreldate.php login.hepforge.org:$fastjet_web_dir/contrib/
+scp hepforge_tmp/contents-$version.html login.hepforge.org:$fastjet_web_dir/contrib/contents/$version.html
 
 
 echo "Ensuring fastjet group write access for new files on hepforge"
@@ -238,7 +238,7 @@ echo "Ensuring fastjet group write access for new files on hepforge"
 # on the fastjet downloads directory, so group does not get set to fastjet
 #ssh login.hepforge.org chgrp fastjet "~fastjet/downloads/fjcontrib-$version.tar.gz"
 # now give fastjet group write permission on these files
-ssh login.hepforge.org chmod g+w "~fastjet/public_html/contrib/fjcversion.php" "~fastjet/public_html/contrib/fjcreldate.php" "~fastjet/public_html/contrib/contents/$version.html" "~fastjet/public_html/contrib/downloads/fjcontrib-$version.tar.gz"
+ssh login.hepforge.org chmod g+w "$fastjet_web_dir/contrib/fjcversion.php" "$fastjet_web_dir/contrib/fjcreldate.php" "$fastjet_web_dir/contrib/contents/$version.html" "$fastjet_web_dir/contrib/downloads/fjcontrib-$version.tar.gz"
 rm -Rf hepforge_tmp
 echo
 echo "Done"

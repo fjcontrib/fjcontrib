@@ -16,9 +16,22 @@ fastjet@projects.hepforge.org
 ======================================================================
 Basic developer usage
 =====================
-       
+
+   # to get started you will need a hepforge account. Go to
+   #
+   #    https://www.hepforge.org/register
+   #
+   # to create it.
+   #
+   # Then you will need to set up access through an ssh key. Go to
+   #
+   #    https://phab.hepforge.org/settings/user/USERNAME/page/ssh/
+   #
+   # to upload it (replace USERNAME with your actual username). Click on
+   # "SSH Key Actions" and select "Upload Public Key".
+
    # check out the overall contrib directory
-   svn checkout http://fastjet.hepforge.org/svn/contrib/trunk fjcontrib
+   svn checkout svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib/trunk fjcontrib
    cd fjcontrib
 
    # get the existing contribs (optional, but useful)
@@ -32,14 +45,8 @@ Basic developer usage
 
    # once you have something worth committing, write to the fastjet contrib
    # maintainers at <fastjet@projects.hepforge.org> to get write access to the
-   # fjcontrib svn.
-   # 
-   # [  To help us set up your account, if the htpasswd command is available
-   #    to you, then send us your encrypted password using the output of
-   #    
-   #    htpasswd -mn YOUR-CHOSEN-USERNAME
-   # ]
-   # 
+   # fjcontrib svn. We will need your username.
+
    # and then run
    scripts/register-new-contrib.sh ContribName
 
@@ -50,6 +57,7 @@ Basic developer usage
    # so that their $Id$ tag automatically gets updated when you commit
 
    # when you're ready to make a versioned release, make sure that
+   #
    #   - all required files (AUTHORS, COPYING, NEWS etc.) are up to date
    #   - VERSION includes the version number for the release
    #   - "make check" and "make install" both work
@@ -168,9 +176,8 @@ Structure of the svn repository
 
 The repository at
 
-    http://fastjet.hepforge.org/svn/contrib/                    (read-only)
-    https://fastjet.hepforge.org/svn/contrib/                   (read-write)
-    svn+ssh://svn.hepforge.org/hepforge/svn/fastjet/contrib/    (read-write)
+    svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib/   (read-write)
+    https://phab.hepforge.org/source/fastjetsvn/browse/contrib/  (browse)
 
 is organised as follows:
 

@@ -27,7 +27,7 @@ Basic developer usage
    #
    #    https://phab.hepforge.org/settings/user/USERNAME/page/ssh/
    #
-   # to upload it (replace USERNAME with your actual username). Click on
+   # (replace USERNAME with your actual username), click on
    # "SSH Key Actions" and select "Upload Public Key".
 
    # check out the overall contrib directory

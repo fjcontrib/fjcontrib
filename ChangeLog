@@ -1,3 +1,12 @@
+2018-10-25  Gavin Salam  <gavin.salam@cern.ch>
+
+        * DEVEL-GUIDELINES
+        * README
+        * scripts/internal/common.sh
+        * scripts/internal/generate-html-contents.pl
+        * scripts/internal/release-fjcontrib.sh
+	work in progress to move things over to the new hepforge system.
+
 2018-08-30  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION:

@@ -11,12 +11,19 @@ $sort=1;
 $include_date=1;
 
 $versions="contribs.svn";
-#$svn="http://fastjet.hepforge.org/svn/contrib/contribs/";
-# links to read from the svn
-$svn_read="svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib";
+
+# get svn info from one common location
+if (! exists $ENV{'svn_read'}) {
+  print STDERR '$svn_read environment variable must be set, but is not (source common.sh first?)',"\n";
+  exit(-1)
+} else {
+  $svn_read=$ENV{'svn_read'};
+  print STDERR '$svn_read is: ', $svn_read,"\n";
+}
+
 $svn=$svn_read."/contribs/";
 # link to browse the svn
-$svnBrowse='https://phab.hepforge.org/source/fastjetsvn/browse/contrib/';
+$svnBrowse='https://phab.hepforge.org/source/fastjetsvn/browse/contrib/contribs/';
 # this ensures that one doesn't get the whole "blame" info, which is ugly
 $svnPost='?as=source&blame=off';
 
@@ -48,6 +55,7 @@ foreach ( @contribs_array ) {
     ($textversion = $version) =~ s/tags\///;
     if($include_date) {
       # extract date of last version tag from svn
+      print STDERR "getting date for $svn$contrib/$version\n";
       $date = `svn info $svn$contrib/$version | grep "Last Changed Date" | awk '{print \$4}'`;
       # One could  also use the --xml option and parse appropriately the output:
       # $date = `svn --xml list $svn$contrib/$version`;

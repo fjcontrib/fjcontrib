@@ -1,5 +1,14 @@
 2018-10-31  Gavin Salam  <gavin.salam@cern.ch>
 
+	* scripts/internal/generate-html-contents.pl:
+	* scripts/internal/common.sh:
+
+	fixed issue with incorrect links generate-html-contents.pl and
+	made it import svn_read address from environment variables set in
+	common.sh
+
+2018-10-31  Gavin Salam  <gavin.salam@cern.ch>
+
 	* NEWS: 
 	* VERSION:
 	preparing for 1.039 release with LundPlane 1.0.2

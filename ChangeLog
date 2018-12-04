@@ -1,5 +1,6 @@
 2018-12-04  Gavin Salam  <gavin.salam@cern.ch>
 
+	* DEVEL-GUIDELINES:
 	* scripts/internal/common.sh (svn_read): 
 	* README:
 	updated links for read-only access.

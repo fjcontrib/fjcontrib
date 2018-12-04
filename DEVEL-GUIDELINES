@@ -31,7 +31,7 @@ Basic developer usage
    # "SSH Key Actions" and select "Upload Public Key".
 
    # check out the overall contrib directory
-   svn checkout svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib/trunk fjcontrib
+   svn checkout https://svn.hepforge.org/fastjetsvn/contrib/trunk fjcontrib
    cd fjcontrib
 
    # get the existing contribs (optional, but useful)

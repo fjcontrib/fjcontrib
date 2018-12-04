@@ -1,3 +1,12 @@
+2018-12-04  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS: 
+	* VERSION:
+	prepared for release of 1.040 with ValenciaPlugin 2.0.1
+
+	* contribs.svn:
+	updated ValenciaPlugin to 2.0.1
+
 2018-10-31  Gavin Salam  <gavin.salam@cern.ch>
 
 	* scripts/internal/generate-html-contents.pl:

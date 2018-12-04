@@ -6,7 +6,8 @@
 #svn_write=https://fastjet.hepforge.org/svn/contrib
 #svn_write=svn+ssh://svn.hepforge.org/hepforge/svn/fastjet/contrib
 #fastjet_web_dir=~fastjet/public_html
-svn_read=svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib
+#svn_read=svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib
+svn_read=https://svn.hepforge.org/fastjetsvn/contrib
 svn_write=svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib
 fastjet_web_dir=/hepforge/projects/fastjet/public_html
 

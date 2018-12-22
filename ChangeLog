@@ -1,3 +1,11 @@
+2018-12-22  Gavin Salam  <gavin.salam@cern.ch>
+
+	* VERSION:
+	* NEWS:
+	* contribs.svn:
+	updated ValenciaPlugin to 2.0.2 with bug fixes for negative beta.
+	Prepared for release of fjcontrib-1.041
+
 2018-12-04  Gavin Salam  <gavin.salam@cern.ch>
 
 	* DEVEL-GUIDELINES:

@@ -1,3 +1,11 @@
+2019-07-18  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS: 
+	* VERSION: 
+	* contribs.svn:
+	ConstituentSubtractor updated to 1.4.4,
+	prepared release of fjcontrib-1.042
+
 2018-12-22  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION:

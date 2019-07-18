@@ -1,3 +1,50 @@
+2019-07-18  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS: 
+	* VERSION: 
+	* contribs.svn:
+	ConstituentSubtractor updated to 1.4.4,
+	prepared release of fjcontrib-1.042
+
+2018-12-22  Gavin Salam  <gavin.salam@cern.ch>
+
+	* VERSION:
+	* NEWS:
+	* contribs.svn:
+	updated ValenciaPlugin to 2.0.2 with bug fixes for negative beta.
+	Prepared for release of fjcontrib-1.041
+
+2018-12-04  Gavin Salam  <gavin.salam@cern.ch>
+
+	* DEVEL-GUIDELINES:
+	* scripts/internal/common.sh (svn_read): 
+	* README:
+	updated links for read-only access.
+
+2018-12-04  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS: 
+	* VERSION:
+	prepared for release of 1.040 with ValenciaPlugin 2.0.1
+
+	* contribs.svn:
+	updated ValenciaPlugin to 2.0.1
+
+2018-10-31  Gavin Salam  <gavin.salam@cern.ch>
+
+	* scripts/internal/generate-html-contents.pl:
+	* scripts/internal/common.sh:
+
+	fixed issue with incorrect links generate-html-contents.pl and
+	made it import svn_read address from environment variables set in
+	common.sh
+
+2018-10-31  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS: 
+	* VERSION:
+	preparing for 1.039 release with LundPlane 1.0.2
+
 2018-10-30  Gavin Salam  <gavin.salam@cern.ch>
 
 	* contribs.svn:

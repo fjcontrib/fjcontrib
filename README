@@ -44,7 +44,7 @@ where USERNAME is replaced by your username).
 
 Now you can get an svn checkout of the top-level directory
   
-    svn co svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib/trunk fjcontrib
+    svn co https://svn.hepforge.org/fastjetsvn/contrib/trunk fjcontrib
 
 which contains the scripts and a current list of contribs and their
 versions. Within the fjcontrib directory, get the contribs themselves

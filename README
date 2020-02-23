@@ -11,7 +11,7 @@ Instructions for generic users
 You should have downloaded a tarball for the contrib. Unpack it, enter
 the resulting directory and run
 
-  ./configure [--fastjet-config=FILE] [--prefix=...] [...]
+  ./configure [--fastjet-config=FILE] [CXXFLAGS="..."] [--prefix=...] [...]
   make
   make check   # optional
   make install
@@ -23,11 +23,17 @@ accessible through a line
 
 with the corresponding library available through -lXYZ .
 
+If you compiled FastJet with a C++11 compiler, then fjcontrib should
+also be compiled with a C++11 compiler (if your compiler needs options
+to get that behaviour, e.g. -std=c++11, then give those same options
+in the CXXFLAGS passed to configure).
+
 Queries about the fastjet-contrib project as a whole should be sent to
 <fastjet@projects.hepforge.org> 
 
 Queries about individual contribs should be sent to the people
 mentioned in the contrib/AUTHORS file
+
 
 ======================================================================
 For users who want the latest version (and for developers)

@@ -4,6 +4,10 @@
 	* VERSION:
 	preparing for release of 1.043
 
+	* README:
+	added note about need for c++11 here if FJ was compiled with
+	c++11. 
+
 	* contribs.svn:
 	updated ConstituentSubtractor to 1.4.5 and LundPlane to 1.0.3 to
 	fix c++98 compatibility issues

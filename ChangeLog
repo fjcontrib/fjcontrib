@@ -1,3 +1,13 @@
+2020-02-23  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS:
+	* VERSION:
+	preparing for release of 1.043
+
+	* contribs.svn:
+	updated ConstituentSubtractor to 1.4.5 and LundPlane to 1.0.3 to
+	fix c++98 compatibility issues
+
 2019-07-18  Gavin Salam  <gavin.salam@cern.ch>
 
 	* NEWS: 

@@ -1,3 +1,7 @@
+2020-02-23: release of 1.043 with
+* updates of ConstituentSubtractor to 1.4.5 and
+  LundPlane to 1.0.3 to fix c++98 compatibility issues
+        
 2019-07-18: release of 1.042 with
 * update of ConstituentSubtractor to 1.4.4
   (updates to function naming, treatment of massive inputs,

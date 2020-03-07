@@ -1,3 +1,7 @@
+2020-03-07: release of 1.044 with
+* update of RecursiveTools to 2.0.0 (relative to 2.0.0-beta2,
+  brings documentation improvements)
+
 2020-02-23: release of 1.043 with
 * updates of ConstituentSubtractor to 1.4.5 and
   LundPlane to 1.0.3 to fix c++98 compatibility issues

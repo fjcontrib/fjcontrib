@@ -1,3 +1,6 @@
+2020-08-04: release of 1.045 with
+* first release of Centauro (DIS jet algorithm plugin), v 1.0.0
+
 2020-03-07: release of 1.044 with
 * update of RecursiveTools to 2.0.0 (relative to 2.0.0-beta2,
   brings documentation improvements)

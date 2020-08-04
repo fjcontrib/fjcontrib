@@ -47,3 +47,5 @@ QCDAwarePlugin                   tags/1.0.0
 FlavorCone                       tags/1.0.0
 # [from Frederic Dreyer, Gavin Salam and Gregory Soyez]
 LundPlane                        tags/1.0.3
+# [from Miguel Arratia, Yiannis Makris, Duff Neill, Felix Ringer, Nobuo Sato]
+Centauro                         tags/1.0.0

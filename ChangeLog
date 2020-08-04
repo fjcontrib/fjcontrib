@@ -1,3 +1,12 @@
+2020-08-04 Tue  <gavin.salam@physics.ox.ac.uk>
+
+	* NEWS:
+	* VERSION:
+	Preparing for release of 1.045
+
+	* contribs.svn:
+	added Centauro (DIS jet algorithm plugin) 1.0.0
+
 2020-03-07  Gavin Salam  <gavin.salam@cern.ch>
 
 	* VERSION:

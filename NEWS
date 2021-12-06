@@ -3,8 +3,8 @@
   from spin-correlation analyses of arXiv:2103.16526 and
   arXiv:2111.01161
 * Note: fjcontrib now requires a compiler that supports C++11 or higher.
-  On some systems appropriate CXXFLAGS arguments may need to be passed
-  to ./configure
+  The configure scripts attempts to add CXXFLAGS arguments to enable this
+  if not already enabled. Please report any issues you encounter.
 
 2021-08-21: release of 1.046 with RecursiveTools updated to v2.0.1
 * added rare divide-by-zero in calculation of mu2

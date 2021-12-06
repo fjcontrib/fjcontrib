@@ -6,6 +6,13 @@
 	updated LundPlane to 2.0.0 and prepared for release of
 	fjcontrib-1.047
 
+    * configure:
+    * scripts/c11check/Makefile:
+    * scripts/c11check/c11check.cc:
+	added facilities for checking if we have c++11
+	support and adding it in if need be
+
+
 2021-08-21 Sat  <gavin.salam@physics.ox.ac.uk>
 
 	* NEWS:

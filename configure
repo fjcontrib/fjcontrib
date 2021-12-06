@@ -168,6 +168,39 @@ echo "PREFIX=$prefix" >> $makefileinc
 echo 'install_script = $(SHELL) ../utils/install-sh' >> $makefileinc
 echo 'check_script = ../utils/check.sh' >> $makefileinc
 
+
+#------------------------------------------------------------------------
+# check for C++11 support (needed as of version 1.047 of fjcontrib)
+# and add in options if needed
+#------------------------------------------------------------------------
+checkc11(){
+    fjcdir=$(pwd)
+    tmpdir=$(mktemp -d)
+    pushd $tmpdir > /dev/null
+    cp -p $fjcdir/scripts/c11check/Makefile $fjcdir/scripts/c11check/c11check.cc .
+    makeoutput=$(make FJCDIR=$fjcdir c11check 2>&1)
+    c11retcode=$?
+    popd > /dev/null
+    rm -rf $tmpdir
+    return $c11retcode
+}
+echo "Checking for c++11 support"
+checkc11
+if [ $? -ne 0 ]
+then 
+    echo "Adding compile-time flag to support c++11"
+    echo "Make sure you use c++11 when compiling/linking with fjcontrib"
+    echo "CXXFLAGS+=-std=c++11" >> $makefileinc
+    checkc11
+    if [ $? -ne 0 ]
+    then
+        echo "Failed to set up C++11 support. Error was"
+        echo "$makeoutput"
+        exit -1
+    fi
+else
+    echo "c++11 already supported with existing CXXFLAGS"
+fi
     
 #------------------------------------------------------------------------
 # construct the list of directories to recurse into

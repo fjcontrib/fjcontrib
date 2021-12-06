@@ -1,3 +1,8 @@
+2021-12-06: release of 1.047 with LundPlane updated to v2.0.0
+* adds RecursiveLundEEGenerator for e+e- studies
+* adds example_dpsi_collinear.cc (spin-correlation analysis of arXiv:2103.16526)
+* adds example_dpsi_slice.cc (spin-correlation analysis of arXiv:2111.01161)
+
 2021-08-21: release of 1.046 with RecursiveTools updated to v2.0.1
 * added rare divide-by-zero in calculation of mu2
 

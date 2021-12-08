@@ -1,3 +1,6 @@
+2021-12-08: release of 1.048 with
+* inclusion of C++11 check files (fixes bug reported by Andrii Verbytskyi)
+
 2021-12-06: release of 1.047 with LundPlane updated to v2.0.1
 * adds RecursiveLundEEGenerator for e+e- studies, with examples
   from spin-correlation analyses of arXiv:2103.16526 and

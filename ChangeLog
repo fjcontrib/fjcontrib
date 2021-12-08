@@ -1,5 +1,9 @@
 2021-12-08  Gregory Soyez  <soyez@fastjet.fr>
 
+	* NEWS:
+	* VERSION:
+	Preparing for the release of fjcontrib-1.048
+
 	* scripts/internal/release-fjcontrib.sh:
 	included the script directory in the tarball and the
 	DEVEL-GUIDELINES.

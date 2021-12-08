@@ -1,3 +1,11 @@
+2021-12-08  Gregory Soyez  <soyez@fastjet.fr>
+
+	* scripts/internal/release-fjcontrib.sh:
+	included the script directory in the tarball and the
+	DEVEL-GUIDELINES.
+	This fixes issue that scripts/c1checks was absent
+	from the tarball
+
 2021-12-06  Gavin Salam  <gavin.salam@physics.ox.ac.uk>
 
 	* VERSION:
@@ -6,9 +14,9 @@
 	updated LundPlane to 2.0.1 and prepared for release of
 	fjcontrib-1.047
 
-    * configure:
-    * scripts/c11check/Makefile:
-    * scripts/c11check/c11check.cc:
+	* configure:
+	* scripts/c11check/Makefile:
+	* scripts/c11check/c11check.cc:
 	added facilities for checking if we have c++11
 	support and adding it in if need be
 

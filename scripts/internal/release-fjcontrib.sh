@@ -6,6 +6,14 @@
 # include function and svn location definitions, etc.
 . `dirname $0`/common.sh
 
+dry_run=0
+if [[ "$1" == "--dry-run" ]]; then
+    dry_run=1
+    echo "--------------------------------------------------"
+    echo "                   DRY RUN                        "
+    echo "--------------------------------------------------"
+fi
+
 #========================================================================
 # svn sanity checks
 #========================================================================
@@ -144,27 +152,40 @@ fi
 #========================================================================
 # tag the release
 #=======================================================================
-echo
-get_yesno_answer "Confirm you want to tag the release and make a tarball?" &&  exit 1
-echo
-
-echo "------------------------------------------------------------------------"
-echo "Making a tag of fjcontrib version $version"
-echo "------------------------------------------------------------------------"
-echo svn copy -m "tagging fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
-     svn copy -m "tagging fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
-
+if (( ${dry_run} )); then
+    echo "Dry run: skipping the release tag"
+else
+    echo
+    get_yesno_answer "Confirm you want to tag the release and make a tarball?" &&  exit 1
+    echo
+    
+    echo "------------------------------------------------------------------------"
+    echo "Making a tag of fjcontrib version $version"
+    echo "------------------------------------------------------------------------"
+    echo svn copy -m "tagging fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
+         svn copy -m "tagging fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
+fi
 
 #========================================================================
 # produce a tarball
 #========================================================================
-echo "------------------------------------------------------------------------"
-echo "Checking out tags/$version of fjcontrib"
-echo "------------------------------------------------------------------------"
-# using svn_write, because the http access sometimes doesn't
-# immediately see the up to date svn repository(?!)
-echo svn co $svn_write/tags/$version fjcontrib-$version
-svn co $svn_write/tags/$version fjcontrib-$version || { echo "Failed to checkout the new released version tags/$version"; exit 1; }
+if (( ${dry_run} )); then
+    echo "------------------------------------------------------------------------"
+    echo "Dry run: checking out the trunk build the fjcontrib tarball"
+    echo "------------------------------------------------------------------------"
+    # using svn_write, because the http access sometimes doesn't
+    # immediately see the up to date svn repository(?!)
+    echo svn co $svn_read/trunk fjcontrib-$version
+    svn co $svn_read/trunk fjcontrib-$version || { echo "Failed to checkout the fjcontrib trunk"; exit 1; }
+else
+    echo "------------------------------------------------------------------------"
+    echo "Checking out tags/$version of fjcontrib"
+    echo "------------------------------------------------------------------------"
+    # using svn_write, because the http access sometimes doesn't
+    # immediately see the up to date svn repository(?!)
+    echo svn co $svn_write/tags/$version fjcontrib-$version
+    svn co $svn_write/tags/$version fjcontrib-$version || { echo "Failed to checkout the new released version tags/$version"; exit 1; }
+fi
 cd fjcontrib-$version
 echo
 
@@ -200,8 +221,6 @@ echo "Producing fjcontrib-$version.tar.gz"
 echo "------------------------------------------------------------------------"
 tar --exclude=".svn" \
     --exclude="fjcontrib-$version/contribs.svn" \
-    --exclude="fjcontrib-$version/scripts" \
-    --exclude="fjcontrib-$version/DEVEL-GUIDELINES" \
   -czf fjcontrib-$version.tar.gz fjcontrib-$version
 rm -Rf fjcontrib-$version
 echo
@@ -211,6 +230,14 @@ echo
 #========================================================================
 # update things on HepForge
 #========================================================================
+if (( ${dry_run} )); then
+    echo "Dry run: not updating HEPForge"
+    echo
+    echo "Done"
+    echo
+    exit 0
+fi
+
 echo
 get_yesno_answer "Confirm you want to upload to hepforge?" &&  exit 1
 echo

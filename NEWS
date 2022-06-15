@@ -1,3 +1,6 @@
+2022-06-15: release of 1.049 with
+* updated of Nsubjettiness 2.2.6, with thread-safety improvements
+
 2021-12-08: release of 1.048 with
 * inclusion of C++11 check files (fixes bug reported by Andrii Verbytskyi)
 

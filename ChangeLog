@@ -1,3 +1,12 @@
+2022-06-15  Gavin Salam  <gavin.salam@physics.ox.ac.uk>
+
+	* NEWS:
+	* VERSION
+	Preparing for release of fjcontrib-1.049
+
+	* contribs.svn:
+	updated Nsubjettiness to 2.26
+
 2021-12-08  Gregory Soyez  <soyez@fastjet.fr>
 
 	* NEWS:

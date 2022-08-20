@@ -1,5 +1,8 @@
+2022-08-20: release of 1.050 with
+* updated LundPlane to 2.0.2, fixing compilation issues with g++-12
+
 2022-06-15: release of 1.049 with
-* updated of Nsubjettiness 2.2.6, with thread-safety improvements
+* updated Nsubjettiness to 2.2.6, with thread-safety improvements
 
 2021-12-08: release of 1.048 with
 * inclusion of C++11 check files (fixes bug reported by Andrii Verbytskyi)

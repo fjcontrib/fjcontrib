@@ -1,3 +1,13 @@
+2023-03-01 Wed  <gavin.salam@physics.ox.ac.uk>
+
+	* NEWS:
+	* VERSION
+	Preparing for release of fjcontrib-1.051
+
+	* contribs.svn:
+	added KTClusCXX 1.0.1
+	updated LundPlane to 2.0.3
+
 2022-08-20 S<gavin.salam@physics.ox.ac.uk>
 
 	* NEWS:

@@ -1,3 +1,10 @@
+2023-03-01: release of 1.051 with
+* new KTClusCXX (1.0.1), a C++ re-implementation of the interface and
+  features of Mike Seymour's Fortran ktclus package (including
+  DIS algorithms and various hadron-collider distance measures). 
+  Provided by Andrii Verbytskyi
+* Update of LundPlane to 2.0.3, to fix missing header installation
+
 2022-08-20: release of 1.050 with
 * updated LundPlane to 2.0.2, fixing compilation issues with g++-12
 

@@ -56,7 +56,7 @@ function get_svn_info(){
 }
 
 # get an entry from a contrib file, filling the "version" variable
-# vwith the version number
+# with the version number
 #
 #   get_contrib_version  contrib_name  file  version
 function get_contrib_version(){

@@ -1,4 +1,13 @@
-2023-03-01 Wed  <gavin.salam@physics.ox.ac.uk>
+2023-05-18  Gavin Salam  <gavin.salam@physics.ox.ac.uk>
+
+	* VERSION:
+	* NEWS:
+	prepared for release of 1.052
+
+	* contribs.svn:
+	updated ConstituentSubtractor to 1.4.6
+
+2023-03-01 Gavin Salam  <gavin.salam@physics.ox.ac.uk>
 
 	* NEWS:
 	* VERSION

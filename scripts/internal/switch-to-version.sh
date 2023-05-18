@@ -18,7 +18,7 @@ if [[ -z "$contrib" ]]; then
     exit 1
 fi
 
-# decide wich version number to use
+# decide which version number to use
 version=$2
 if [[ -z "$version" ]]; then
     # get the version from the svn list

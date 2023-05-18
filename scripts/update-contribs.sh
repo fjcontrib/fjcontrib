@@ -173,7 +173,7 @@ for contrib in $(ls -d */ || sed 's/\/*//g'); do
     get_svn_info $contrib mode version
 
     if [[ "$version" == "tags/"* ]]; then
-	echo "${contrib}: your local copy ($version) does not appear in the default svn-suppoerted list."
+	echo "${contrib}: your local copy ($version) does not appear in the default svn-supported list."
 	get_yesno_answer "  Do you want to remove the local version?" "$default_yesno_answer" || {
 	    rm -Rf $contrib
 	}

@@ -1,3 +1,7 @@
+2023-09-29: release of 1.053 with
+* update of LundPlane to whcih fixes a const-correctness issue and 
+  adds a new LundPlane.hh header, which acts as a shortcut to the
+  other headers. 
 2023-05-18: release of 1.052 with
 * update of ConstituentSubtractor to v1.4.6, which brings small bug fixes
 

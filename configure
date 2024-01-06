@@ -11,7 +11,7 @@
 # the list of contribs supported by this script
 #------------------------------------------------------------------------
 all_contribs=`find . -mindepth 2 -maxdepth 2 -name VERSION -not -print \
-                 | sed 's/\.\///g;s/\/.*$//g' | grep -v "Template"`
+                 | sort | sed 's/\.\///g;s/\/.*$//g' | grep -v "Template"`
 
 #------------------------------------------------------------------------
 # default values prior to the arg parsing

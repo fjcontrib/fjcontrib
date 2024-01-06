@@ -1,3 +1,10 @@
+2024-01-06  Gavin Salam  <gavin.salam@physics.ox.ac.uk>
+
+	* configure:
+	added sorting of contribs, to ensure build order is reproducible,
+	as requested in https://github.com/alisw/fastjet/pull/6
+	and communicated to us by Stefan Bruns.
+
 2023-09-29 Fri  <gavin.salam@physics.ox.ac.uk>
 
 	* VERSION:

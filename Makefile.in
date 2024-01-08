@@ -31,15 +31,14 @@ examples clean: $(SUBDIRS)
 
 distclean: $(SUBDIRS) fragile-shared-distclean
 
-check: check_init $(SUBDIRS)
+check: $(SUBDIRS)
 	@echo ""
-	@cat test_summary.tmp
+	@echo "Summary of tests" 
+	@echo "----------------" 
+	@cat test_summary.tmp | sort
 	@printf "\n%d out of %d tests passed\n\n" `grep "Success" test_summary.tmp | wc -l` `grep "^  " test_summary.tmp | wc -l`
 	@rm -f test_summary.tmp
 
-check_init:
-	@echo "Summary of tests" >  test_summary.tmp
-	@echo "----------------" >> test_summary.tmp
 
 # distclean removes the Makefile, but leaves in config.log
 distclean:

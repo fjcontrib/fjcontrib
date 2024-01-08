@@ -5,6 +5,9 @@
 	as requested in https://github.com/alisw/fastjet/pull/6
 	and communicated to us by Stefan Bruns.
 
+	* Makefile.in:
+	sorted output from tests to ensure reproducibility
+
 2023-09-29 Fri  <gavin.salam@physics.ox.ac.uk>
 
 	* VERSION:

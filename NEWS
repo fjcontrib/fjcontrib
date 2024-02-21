@@ -1,3 +1,14 @@
+**2024-02-XX:** **PRE**release of 1.054 with
+* addition of new SignalFreeBackgroundEstimator contrib, version 1.0.0
+  (see https://arxiv.org/abs/2304.08383)
+* update of LundPlane to version 2.1.0, with bug fixes for
+  delta psibar calculations in opposite hemispheres and for compilation
+  issues on some systems
+* update of ConstituentSubtractor to version 1.4.7, which resolves
+  rounding-error induced failures of make check on Mac M2 systems
+* configure script now sorts contribs alphabetically to ensure
+  reproducibility of build order (thanks to Stefan Bruns)  
+
 2023-09-29: release of 1.053 with
 * update of LundPlane to whcih fixes a const-correctness issue and 
   adds a new LundPlane.hh header, which acts as a shortcut to the

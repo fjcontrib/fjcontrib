@@ -32,7 +32,7 @@ JetCleanser                      tags/1.0.1
 # [contrib from D. Bertolini, T. Chan and J. Thaler]
 JetsWithoutJets                  tags/1.0.0
 # [contrib from Peter Berta, Martin Spousta, David W. Miller and Rupert Leitner]
-ConstituentSubtractor            tags/1.4.6
+ConstituentSubtractor            tags/1.4.7
 # [contrib from Gavin Salam, Gregory Soyez and Jesse Thaler]
 RecursiveTools                   tags/2.0.1
 # [contrib from Matteo Cacciari, Gavin Salam and Gregory Soyez]
@@ -51,3 +51,5 @@ LundPlane                        tags/2.1.0
 Centauro                         tags/1.0.0
 # [from Andrii Verbytskyi]
 KTClusCXX                        tags/1.0.1
+# [from Peter Berta and Martin Spousta]
+SignalFreeBackgroundEstimator    tags/1.0.0

@@ -1,3 +1,13 @@
+2024-02-21 Wed  <gavin.salam@physics.ox.ac.uk>
+
+	* contribs.svn:
+	* configure:
+	added SignalFreeBackgroundEstimator v1.0.0 and updated configure script
+	so that it allows for longer contrib names in its summary output.
+
+	* NEWS:
+	started preparation of release notes for 1.054
+
 2024-02-01  Gavin Salam  <gavin.salam@physics.ox.ac.uk>
 
 	* contribs.svn:

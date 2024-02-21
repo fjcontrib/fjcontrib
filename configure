@@ -369,7 +369,7 @@ do
     else
         svninfo=""
     fi
-    printf "        %-22s v%-15s $svninfo\n" $contrib `cat $contrib/VERSION` 
+    printf "        %-30s v%-15s $svninfo\n" $contrib `cat $contrib/VERSION` 
 done
 #
 # output to config.log

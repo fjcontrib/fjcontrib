@@ -117,3 +117,30 @@ function check_pending_modifications(){
     cd ..
     return 0
 }
+
+function find_gnu_tar(){
+    # check if tar is gnu tar (needed for clean tarball). set the $tar variable to it;
+    # otherwise see if gtar is available and a proper gnu tar. If so, set the $tar variable to it.
+    # If not, exit with an error message inviting the user to install gnu-tar on mac
+    tar=""
+    if [[ -z "$tar" ]]; then
+        if [[ -x "`which tar 2>/dev/null`" ]]; then
+        tar=`which tar`
+        if [[ -z "`$tar --version | grep 'GNU tar'`" ]]; then
+            if [[ -x "`which gtar 2>/dev/null`" ]]; then
+            tar=`which gtar`
+            if [[ -z "`$tar --version | grep 'GNU tar'`" ]]; then
+                echo "You have a non-GNU tar installed. Please install GNU tar (e.g. using brew install gnu-tar)"
+                exit 1
+            fi
+            else
+            echo "You have a non-GNU tar installed. Please install GNU tar (e.g. using brew install gnu-tar)"
+            exit 1
+            fi
+        fi
+        else
+        echo "You have no tar installed. Please install GNU tar (e.g. using brew install gnu-tar)"
+        exit 1
+        fi
+    fi
+}

@@ -1,3 +1,14 @@
+2024-02-26 Mon  <gavin.salam@physics.ox.ac.uk>
+
+	* contribs.svn:
+	updated RecursiveTools to 2.0.2
+
+	* scripts/internal/common.sh:
+	* scripts/internal/release-fjcontrib.sh:
+	this now searches explicitly for gnu tar rather than just tar
+	(which could be a BSD tar on macs, and which gives tarballs
+	that are not very Linux friendly, reported by Ezra Lesser).
+
 2024-02-21 Wed  <gavin.salam@physics.ox.ac.uk>
 
 	* contribs.svn:

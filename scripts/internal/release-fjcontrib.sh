@@ -15,6 +15,14 @@ if [[ "$1" == "--dry-run" ]]; then
 fi
 
 #========================================================================
+# System sanity checks
+#========================================================================
+# sets the $tar variable and ensures that we have a GNU version. This avoids
+# the default mac (BSD) tar, which includes info that Linux systems have
+# a hard time handling.
+find_gnu_tar 
+
+#========================================================================
 # svn sanity checks
 #========================================================================
 
@@ -219,7 +227,8 @@ cd ..
 echo "------------------------------------------------------------------------"
 echo "Producing fjcontrib-$version.tar.gz"
 echo "------------------------------------------------------------------------"
-tar --exclude=".svn" \
+# NB: $tar was set by find_gnu_tar
+$tar --exclude=".svn" \
     --exclude="fjcontrib-$version/contribs.svn" \
   -czf fjcontrib-$version.tar.gz fjcontrib-$version
 rm -Rf fjcontrib-$version

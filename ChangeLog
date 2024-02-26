@@ -13,7 +13,8 @@
 	Also aligned output in summary.
 
 	* contribs.svn:
-	updated RecursiveTools to 2.0.2 and EnergyCorrelator to 1.3.2
+	updated RecursiveTools to 2.0.2, EnergyCorrelator to 1.3.2,
+	Nsubjettiness to 2.3.0
 
 	* scripts/internal/common.sh:
 	* scripts/internal/release-fjcontrib.sh:

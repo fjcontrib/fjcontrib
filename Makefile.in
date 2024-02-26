@@ -37,6 +37,8 @@ check: $(SUBDIRS)
 	@echo "----------------" 
 	@cat test_summary.tmp | sort
 	@printf "\n%d out of %d tests passed\n\n" `grep "Success" test_summary.tmp | wc -l` `grep "^  " test_summary.tmp | wc -l`
+# if the number of tests passed is not equal to the number of tests run, exit with an error
+	@test `grep "Success" test_summary.tmp | wc -l` -eq `grep "^  " test_summary.tmp | wc -l` || (rm -f test_summary.tmp && exit 1)
 	@rm -f test_summary.tmp
 
 

@@ -6,6 +6,12 @@
 
 2024-02-26 Mon  <gavin.salam@physics.ox.ac.uk>
 
+	* Makefile.in:
+	* utils/check.sh: 
+	fixed an issue where a failure in one of the checks
+	did not result in a non-zero exit code for make check.
+	Also aligned output in summary.
+
 	* contribs.svn:
 	updated RecursiveTools to 2.0.2 and EnergyCorrelator to 1.3.2
 

@@ -11,7 +11,9 @@
 * EnergyCorrelator updated to 1.3.2, addressing rounding-error induced
   make check issues on Mac M2 systems
 * configure script now sorts contribs alphabetically to ensure
-  reproducibility of build order (thanks to Stefan Bruns)  
+  reproducibility of build order (thanks to Stefan Bruns) 
+* make check now correctly gives a non-zero return code if any of the 
+  underlying contribs fail their tests 
 
 2023-09-29: release of 1.053 with
 * update of LundPlane to which fixes a const-correctness issue and 

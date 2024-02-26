@@ -35,7 +35,7 @@ function print_status_and_exit {
     # if this is is a subdirectory make, then discard the exit code,
     # and record success/failure in a file that will be output from 
     # the parent makefile
-    printf "  %-21s %-25s %s\n" `pwd | sed 's/.*\///g'` "$1" "$OUTPUT" >> ../test_summary.tmp
+    printf "  %-31s %-26s %s\n" `pwd | sed 's/.*\///g'` "$1" "$OUTPUT" >> ../test_summary.tmp
     exit
   fi
 }

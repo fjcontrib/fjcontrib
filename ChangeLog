@@ -7,7 +7,7 @@
 2024-02-26 Mon  <gavin.salam@physics.ox.ac.uk>
 
 	* contribs.svn:
-	updated RecursiveTools to 2.0.2
+	updated RecursiveTools to 2.0.2 and EnergyCorrelator to 1.3.2
 
 	* scripts/internal/common.sh:
 	* scripts/internal/release-fjcontrib.sh:

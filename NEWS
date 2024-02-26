@@ -8,6 +8,8 @@
   rounding-error induced failures of make check on Mac M2 systems
 * RecursiveTools updated to 2.0.2, addressing rounding-error induced
   make check issues on Mac M2 systems
+* EnergyCorrelator updated to 1.3.2, addressing rounding-error induced
+  make check issues on Mac M2 systems
 * configure script now sorts contribs alphabetically to ensure
   reproducibility of build order (thanks to Stefan Bruns)  
 

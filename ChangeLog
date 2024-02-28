@@ -1,8 +1,15 @@
+2024-02-28 Wed  <gavin.salam@physics.ox.ac.uk>
+
+	* contribs.svn:
+	* NEWS:
+	updated Nsubjettiness to 2.3.1 to fix unsigned int warning 
+	in AxesDefinition.hh
+
 2024-02-26 Mon  <gavin.salam@physics.ox.ac.uk>
 
 	* VERSION:
 	* NEWS:
-	prepared release of 1.054
+	preparing for release of 1.054
 
 2024-02-26 Mon  <gavin.salam@physics.ox.ac.uk>
 

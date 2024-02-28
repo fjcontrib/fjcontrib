@@ -4,7 +4,7 @@
 * LundPlane updated to version 2.1.0, with bug fixes for
   delta psibar calculations in opposite hemispheres and for compilation
   issues on some systems
-* Nsubjettiness updated to 2.3.0, with change in recommended axes
+* Nsubjettiness updated to 2.3.1 with change in recommended axes
   away from OnePass, and addition of HalfKT axes options recommended for beta = 2
 * ConstituentSubtractor updated to version 1.4.7, which resolves
   rounding-error induced failures of make check on Mac M2 systems

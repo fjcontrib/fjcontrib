@@ -1,7 +1,7 @@
-2024-02-26: release of 1.054 with
+2024-02-28: release of 1.054 with
 * addition of new SignalFreeBackgroundEstimator contrib, version 1.0.0
   (see https://arxiv.org/abs/2304.08383)
-* LundPlane updated to version 2.1.0, with bug fixes for
+* LundPlane updated to version 2.1.1, with bug fixes for
   delta psibar calculations in opposite hemispheres and for compilation
   issues on some systems
 * Nsubjettiness updated to 2.3.1 with change in recommended axes

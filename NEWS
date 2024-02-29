@@ -1,11 +1,12 @@
-2024-02-28: release of 1.054 with
+2024-02-29: release of 1.054 with
 * addition of new SignalFreeBackgroundEstimator contrib, version 1.0.0
   (see https://arxiv.org/abs/2304.08383)
 * LundPlane updated to version 2.1.1, with bug fixes for
   delta psibar calculations in opposite hemispheres and for compilation
   issues on some systems
-* Nsubjettiness updated to 2.3.1 with change in recommended axes
-  away from OnePass, and addition of HalfKT axes options recommended for beta = 2
+* Nsubjettiness updated to 2.3.2 with change in recommended axes
+  away from OnePass, and addition of HalfKT axes options recommended for beta = 2.
+  This release also fixes a few compiler warnings.
 * ConstituentSubtractor updated to version 1.4.7, which resolves
   rounding-error induced failures of make check on Mac M2 systems
 * RecursiveTools updated to 2.0.2, addressing rounding-error induced

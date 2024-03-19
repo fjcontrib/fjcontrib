@@ -4,6 +4,11 @@
 	added this file, as needed for validation of the new 
 	JetFlav contrib.
 
+	* utils/check.sh: 
+	updated this to version needed for JetFlav/IFN checks, 
+	which allows for extra arguments to be passed.
+
+
 2024-02-29  Gregory Soyez  <soyez@fastjet.fr>
 
 	* contribs.svn:

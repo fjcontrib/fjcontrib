@@ -1,3 +1,9 @@
+2024-03-19 Gavin Salam  <gavin.salam@physics.ox.ac.uk>
+
+	* data/pythia8_Zq_vshort.dat:   *** ADDED ***
+	added this file, as needed for validation of the new 
+	JetFlav contrib.
+
 2024-02-29  Gregory Soyez  <soyez@fastjet.fr>
 
 	* contribs.svn:

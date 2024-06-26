@@ -1,3 +1,10 @@
+2024-06-26 Wed  Gavin Salam
+
+	* contribs.svn:
+	* NEWS:
+	* VERSION:
+	updated SignalFreeBackgroundEstimator to 1.0.1 and prepared for 1.055 release
+
 2024-03-19 Gavin Salam  <gavin.salam@physics.ox.ac.uk>
 
 	* data/pythia8_Zq_vshort.dat:   *** ADDED ***

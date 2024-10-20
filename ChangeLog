@@ -1,3 +1,9 @@
+2024-10-20  Gavin Salam  <salam@hydra>
+
+	* configure:
+	updated fragileshared dynlibopt on Linux, as per request at
+	https://github.com/fjcontrib/fjcontrib/issues/4
+
 2024-10-07 Gavin Salam
 
 	* contribs.svn:

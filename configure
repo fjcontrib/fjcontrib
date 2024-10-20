@@ -333,7 +333,10 @@ if [ "x"`uname` == "xDarwin" ] ;  then
     dynlibext="dylib"
     dynlibpostproc="install_name_tool -id \\1 \\1"
 else 
-    dynlibopt="-shared"
+    #dynlibopt="-shared"
+    # the following more elaborate set of options requested by Alexander Puck Neuwirth
+    # for compatibility with gentoo, cf. https://github.com/fjcontrib/fjcontrib/issues/4
+    dynlibopt="-shared -Wl,--as-needed -Wl,-soname,fastjetcontribfragile.so.0"
     dynlibext="so"
     dynlibpostproc="" # some dummy command needed
 fi

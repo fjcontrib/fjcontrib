@@ -1,3 +1,16 @@
+2024-11-25 Mon  <gavin.salam@physics.ox.ac.uk>
+
+	* Makefile.in:
+	* configure:
+	started work on support for dependencies between contribs;
+	if a file ContribName/DEPENDS is present, then the contribs
+	listed will be dependencies. 
+	
+	Technically, configure now generates targets ContribName.all,
+	ContribName.check and ContribName.ex, ContribName.install with the
+	latter three depending on the first one. The dependency is then made
+	explicit for ContribName.all.
+
 2024-10-20  Gavin Salam  <salam@hydra>
 
 	* configure:

@@ -352,6 +352,40 @@ sed -e "s/@CONTRIB_BUILD_LIST@/$escaped_built_list/g" \
     -e "s/@DYNLIBPOSTPROC@ \(.*\)/$dynlibpostproc/g" \
     -e "s/any edits fit with the rest of the build system/you only edit Makefile.in/" Makefile.in > Makefile
 
+# build up the dependencies for the sub-directories
+for contrib in $included_contribs
+do
+    # if there is a file called DEPENDS in the contrib directory
+    dependencies=""
+    if [ -e $contrib/DEPENDS ] ; then
+        deplist=$(cat $contrib/DEPENDS | grep -v '^ *#' | tr '\n' ' ')
+        for dep in $deplist
+        do
+            if [ -e $dep ] ; then
+                dependencies="$dependencies $dep.all"
+            else
+                echo "Warning: $contrib depends on $dep, which does not exist"
+            fi
+        done
+        echo "Dependences for $contrib: " $dependencies
+    fi
+
+    cat >> Makefile <<EOF
+
+$contrib.all: $dependencies
+${TAB}+\$(SUBMAKE) -C $contrib
+
+$contrib.ex: $contrib.all
+${TAB}+\$(SUBMAKE) -C $contrib examples
+
+$contrib.check: $contrib.all
+${TAB}+\$(SUBMAKE) -C $contrib check
+
+$contrib.install: $contrib.all
+${TAB}+\$(SUBMAKE) -C $contrib install
+EOF
+done
+
 #------------------------------------------------------------------------
 # write output and config.log file
 #------------------------------------------------------------------------

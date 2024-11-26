@@ -1,4 +1,4 @@
-# a list of definitions and tools that we'd like to ave an easy access
+# a list of definitions and tools that we'd like to have an easy access
 # to
 
 # svn repositories for read and write access

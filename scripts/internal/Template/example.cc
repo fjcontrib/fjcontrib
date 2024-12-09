@@ -29,7 +29,7 @@
 
 #include "fastjet/PseudoJet.hh"
 #include <sstream>
-#include "Template.hh" // In external code, this should be fastjet/contrib/Template.hh
+#include "fastjet/contrib/Template.hh" 
 
 using namespace std;
 using namespace fastjet;

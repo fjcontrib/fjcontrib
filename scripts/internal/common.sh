@@ -144,3 +144,157 @@ function find_gnu_tar(){
         fi
     fi
 }
+
+
+# helpers to read config files
+#
+# Config files structure:
+# - they should be made of lines of the form
+#   <tag>: <value>
+#   potentially with spaces between <tag> and ":"
+#
+# - the "dependencies" value should be a comma-separated list of
+#   dependencies. An optional minimal version number can be given in
+#   parenthesis.
+# 
+# Currently supported tags are
+#   name            the name of the contrib
+#   version         the current version of the contrib
+#   dependencies    list of required dependencies (with an 
+#                   optional minimal version number)
+#
+# this script provides
+#   read_tag <dirname> <tag> <value> sets value to the value of the given tag
+#   parse_dependencies  returns [TBD]
+#
+# Include this file in scripts that need it using
+#   . `dirname $0`/config_reader.sh
+
+# Usage:
+#   read_tag <dirname> <tag> <value>
+# reads the tag <tag> and sets the value in the <value> variable
+function read_tag(){
+    dirname=$1
+    tag=$2
+    local __value=$3
+    
+    # case where the config file is absent
+    # only the "version" tag is supported
+    if [ ! -f ${dirname}/FJCONTRIB.cfg ]; then
+        if [ "$tag" == "version" ]; then
+            eval $__value=\"$(head -1 ${dirname}/VERSION)\"
+            return 0
+        fi
+        eval $__value="";
+        return 0
+    fi
+
+    # find the line in the file
+    #dbg: echo "tag is ${tag}"
+    #dbg: grep -m1 "${tag}\s*:" FJCONTRIB.cfg
+    #dbg: grep -m1 "${tag}\s*:" FJCONTRIB.cfg | sed 's/^.*: *//'
+    eval $__value=\"$(grep -m1 "^\s*${tag}\s*:" ${dirname}/FJCONTRIB.cfg | sed 's/^.*: *//')\"
+    return 0
+}
+
+# Usage:
+#
+#   get_dependencies <dirname> <dependencies> <min_versions>
+#
+# sets "dependencies: and "min_versions" to an array listing the
+# dependencies and their associated minimal versions.
+#
+# Whenever the minimal version is absent, set it to "0.0.0"
+#
+# The dependencies should be on a line in the FJCONTRIB.cfg file of the form
+#    
+#  dependencies: dep1,dep2(1.0.0),dep3
+#
+# where the minimal version, in brackets, is optional
+function get_dependencies(){
+    dirname=$1
+    local __dependencies=$2
+    local __min_versions=$3
+
+    # read the full string
+    read_tag $dirname "dependencies" all_dependencies
+
+    # start creating an array
+    dependencies="("
+    minversions="("
+
+    # loop over all the dependencies
+    depver_list=`echo ${all_dependencies} | tr ',' ' '`
+    for depver in ${depver_list}; do
+        #echo ${depver}
+        if [[ $depver == *"("* ]]; then
+            dep=`echo -n ${depver} | sed 's/(.*//'`
+            ver=`echo -n ${depver} | sed 's/^.*(//;s/).*//'`
+        else
+            dep=${depver}
+            ver="0.0.0"
+        fi
+        dependencies="${dependencies} ${dep}"
+        minversions="${minversions} ${ver}"
+    done
+
+    # finalise and build return values
+    dependencies="${dependencies})"
+    minversions="${minversions})"
+    eval $__dependencies="${dependencies}"
+    eval $__min_versions="${minversions}"
+    
+    #eval $__dependencies=\""("`echo ${all_dependencies} | sed 's/([0-9\.]*)//g;s/,/ /g'`")"\"
+    #eval $__min_versions=\""("`echo ${all_dependencies} | sed 's/([0-9\.]*)//g;s/,/ /g'`")"\"
+    
+}
+
+# Usage:
+#  item_is_in_list <item> <list>
+function item_is_in_list {
+    local x=$1
+    local list=$2
+    local item
+
+    for item in $list
+    do
+        if [ "$x" == "$item" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# Usage:
+#  version_is_at_least <version> <min_version>
+#
+# Should return true if the version is at least the minimal version
+function version_is_at_least() {
+    local version=$1
+    local min_version=$2
+
+    # split the version into its components
+    local version_major=`echo $version | cut -d. -f1`
+    local version_minor=`echo $version | cut -d. -f2`
+    local version_patch=`echo $version | cut -d. -f3 | cut -d- -f1`
+    local min_version_major=`echo $min_version | cut -d. -f1`
+    local min_version_minor=`echo $min_version | cut -d. -f2`
+    local min_version_patch=`echo $min_version | cut -d. -f3 | cut -d- -f1`
+
+    # compare the components
+    if [ $version_major -gt $min_version_major ]; then
+        return 0
+    elif [ $version_major -lt $min_version_major ]; then
+        return 1
+    fi
+    if [ $version_minor -gt $min_version_minor ]; then
+        return 0
+    elif [ $version_minor -lt $min_version_minor ]; then
+        return 1
+    fi
+    if [ $version_patch -ge $min_version_patch ]; then
+        return 0
+    else
+        return 1
+    fi
+}

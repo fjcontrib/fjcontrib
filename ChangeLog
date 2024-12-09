@@ -1,3 +1,41 @@
+2024-12-09 Gavin Salam + Matteo Cacciari + Gregory Soyez
+
+	* VERSION:
+
+	upped to 1.057-devel
+
+	* Makefile.in:
+	* configure:
+
+	modification to scheme for support of dependencies between contribs. 
+	It now requires contribs to be in a new form where there is a 
+	ContribName/FJCONTRIB.cfg file that contains the version number and
+	any dependencies. 
+
+	* scripts/internal/common.sh:
+	* scripts/release-contrib.sh:
+
+	various changes to support the new scheme with
+	ContribName/FJCONTRIB.cfg files and the option to have either that
+	or the old ContribName/VERSION file.
+
+	* scripts/internal/Template:
+	* scripts/new-contrib-from-template.sh:
+	* DEVEL-GUIDELINES:
+
+	adapted things to be in the new scheme with an FJCONTRIB.cfg file
+	that contains both the version number and the dependencies and has
+	the include files in a include/fastjet/contrib/ subdirectory. 
+	
+	The new include placement help reduce the risk of conflicts with
+	system include files and also has the benefit that example programs
+	don't need to have their #include statements modified in order to
+	still work with a full installation of fjcontrib.
+
+	Also added a note in the DEVEL-GUIDELINES that fjcontrib maintainers
+	may modify and release new versions of contribs if needed, e.g.
+	to fix bugs, after attempting to contact authors.
+
 2024-11-25 Mon  <gavin.salam@physics.ox.ac.uk>
 
 	* Makefile.in:

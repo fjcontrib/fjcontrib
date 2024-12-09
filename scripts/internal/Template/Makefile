@@ -17,11 +17,27 @@ check_script = ../utils/check.sh
 NAME=Template
 SRCS=Template.cc
 EXAMPLES=example
+# the headers to be installed are expected to be in include/fastjet/contrib
 INSTALLED_HEADERS=Template.hh
+# List here any dependencies on other contribs. Note that they 
+# must be listed (potentially with versioning constraints) also
+# in the FJCONTRIB.cfg file.
+DEPENDS_ON = 
 #------------------------------------------------------------------------
 
 CXXFLAGS+= $(shell $(FASTJETCONFIG) --cxxflags)
 LDFLAGS += -lm $(shell $(FASTJETCONFIG) --libs)
+
+INCLUDE += -Iinclude/
+# loop over all entries in DEPENDS_ON and for each entry ENTRY
+# add -I../ENTRY to INCLUDE, -L../ENTRY to LDFLAGS and -lENTRY to LDFLAGS
+INCLUDE += $(foreach ENTRY,$(DEPENDS_ON),-I../$(ENTRY)/include)
+LDFLAGS += $(foreach ENTRY,$(DEPENDS_ON),-L../$(ENTRY) -l$(ENTRY))
+CXXFLAGS+= $(INCLUDE)
+
+# optionally, print out the INCLUDE and LDFLAGS variables
+# $(info INCLUDE=$(INCLUDE))
+# $(info LDFLAGS=$(LDFLAGS))
 
 OBJS  = $(SRCS:.cc=.o)
 EXAMPLES_SRCS  = $(EXAMPLES:=.cc)
@@ -68,7 +84,7 @@ distclean: clean
 install: all
 	$(install_DIR) $(PREFIX)/include/fastjet/contrib
 	for header in $(INSTALLED_HEADERS); do\
-	  $(install_HEADER) $$header $(PREFIX)/include/fastjet/contrib/;\
+	  $(install_HEADER) include/fastjet/contrib/$$header $(PREFIX)/include/fastjet/contrib/;\
 	done
 	$(install_DIR) $(PREFIX)/lib
 	$(install_LIB) lib$(NAME).a $(PREFIX)/lib

@@ -5,6 +5,9 @@
 # Usage:
 #   scripts/release-contrib.sh <ContribName>
 
+# get common definitions
+. `dirname $0`/internal/common.sh
+
 # make sure we have an argument and it exists
 contrib=${1%/}
 if [ -z $contrib ]; then
@@ -23,19 +26,33 @@ fi
 #------------------------------------------------------------------------
 # make sure all the required files are present
 cd $contrib
-mandatory_files="AUTHORS COPYING NEWS README VERSION"
+mandatory_files="AUTHORS COPYING NEWS README"
+# one or other of VERSION or FJCONTRIB.cfg is mandatory
+if [ -e VERSION ]; then
+    mandatory_files="${mandatory_files} VERSION"
+else
+    mandatory_files="${mandatory_files} FJCONTRIB.cfg"
+fi
+# if both VERSION and FJCONTRIB.cfg are present, complain and abort
+if [ -e VERSION ] && [ -e FJCONTRIB.cfg ]; then
+    echo "Error: both VERSION and FJCONTRIB.cfg are present in $contrib" 
+    echo "FJCONTRIB.cfg is the new form and is required if $contrib has dependencies on other contribs"
+    cd ..
+    exit 1
+fi
+
 missing_mandatory=""
 missing_mandatory_on_svn=""
 for fname in $mandatory_files; do
     if [[ ! -e ${fname} ]]; then
-	missing_mandatory="${fname} ${missing_mandatory}"
+        missing_mandatory="${fname} ${missing_mandatory}"
     fi
     if [[ ! -z "`svn stat ${fname}`" ]]; then
-	missing_mandatory_on_svn="${fname} ${missing_mandatory_on_svn}"
+        missing_mandatory_on_svn="${fname} ${missing_mandatory_on_svn}"
     fi
 done
 if [[ "x${missing_mandatory}" != "x" ]]; then
-    echo "The following mandatory file(s) are miss1ng: ${missing_mandatory}"
+    echo "The following mandatory file(s) are missing: ${missing_mandatory}"
     cd ..
     exit 1
 fi
@@ -57,8 +74,9 @@ check_pending_modifications $contrib || {
 
 #------------------------------------------------------------------------
 # decide the version number
+#version=`head -1 VERSION`
+read_tag $contrib version version
 cd $contrib
-version=`head -1 VERSION`
 
 #------------------------------------------------------------------------
 # ask confirmation that we can proceed with the release

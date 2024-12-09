@@ -84,8 +84,22 @@ Please refrain from developing other people's contribs without first
 consulting them!
 
 Note: currently there is no mechanism for handling external
-dependencies (ROOT, gsl, etc.), nor for handling dependencies between
-different contribs.
+dependencies (ROOT, gsl, etc.), because this would limit the range
+of systems on which fjcontrib could be straightforwardly be built.
+
+For handling dependencies between different contribs, see below.
+
+IMPORTANT NOTE: by releasing a contrib in fjcontrib, you acknowledge
+that the maintainers for the fjcontrib project may occasionally make
+changes and new releases of your code. This may be in order to fix bugs
+or to make it compatible with new versions of fjcontrib, for example
+with updated build systems. 
+
+The fjcontrib maintainers will always endeavour to consult with
+individual contrib authors before making such changes. However in the
+absence of a response, or current means of contacting the authors, they
+reserve the right (compatibly with the GPL license) to proceed with such
+necessary changes.
 
 ======================================================================
 Further details
@@ -117,13 +131,15 @@ put in place when you run scripts/new-contrib-from-template.sh, see below):
    tool or plugin, together with a file containing the expected
    output (example.ref).
 
- - VERSION: a version number, e.g. 1.0.x, which would be updated to
-   2.0.x in the event of a major change.
+ - FJCONTRIB.cfg: 
+   * it should at least contain a line such as  "version: 1.0.x",  which
+     would be updated to 2.0.x in the event of a major change.
+   * it may also contain a line such as "dependencies: ContribName(1.3.4)"
+     to signal dependencies on other contribs and their minimal required version.
 
  - NEWS: to indicate what has changed in each new version
 
  - ChangeLog: finer grained details of day-to-day changes
-
 
 ======================================================================
 Build system
@@ -139,6 +155,7 @@ modified:
   - SRCS
   - EXAMPLES
   - INSTALLED_HEADERS
+  - DEPENDS_ON (optional)
 
 Additionally you will need to ensure that "make check" works. By
 default it does the following:

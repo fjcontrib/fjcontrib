@@ -35,16 +35,24 @@ user=`whoami`
 #------------------------------------------------------------------------
 # create the structure
 mkdir $contrib
+#mkdir $contrib/include
+#mkdir $contrib/fastjet
+#mkdir $contrib/fastjet/contrib
 
-for fn in `dirname $0`/internal/Template/*; do
-    stripped=${fn##*internal/}
-    echo "  creating "${stripped//Template/${contrib}}
-    sed "s/Template/${contrib}/g;\
-         s/template/${contrib_lower}/g;\
-         s/TEMPLATE/${contrib_upper}/g;\
-         s/20XX-XX-XX/${date}/g;\
-         s/xxxx@localhost/${user}@localhost/g"\
-         ${fn} > ${stripped//Template/${contrib}}
+for fn in $(find $(dirname $0)/internal/Template/ ); do
+    if [ -d $fn ]; then
+        mkdir -p $contrib/${fn##*internal/Template/}
+    else 
+        stripped=${fn##*internal/}
+        echo "  creating "${stripped//Template/${contrib}}
+        sed "s/Template/${contrib}/g;\
+             s/template/${contrib_lower}/g;\
+             s/TEMPLATE/${contrib_upper}/g;\
+             s/20XX-XX-XX/${date}/g;\
+             s/xxxx@localhost/${user}@localhost/g"\
+             ${fn} > ${stripped//Template/${contrib}}
+    fi
+#for fn in `dirname $0`/internal/Template/*; do
 done
 echo "----------------------------------------------------------------------"
 echo "$contrib successfully created from Template. Rerun ./configure"

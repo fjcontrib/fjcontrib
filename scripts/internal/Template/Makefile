@@ -90,4 +90,4 @@ install: all
 	$(install_LIB) lib$(NAME).a $(PREFIX)/lib
 
 depend:
-	makedepend -Y --   -- $(SRCS) $(EXAMPLES_SRCS)
+	makedepend -Y -- -Iinclude  -- $(SRCS) $(EXAMPLES_SRCS)

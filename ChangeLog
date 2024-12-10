@@ -1,5 +1,8 @@
 2024-12-10 Tue  <gavin.salam@physics.ox.ac.uk>
 
+	* NEWS:
+	starting work on NEWS for 1.057
+
 	* contribs.svn:
 	updated RecursiveTools to 2.0.4-rc1 and added IFNPlugin 1.0.0-alpha2, to facilitate
 	experimentation with dependencies by other groups. 

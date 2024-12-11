@@ -1,3 +1,8 @@
+2024-12-11  Gregory Soyez  <soyez@fastjet.fr> + Gavin+Matteo
+
+	* contribs.svn:
+	switched LundPlane over to version 2.1.2
+
 2024-12-11  Gavin Salam  <gavin.salam@physics.ox.ac.uk>
 
 	* NEWS:

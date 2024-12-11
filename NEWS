@@ -10,7 +10,7 @@
     locations that are consistent with those that would be available
     from an installed version of the contrib
 * inclusion of new IFNPlugin X.X.X
-* update of RecursiveTools to version X.X.X, moving it into the 
+* update of RecursiveTools to version 2.0.4, which moves it into the 
   new contrib format.
 * [update of LundPlane to version X.X.X, resolving some linking issues.]
 

@@ -161,7 +161,9 @@ if ! [ `command -v $fjconfig` ]; then
     exit 1 
 fi
 
-echo "Using fastjet-config at $fjconfig"
+# write out full path to fastjet-config + version
+fjconfig=$(command -v $fjconfig)
+echo "Using $fjconfig, corresponding to fastjet version" $($fjconfig --version)
 echo
 
 

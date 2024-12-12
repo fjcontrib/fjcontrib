@@ -9,6 +9,10 @@
 $sort=1;
 # set to 1 to include release date taken from svn tags, 0 otherwise.
 $include_date=1;
+# set to 1 to include dependencies
+$include_deps=1;
+# set to 1 to include minimal fastjet version
+$include_minFJ=1;
 
 $versions="contribs.svn";
 
@@ -63,6 +67,26 @@ foreach ( @contribs_array ) {
       #
       #print $contrib." ".$date."\n";
     }
+    # extract dependencies and minimal fastjet version from config file
+    $deps=""; $minFJ="";
+    if ( -e "$contrib/FJCONTRIB.cfg" ) {
+       $deps = `grep 'dependencies:' $contrib/FJCONTRIB.cfg`;
+       $minFJ = `grep 'minimal_fastjet_version:' $contrib/FJCONTRIB.cfg`;
+       # deps
+       if ($deps) {
+         chomp $deps;
+         $deps =~ /^\s*dependencies:\s*(.*)/;
+         $deps = $1;
+	 if (! $deps ) { $deps = ""; } # to avoid a warning
+       } 
+       # minFJ
+       if ($minFJ) {
+         chomp $minFJ;
+         $minFJ =~ /^\s*minimal_fastjet_version:\s*(.*)/;
+         $minFJ = $1;
+	 if (! $minFJ ) { $minFJ = ""; } # to avoid a warning
+       }
+    }   
     $list .= "<tr> <td class=\"contribname\"> 
                    <a href=\"$svnBrowse$contrib/$version/\">$contrib</a>
                </td> <td style=\"{text-align:center;}\"> $textversion </td>";
@@ -74,6 +98,8 @@ foreach ( @contribs_array ) {
     if (-e "$contrib/NEWS") {
       $list .= '<a href="'.$svnBrowse.$contrib.'/'.$version.'/NEWS'.$svnPost.'">NEWS</a> ';
     }
+    if ($include_deps) {$list .= "<td>$deps</td>";}
+    if ($include_minFJ) {$list .= "<td>$minFJ</td>";}
     $list .= "</td></tr>\n";
 }
 
@@ -114,7 +140,12 @@ Version '.$topversion.' of FastJet Contrib is distributed with the following pac
 if($include_date) {$head .= '
     <th class="contriblist">Release date</th>';}
 $head .= '
-    <th class="contriblist">Information</th> </tr> 
+    <th class="contriblist">Information</th>';
+if ($include_deps) {$head .= '
+    <th class="contriblist">Dependencies</th>';}   
+if ($include_minFJ) {$head .= '
+    <th class="contriblist">Minimal FJ version</th>';}   
+$head .= '</tr> 
 ';
 
 $tail='

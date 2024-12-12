@@ -1,3 +1,9 @@
+2024-12-12  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+	* scripts/internal/generate-html-contents.pl
+	updated to also output information about dependencies and minimal
+	FastJet version
+
 2024-12-12 Thu  <gavin.salam@physics.ox.ac.uk> + Matteo + Gregory
 
 	* NEWS:

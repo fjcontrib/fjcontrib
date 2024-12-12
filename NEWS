@@ -9,7 +9,10 @@
     dependency and ensures that example programs use header
     locations that are consistent with those that would be available
     from an installed version of the contrib
-* inclusion of new IFNPlugin X.X.X
+* inclusion of new IFNPlugin 1.0.3, for interleaved flavour neutralisation 
+  jet algorithm
+* inclusion of new CMPPlugin 1.0.0, for the Czakon-Mitov-Poncelet flavour 
+  jet algorithm
 * update of RecursiveTools to version 2.0.4, which moves it into the 
   new contrib format.
 * update of LundPlane to version 2.1.2, resolving some linking issues

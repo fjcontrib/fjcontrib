@@ -54,4 +54,6 @@ KTClusCXX                        tags/1.0.1
 # [from Peter Berta and Martin Spousta]
 SignalFreeBackgroundEstimator    tags/1.0.1
 # [from Fabrizio Caola, Radoslaw Grabarczyk, Maxwell Hutt, Gavin P. Salam, Ludovic Scyboz, and Jesse Thaler]
-IFNPlugin                        tags/1.0.3-alpha3
+IFNPlugin                        tags/1.0.3
+# [from Michal Czakon, Alex Mitov and Rene Poncelet]
+CMPPlugin                        tags/1.0.0

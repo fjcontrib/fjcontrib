@@ -1,7 +1,9 @@
 2024-12-12 Thu  <gavin.salam@physics.ox.ac.uk> + Matteo + Gregory
 
+	* NEWS:
 	* contribs.svn:
-	updated IFNPlugin to 1.0.3-alpha3
+	updated IFNPlugin to 1.0.3 and added CMPPlugin 1.0.0
+	
 
 	* scripts/internal/Template/FJCONTRIB.cfg:
 	added commented "minimal_fastjet_version:..." line

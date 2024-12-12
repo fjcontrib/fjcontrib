@@ -135,7 +135,11 @@ put in place when you run scripts/new-contrib-from-template.sh, see below):
    * it should at least contain a line such as  "version: 1.0.x",  which
      would be updated to 2.0.x in the event of a major change.
    * it may also contain a line such as "dependencies: ContribName(1.3.4)"
-     to signal dependencies on other contribs and their minimal required version.
+     to signal dependencies on other contribs and their minimal required
+     version.
+   * it may also contain a line such as "minimal_fastjet_version: 3.4.1" 
+     to signal that the contrib needs to be compiled with a fastjet version
+     equal or higher to the one indicated.
 
  - NEWS: to indicate what has changed in each new version
 

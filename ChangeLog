@@ -1,3 +1,11 @@
+2024-12-12  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+	* configure:
+	* scripts/internal/common.sh:
+	* DEVEL-GUIDELINES:
+	added handling of minimal_fastjet_version in contribs 
+	configuration files
+
 2024-12-11  Gavin Salam  <gavin.salam@physics.ox.ac.uk>
 
 	* VERSION:

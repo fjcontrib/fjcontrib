@@ -101,8 +101,6 @@ is_in_list(){
 #[ $# -gt 0 ] || usage 1
 
 echo "Configuring fjcontrib version" `cat VERSION`
-echo
-
 
 # make sure Makefile.inc is absent
 makefileinc=".Makefile.inc"
@@ -149,6 +147,9 @@ for arg do
             ;;
     esac
 done
+
+echo using FastJet version `$fjconfig --version`
+echo
 
 #------------------------------------------------------------------------
 # check for fastjet-config and set up prefix
@@ -374,10 +375,20 @@ LC_ALL=C
 sorted_built_contribs=`echo $built_contribs | tr " " "\n" | sort | tr "\n" " "`
 
 # build up the dependencies for the sub-directories
+fjversion=`$fjconfig --version`
 for contrib in $sorted_built_contribs
 do
-    get_dependencies $contrib dependencies min_versions
+    get_dependencies $contrib dependencies min_versions min_fj_version
     echo "Processing dependencies for $contrib"
+    # first, check if there's a minimal required FastJet version
+    if [ ! x$min_fj_version = x ]; then
+        if ! version_is_at_least ${fjversion} ${min_fj_version}; then
+	        echo "$contrib requires Fastjet $min_fj_version or higher. Fastjet $fjversion < $min_fj_version has been found."
+                echo Bailing out of the configure process
+                exit 1
+       fi
+    fi   
+    # then, check potential dependencies on other contribs
     deps=""
     for i in "${!dependencies[@]}"; do
         echo "  ${dependencies[i]} (needs v>=${min_versions[i]})"

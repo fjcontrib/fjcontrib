@@ -199,10 +199,11 @@ function read_tag(){
 
 # Usage:
 #
-#   get_dependencies <dirname> <dependencies> <min_versions>
+#   get_dependencies <dirname> <dependencies> <min_versions> <min_fastjet_version>
 #
-# sets "dependencies: and "min_versions" to an array listing the
-# dependencies and their associated minimal versions.
+# sets "dependencies" and "min_versions" to an array listing the
+# dependencies and their associated minimal versions. Also sets
+# "min_fastjet_versions" for each contrib, if specified in FJCONTRIB.cfg
 #
 # Whenever the minimal version is absent, set it to "0.0.0"
 #
@@ -210,14 +211,19 @@ function read_tag(){
 #    
 #  dependencies: dep1,dep2(1.0.0),dep3
 #
-# where the minimal version, in brackets, is optional
+# where the minimal version, in brackets, is optional, and
+#
+#  minimal_fastjet_version: x.y.z
+#
 function get_dependencies(){
     dirname=$1
     local __dependencies=$2
     local __min_versions=$3
+    local __min_fastjet_version=$4
 
     # read the full string
     read_tag $dirname "dependencies" all_dependencies
+    read_tag $dirname "minimal_fastjet_version" minfjversion
 
     # start creating an array
     dependencies="("
@@ -238,11 +244,14 @@ function get_dependencies(){
         minversions="${minversions} ${ver}"
     done
 
-    # finalise and build return values
+    # finalise and build return values for dependencies
     dependencies="${dependencies})"
     minversions="${minversions})"
     eval $__dependencies="${dependencies}"
     eval $__min_versions="${minversions}"
+    
+    # return minimal fastjet version
+    eval $__min_fastjet_version=$minfjversion
     
     #eval $__dependencies=\""("`echo ${all_dependencies} | sed 's/([0-9\.]*)//g;s/,/ /g'`")"\"
     #eval $__min_versions=\""("`echo ${all_dependencies} | sed 's/([0-9\.]*)//g;s/,/ /g'`")"\"

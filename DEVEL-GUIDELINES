@@ -59,7 +59,7 @@ Basic developer usage
    # when you're ready to make a versioned release, make sure that
    #
    #   - all required files (AUTHORS, COPYING, NEWS etc.) are up to date
-   #   - VERSION includes the version number for the release
+   #   - FJCONTRIB.cfg includes the version number for the release
    #   - "make check" and "make install" both work
    #   - everything is committed
    #

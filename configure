@@ -148,9 +148,6 @@ for arg do
     esac
 done
 
-echo using FastJet version `$fjconfig --version`
-echo
-
 #------------------------------------------------------------------------
 # check for fastjet-config and set up prefix
 #------------------------------------------------------------------------
@@ -163,6 +160,10 @@ if ! [ `command -v $fjconfig` ]; then
     echo "Exiting"
     exit 1 
 fi
+
+echo "Using fastjet-config at $fjconfig"
+echo
+
 
 # if prefix has not been set explicitly from command line, set it to
 # the one returned by 'fastjet-config --prefix'

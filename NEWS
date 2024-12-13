@@ -1,4 +1,4 @@
-2024-12-XX: release of 1.100 with
+2024-12-13: release of 1.100 with
 * new functionality to allow for dependencies between contribs
   - new contrib template now uses FJCONTRIB.cfg file to specify
     version and dependencies, and Makefile template has been 
@@ -10,9 +10,9 @@
     locations that are consistent with those that would be available
     from an installed version of the contrib
 * inclusion of new IFNPlugin 1.0.3, for interleaved flavour neutralisation 
-  jet algorithm
+  jet algorithm, https://arxiv.org/abs/2306.07314
 * inclusion of new CMPPlugin 1.0.0, for the Czakon-Mitov-Poncelet flavour 
-  jet algorithm
+  jet algorithm, https://arxiv.org/abs/2205.11879
 * update of RecursiveTools to version 2.0.4, which moves it into the 
   new contrib format.
 * update of LundPlane to version 2.1.2, resolving some linking issues

@@ -1,5 +1,9 @@
 2024-12-13  Matteo, Gregory, Gavin
 
+	* NEWS:
+	* VERSION:
+	prepared for 1.100 release.
+
 	* configure:
 	added check that contribs don't have both VERSION and FJCONTRIB.cfg files.
 

@@ -1,3 +1,9 @@
+2024-12-13  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+	* scripts/internal/generate-html-contents.pl
+        added javascript function to sort table in contrib name
+        alphabetical order and release date
+
 2024-12-12  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
 	* scripts/internal/generate-html-contents.pl

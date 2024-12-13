@@ -129,16 +129,22 @@ td.spanned {
   text-align:center;
   background-color:#dddddd;
 }
+.triangles { 
+  display: inline-block; 
+  line-height: 1em; 
+  text-align: center; 
+  font-size: 0.5em; /* Adjust this to make the triangles smaller or larger */} 
+.triangles span { display: block; } 
 </style>
 </head>
 <body>
 Version '.$topversion.' of FastJet Contrib is distributed with the following packages<p>
 
-<table class="contriblist">
-<tr><th class="contriblist">Package</th> 
+<table class="contriblist" id="fjcontribtable">
+<tr><th class="contriblist" onclick="sortTable(0)">Package &nbsp; <div class="triangles"> <span>&#9650;</span> <span>&#9660;</span> </div></th> 
     <th class="contriblist">Version</th>';
 if($include_date) {$head .= '
-    <th class="contriblist">Release date</th>';}
+    <th class="contriblist" onclick="sortTable(2)">Release date &nbsp; <div class="triangles"> <span>&#9650;</span> <span>&#9660;</span> </div></th>';}
 $head .= '
     <th class="contriblist">Information</th>';
 if ($include_deps) {$head .= '
@@ -151,6 +157,63 @@ $head .= '</tr>
 $tail='
 </table>
 
+
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("fjcontribtable");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+         if (x.innerHTML > y.innerHTML) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        } 
+      } else if (dir == "desc") {
+        if (x.innerHTML < y.innerHTML) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+     }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
 
 </body>
 </html>

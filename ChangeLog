@@ -7,6 +7,10 @@
 	* configure:
 	added check that contribs don't have both VERSION and FJCONTRIB.cfg files.
 
+	* contribs.svn:
+	* NEWS:
+	updated IFNPlugin to 1.0.4 (removing spurious dependency on RecursiveTools in Makefile)
+
 2024-12-13  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
 	* scripts/internal/generate-html-contents.pl

@@ -9,7 +9,7 @@
     dependency and ensures that example programs use header
     locations that are consistent with those that would be available
     from an installed version of the contrib
-* inclusion of new IFNPlugin 1.0.3, for interleaved flavour neutralisation 
+* inclusion of new IFNPlugin 1.0.4, for interleaved flavour neutralisation 
   jet algorithm, https://arxiv.org/abs/2306.07314
 * inclusion of new CMPPlugin 1.0.0, for the Czakon-Mitov-Poncelet flavour 
   jet algorithm, https://arxiv.org/abs/2205.11879

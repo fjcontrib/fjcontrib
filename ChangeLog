@@ -1,3 +1,8 @@
+2024-12-13  Matteo, Gregory, Gavin
+
+	* configure:
+	added check that contribs don't have both VERSION and FJCONTRIB.cfg files.
+
 2024-12-13  Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
 	* scripts/internal/generate-html-contents.pl
@@ -15,7 +20,7 @@
 	* NEWS:
 	* contribs.svn:
 	updated IFNPlugin to 1.0.3 and added CMPPlugin 1.0.0
-	
+
 
 	* scripts/internal/Template/FJCONTRIB.cfg:
 	added commented "minimal_fastjet_version:..." line

@@ -381,6 +381,13 @@ sorted_built_contribs=`echo $built_contribs | tr " " "\n" | sort | tr "\n" " "`
 fjversion=`$fjconfig --version`
 for contrib in $sorted_built_contribs
 do
+
+    if [[ -f $contrib/VERSION && -f $contrib/FJCONTRIB.cfg ]]; then
+        echo "ERROR: $contrib has both $contrib/VERSION and $contrib/FJCONTRIB.cfg files."
+        echo "Only one of these should be present. In newer contribs, please use FJCONTRIB.cfg"
+        exit 1
+    fi
+
     get_dependencies $contrib dependencies min_versions min_fj_version
     echo "Processing dependencies for $contrib"
     # first, check if there's a minimal required FastJet version

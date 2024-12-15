@@ -345,7 +345,11 @@ done
 escaped_srclist="$(echo ${srclist} | sed -e 's/[\/&]/\\&/g')"
 escaped_fragile_include="$(echo ${fragile_include} | sed -e 's/[\/&]/\\&/g')"
 if [ "x"`uname` == "xDarwin" ] ;  then
-    dynlibopt="-dynamiclib"
+    # -Wl,-headerpad_max_install_names requested at 
+    # https://github.com/conda-forge/fastjet-contrib-feedstock/commit/4a25ace5d4500f7327ac81b89c4931d0d2495d78
+    # and checked by Matthew Feickert on MacOS x86 and arm64
+    # (makes it possible for install_name_tool to alter the load commands later)
+    dynlibopt="-dynamiclib -Wl,-headerpad_max_install_names"
     dynlibext="dylib"
     dynlibpostproc="install_name_tool -id \\1 \\1"
 else 

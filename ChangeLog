@@ -1,3 +1,9 @@
+2024-12-15 Sun  <gavin.salam@physics.ox.ac.uk>
+
+	* configure:
+	for Darwin buids, added "-Wl,-headerpad_max_install_names" to
+	dynlibopt, as per request from Matthew Feickert
+	
 2024-12-13  Matteo, Gregory, Gavin
 
 	* NEWS:

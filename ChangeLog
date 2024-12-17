@@ -1,3 +1,9 @@
+2024-12-17 Matteo Cacciari <cacciari@lpthe.jussieu.fr>
+
+	* scripts/internal/generate-html-contents.pl
+        added option to generate-html-contents.html to generate table of contribs 
+        for fastjet.fr at LPTHE rather than HEPFORGE
+
 2024-12-15  Gavin Salam  <gavin.salam@physics.ox.ac.uk>
 
 	* VERSION:

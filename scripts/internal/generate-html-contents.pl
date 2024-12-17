@@ -13,6 +13,8 @@ $include_date=1;
 $include_deps=1;
 # set to 1 to include minimal fastjet version
 $include_minFJ=1;
+# set to 1 to generate the page for LPTHE rather than for HEPFORGE
+$lpthe=0;
 
 $versions="contribs.svn";
 
@@ -103,16 +105,23 @@ foreach ( @contribs_array ) {
     $list .= "</td></tr>\n";
 }
 
-
+# create head
 $head='
 <html>
 <head>
-<style type="text/css">
+';
+
+if ( $lpthe ) {
+$head .= '<link rel="stylesheet" href="/style.css" type="text/css" media="screen"/>
+<!--#include virtual="/commonheader.html"-->
+'; }
+
+$head .= '<style type="text/css">
 .contriblist table,.contriblist tr,.contriblist td,.contriblist th {
   text-align:center;
   border:1px solid white;
   padding:4px;
-  padding-right:26px;
+  padding-right:6px;
 }
 td.contribname {
   background-color:#eeeeee;
@@ -121,8 +130,8 @@ td.contribname {
 th.contriblist {
   text-align:center;
   padding:6px;
-  padding-left:16px;
-  padding-right:16px;
+  padding-left:10px;
+  padding-right:10px;
   background-color:#dddddd;
 }
 td.spanned {
@@ -136,28 +145,6 @@ td.spanned {
   font-size: 0.5em; /* Adjust this to make the triangles smaller or larger */} 
 .triangles span { display: block; } 
 </style>
-</head>
-<body>
-Version '.$topversion.' of FastJet Contrib is distributed with the following packages<p>
-
-<table class="contriblist" id="fjcontribtable">
-<tr><th class="contriblist" onclick="sortTable(0)">Package &nbsp; <div class="triangles"> <span>&#9650;</span> <span>&#9660;</span> </div></th> 
-    <th class="contriblist">Version</th>';
-if($include_date) {$head .= '
-    <th class="contriblist" onclick="sortTable(2)">Release date &nbsp; <div class="triangles"> <span>&#9650;</span> <span>&#9660;</span> </div></th>';}
-$head .= '
-    <th class="contriblist">Information</th>';
-if ($include_deps) {$head .= '
-    <th class="contriblist">Dependencies</th>';}   
-if ($include_minFJ) {$head .= '
-    <th class="contriblist">Minimal FJ version</th>';}   
-$head .= '</tr> 
-';
-
-$tail='
-</table>
-
-
 <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -214,9 +201,65 @@ function sortTable(n) {
   }
 }
 </script>
+</head>
+<body>
+';
 
-</body>
+if ( $lpthe ) {
+$head .= '<!--#include virtual="/fjversion.html"-->
+<div id="page">
+    <div id="mast">
+      <ul id="mainMenu">
+        <li class=""><a href="/">Home</a></li>
+	<li class=""><a href="about.html">About</a></li>
+ 	<li class=""><a href="all-releases.html">Releases</a></li>
+        <li class=""><a href="quickstart.html" >Quick start</a></li>
+        <li class=""><a href="repo/fastjet-doc-<!--#echo var="fjversion"-->.pdf" >Manual</a></li>
+        <li class=""><a href="repo/doxygen-<!--#echo var="fjversion"-->/" >Doxygen</a></li>
+        <li class=""><a href="tools.html" >Tools</a></li>
+        <li class="selected"><a href="/contrib/" >Contrib</a></li>
+ 	<li class=""><a href="FAQ.html" >FAQ</a></li>
+      </ul>
+    </div>
+<div id="header">
+</div>
+<p><br>
+'; }
+ 
+$head .= 'Version '.$topversion.' of FastJet Contrib is distributed with the following packages<p>
+';
+
+if ($lpthe ) { 
+$head .= '<p><br>
+'; }
+
+$head.='<table class="contriblist" id="fjcontribtable">
+<tr><th class="contriblist" onclick="sortTable(0)">Package &nbsp; <div class="triangles"> <span>&#9650;</span> <span>&#9660;</span> </div></th> 
+    <th class="contriblist">Version</th>';
+if($include_date) {$head .= '
+    <th class="contriblist" onclick="sortTable(2)">Release date &nbsp; <div class="triangles"> <span>&#9650;</span> <span>&#9660;</span> </div></th>';}
+$head .= '
+    <th class="contriblist">Information</th>';
+if ($include_deps) {$head .= '
+    <th class="contriblist">Dependencies</th>';}   
+if ($include_minFJ) {$head .= '
+    <th class="contriblist">Minimal FJ version</th>';}   
+$head .= '</tr> 
+';
+
+# create tail
+$tail='
+</table>
+';
+
+if ( $lpthe) {
+$tail .= '<!--#include virtual="/footer.html"-->
+</div> <!-- page -->
+'; }
+
+$tail .= '</body>
 </html>
 ';
 
+# put everything together
 print $head, $list, $tail;

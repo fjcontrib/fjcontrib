@@ -211,14 +211,14 @@ $head .= '<!--#include virtual="/fjversion.html"-->
     <div id="mast">
       <ul id="mainMenu">
         <li class=""><a href="/">Home</a></li>
-	<li class=""><a href="about.html">About</a></li>
- 	<li class=""><a href="all-releases.html">Releases</a></li>
-        <li class=""><a href="quickstart.html" >Quick start</a></li>
-        <li class=""><a href="repo/fastjet-doc-<!--#echo var="fjversion"-->.pdf" >Manual</a></li>
-        <li class=""><a href="repo/doxygen-<!--#echo var="fjversion"-->/" >Doxygen</a></li>
-        <li class=""><a href="tools.html" >Tools</a></li>
+	<li class=""><a href="/about.html">About</a></li>
+ 	<li class=""><a href="/all-releases.html">Releases</a></li>
+        <li class=""><a href="/quickstart.html" >Quick start</a></li>
+        <li class=""><a href="/repo/fastjet-doc-<!--#echo var="fjversion"-->.pdf" >Manual</a></li>
+        <li class=""><a href="/repo/doxygen-<!--#echo var="fjversion"-->/" >Doxygen</a></li>
+        <li class=""><a href="/tools.html" >Tools</a></li>
         <li class="selected"><a href="/contrib/" >Contrib</a></li>
- 	<li class=""><a href="FAQ.html" >FAQ</a></li>
+ 	<li class=""><a href="/FAQ.html" >FAQ</a></li>
       </ul>
     </div>
 <div id="header">

@@ -230,7 +230,7 @@ function get_dependencies(){
     minversions="("
 
     # loop over all the dependencies
-    depver_list=`echo ${all_dependencies} | tr ',' ' '`
+    depver_list=`echo ${all_dependencies} | tr -d ' ' | tr ',' ' '`
     for depver in ${depver_list}; do
         #echo ${depver}
         if [[ $depver == *"("* ]]; then

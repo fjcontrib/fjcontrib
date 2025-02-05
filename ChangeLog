@@ -8,8 +8,8 @@
 
 	* configure:
 	for linux builds, changed soname in dylibopt from fastjetcontribfragile.so.0
-	to libfastjetcontribfragile.so.0, as per request from Matthew Feickert, cf.
-	https://github.com/fjcontrib/fjcontrib/issues/5
+	to libfastjetcontribfragile.so, as per request from Matthew Feickert, cf.
+	https://github.com/fjcontrib/fjcontrib/issues/5 and #4
 
 2024-12-17 Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 

@@ -1,3 +1,7 @@
+2025-01-XX: release of 1.101 with
+* new contrib SDFPlugin, v. 1.0.1
+* new contrib GHSAlgo, v. 1.0.0
+
 2024-12-13: release of 1.100 with
 * new functionality to allow for dependencies between contribs
   - new contrib template now uses FJCONTRIB.cfg file to specify

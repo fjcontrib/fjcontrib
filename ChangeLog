@@ -1,3 +1,11 @@
+2025-02-05 Gavin + Matteo
+
+	* contribs.svn:
+	added SDFPlugin 1.0.1
+
+	* NEWS:
+	started preparing for 1.101 release
+
 2024-12-17 Matteo Cacciari <cacciari@lpthe.jussieu.fr>
 
 	* scripts/internal/generate-html-contents.pl

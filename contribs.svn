@@ -57,3 +57,5 @@ SignalFreeBackgroundEstimator    tags/1.0.1
 IFNPlugin                        tags/1.0.4
 # [from Michal Czakon, Alex Mitov and Rene Poncelet]
 CMPPlugin                        tags/1.0.0
+# [from Simone Caletti, Daniel Reichelt, Andrew J. Larkoski and Simone Marzani]
+SDFPlugin                        tags/1.0.1

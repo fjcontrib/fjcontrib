@@ -1,3 +1,12 @@
+2025-02-06 Gavin
+
+	* README:
+	added mention of github mirror, including the fact that it is not
+	always immediate. This resolves the following problem: the mirror
+	so far was not an exact mirror, because it included a mention
+	of the mirror, while svn did not. From now on they will be 
+	kept identical.
+
 2025-02-05 Gavin + Matteo
 
 	* contribs.svn:

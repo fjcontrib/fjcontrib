@@ -59,3 +59,5 @@ IFNPlugin                        tags/1.0.4
 CMPPlugin                        tags/1.0.0
 # [from Simone Caletti, Daniel Reichelt, Andrew J. Larkoski and Simone Marzani]
 SDFPlugin                        tags/1.0.1
+# [from Rhorry Gauld, Alex Huss, Giovanni Stagnitto]
+GHSAlgo                          tags/1.0.0

@@ -1,6 +1,7 @@
-2025-01-XX: release of 1.101 with
-* new contrib SDFPlugin, v. 1.0.1
-* new contrib GHSAlgo, v. 1.0.0
+2025-01-24: release of 1.101 with
+* new contrib SDFPlugin, v. 1.0.1 (https://arxiv.org/abs/2205.01109)
+* new contrib GHSAlgo, v. 1.0.0 (https://arxiv.org/abs/2208.11138 (v2))
+* small fixes to build system
 
 2024-12-13: release of 1.100 with
 * new functionality to allow for dependencies between contribs

@@ -1,3 +1,14 @@
+2025-02-24 Gavin
+
+	* NEWS:
+	finalised for 1.101 release
+
+	* VERSION:
+	updated to 1.101
+
+	* contribs.svn:
+	Added GHSAlgo 1.0.0, Gauld, Huss and Stagnitto
+
 2025-02-06 Gavin
 
 	* README:

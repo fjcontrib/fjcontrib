@@ -47,23 +47,27 @@ fi
 internal_directories="_,scripts,Template,data,_"
 
 #----------------------------------------------------------------------
-# update svn
+# update svn if we are using svn
+if [[ -d .svn ]]; then
 
-# get the revision of this file
-script_current_version=$(svn info $0 | grep "^Revision: " | sed 's/Revision: //')
+    # get the revision of this file
+    script_current_version=$(svn info $0 | grep "^Revision: " | sed 's/Revision: //')
 
-# perform the svn update
-echo "-----------------------------"
-echo "Updating top-level directory:"
-echo "-----------------------------"
-svn up || { echo "Failed to update svn. Aborting"; exit 1; }
+    # perform the svn update
+    echo "-----------------------------"
+    echo "Updating top-level directory:"
+    echo "-----------------------------"
+    svn up || { echo "Failed to update svn. Aborting"; exit 1; }
 
-# check if this script has been updated
-script_new_version=$(svn info $0 | grep "^Last Changed Rev: " | sed 's/Last Changed Rev: //')
-if [[ "$script_new_version" -gt "$script_current_version" ]]; then
-    echo "update-contribs.sh has been updated. Re-running the new version."
-    $0 || { exit 1;}
-    exit 0
+    # check if this script has been updated
+    script_new_version=$(svn info $0 | grep "^Last Changed Rev: " | sed 's/Last Changed Rev: //')
+    if [[ "$script_new_version" -gt "$script_current_version" ]]; then
+        echo "update-contribs.sh has been updated. Re-running the new version."
+        $0 || { exit 1;}
+        exit 0
+    fi
+else
+    echo "No .svn/ directory found, skipping svn update for the top-level repository"
 fi
 
 #----------------------------------------------------------------------

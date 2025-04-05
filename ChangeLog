@@ -1,3 +1,9 @@
+2025-04-05  Gavin Salam  <gavin.salam@physics.ox.ac.uk>
+
+	* scripts/update-contribs.sh:
+	added a check for the .svn directory and if it is missing skip the
+	svn update for the top-level repo
+
 2025-02-24 Gavin
 
 	* NEWS:

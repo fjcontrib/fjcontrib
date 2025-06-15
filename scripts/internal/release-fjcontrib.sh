@@ -6,6 +6,16 @@
 # include function and svn location definitions, etc.
 . `dirname $0`/common.sh
 
+# Uncomment to upload files to LPTHE rather than to HepForge
+# In this case, make sure to make the appropriate modifications
+# in generate-html-contents.pl 
+web_repo_name="HepForge"
+web_server="login.hepforge.org"
+#web_repo_name="LPTHE"
+#web_server="tycho.lpthe.jussieu.fr"
+#fastjet_web_dir="~salam/www/fastjet3/"
+###############################################
+
 dry_run=0
 if [[ "$1" == "--dry-run" ]]; then
     dry_run=1
@@ -237,10 +247,10 @@ echo "Success."
 echo
 
 #========================================================================
-# update things on HepForge
+# update things on HepForge or LPTHE
 #========================================================================
 if (( ${dry_run} )); then
-    echo "Dry run: not updating HEPForge"
+    echo "Dry run: not updating $web_repo_name"
     echo
     echo "Done"
     echo
@@ -248,14 +258,14 @@ if (( ${dry_run} )); then
 fi
 
 echo
-get_yesno_answer "Confirm you want to upload to hepforge?" &&  exit 1
+get_yesno_answer "Confirm you want to upload to $web_repo_name?" &&  exit 1
 echo
 echo "------------------------------------------------------------------------"
-echo "Uploading to HepForge"
+echo "Uploading to $web_repo_name"
 echo "------------------------------------------------------------------------"
 
 echo "Uploading fjcontrib-$version.tar.gz"
-scp fjcontrib-$version.tar.gz login.hepforge.org:$fastjet_web_dir/contrib/downloads/
+scp fjcontrib-$version.tar.gz $web_server:$fastjet_web_dir/contrib/downloads/
 
 mkdir hepforge_tmp
 echo "Generating info for the webpage"
@@ -265,16 +275,16 @@ reldate=`date +"%e %B %Y"`
 echo -n $reldate  > hepforge_tmp/fjcreldate.php
 
 echo "Uploading info for the webpage"
-scp hepforge_tmp/fjcversion.php hepforge_tmp/fjcreldate.php login.hepforge.org:$fastjet_web_dir/contrib/
-scp hepforge_tmp/contents-$version.html login.hepforge.org:$fastjet_web_dir/contrib/contents/$version.html
+scp hepforge_tmp/fjcversion.php hepforge_tmp/fjcreldate.php $web_server:$fastjet_web_dir/contrib/
+scp hepforge_tmp/contents-$version.html $web_server:$fastjet_web_dir/contrib/contents/$version.html
 
 
-echo "Ensuring fastjet group write access for new files on hepforge"
+echo "Ensuring fastjet group write access for new files on $web_repo_name"
 # the following is needed because group sticky bit is erroneously not set
 # on the fastjet downloads directory, so group does not get set to fastjet
 #ssh login.hepforge.org chgrp fastjet "~fastjet/downloads/fjcontrib-$version.tar.gz"
 # now give fastjet group write permission on these files
-ssh login.hepforge.org chmod g+w "$fastjet_web_dir/contrib/fjcversion.php" "$fastjet_web_dir/contrib/fjcreldate.php" "$fastjet_web_dir/contrib/contents/$version.html" "$fastjet_web_dir/contrib/downloads/fjcontrib-$version.tar.gz"
+ssh $web_server chmod g+w "$fastjet_web_dir/contrib/fjcversion.php" "$fastjet_web_dir/contrib/fjcreldate.php" "$fastjet_web_dir/contrib/contents/$version.html" "$fastjet_web_dir/contrib/downloads/fjcontrib-$version.tar.gz"
 rm -Rf hepforge_tmp
 echo
 echo "Done"

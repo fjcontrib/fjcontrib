@@ -125,13 +125,16 @@ $head .= '<style type="text/css">
   padding:4px;
   padding-right:6px;
 }
-.contriblist tr:nth-child(even) {
+';
+if ( $lpthe ) {
+$head .= '.contriblist tr:nth-child(even) {
   background-color: #eeeeee; /* Light gray */
 }
 .contriblist tr:nth-child(odd) {
   background-color: #ffffff; /* White */
 }
-td.contribname {
+';}
+$head .= 'td.contribname {
   background-color:#eeeeee;
   text-align:left;
 }

@@ -13,7 +13,9 @@ $include_date=1;
 $include_deps=1;
 # set to 1 to include minimal fastjet version
 $include_minFJ=1;
-# set to 1 to generate the page for LPTHE rather than for HEPFORGE
+# set to 1 to generate the page for LPTHE rather than for HepForge
+# In this case, make sure to make the approriate modifications in 
+# release_fjcontrib.sh
 $lpthe=0;
 
 $versions="contribs.svn";
@@ -123,15 +125,24 @@ $head .= '<style type="text/css">
   padding:4px;
   padding-right:6px;
 }
-td.contribname {
+';
+if ( $lpthe ) {
+$head .= '.contriblist tr:nth-child(even) {
+  background-color: #eeeeee; /* Light gray */
+}
+.contriblist tr:nth-child(odd) {
+  background-color: #ffffff; /* White */
+}
+';}
+$head .= 'td.contribname {
   background-color:#eeeeee;
   text-align:left;
 }
 th.contriblist {
   text-align:center;
   padding:6px;
-  padding-left:10px;
-  padding-right:10px;
+  padding-left:12px;
+  padding-right:12px;
   background-color:#dddddd;
 }
 td.spanned {

@@ -24,10 +24,8 @@ accessible through a line
 
 with the corresponding library available through -lXYZ .
 
-If you compiled FastJet with a C++11 compiler, then fjcontrib should
-also be compiled with a C++11 compiler (if your compiler needs options
-to get that behaviour, e.g. -std=c++11, then give those same options
-in the CXXFLAGS passed to configure).
+FJContrib requires C++11 support. The configure script will check for
+that, and add relevant compiler options if needed.
 
 Queries about the fastjet-contrib project as a whole should be sent to
 <fastjet@projects.hepforge.org> 

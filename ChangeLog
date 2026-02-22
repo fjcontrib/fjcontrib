@@ -1,3 +1,9 @@
+2026-02-22 Gavin Salam
+
+	* README: 	
+	Clarified that C++11 is required and that the configure script will
+	check for it and add relevant compiler options if needed.
+
 2025-04-05  Gavin Salam  <gavin.salam@physics.ox.ac.uk>
 
 	* scripts/update-contribs.sh:

@@ -1,10 +1,16 @@
-2026-03-04 Gavin Salam
+2026-03-04 Gavin Salam + Matteo
 
 	* NEWS:
 	finalised for release of 1.102
 
 	* contribs.svn:
 	updated QCDAwarePlugin to 2.0.0
+
+	* scripts/internal/common.sh:
+	* scripts/internal/generate-html-contents.pl:
+	* scripts/internal/release-fjcontrib.sh:
+	small updates to make LPTHE the default web destination,
+	based on earlier commits from Matteo
 
 2026-02-22 Gavin Salam
 

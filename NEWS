@@ -1,3 +1,7 @@
+2026-03-04: release of 1.102
+* update of QCDAwarePlugin to version 2.0.0, which adds support for 
+  photon splittings to leptons, and coupling factors
+
 2025-01-24: release of 1.101 with
 * new contrib SDFPlugin, v. 1.0.1 (https://arxiv.org/abs/2205.01109)
 * new contrib GHSAlgo, v. 1.0.0 (https://arxiv.org/abs/2208.11138 (v2))

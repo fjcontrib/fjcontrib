@@ -8,21 +8,38 @@
 
 # Uncomment to upload files to LPTHE rather than to HepForge
 # In this case, make sure to make the appropriate modifications
-# in generate-html-contents.pl 
-web_repo_name="HepForge"
-web_server="login.hepforge.org"
-#web_repo_name="LPTHE"
-#web_server="tycho.lpthe.jussieu.fr"
-#fastjet_web_dir="~salam/www/fastjet3/"
+# in generate-html-contents.pl (lpthe) and common.sh (fastjet_web_dir)
+web_repo_name="LPTHE"
+web_server="tycho.lpthe.jussieu.fr"
+fastjet_web_dir="~salam/www/fastjet3/"
+# web_repo_name="HepForge"
+# web_server="login.hepforge.org"
+# fastjet_web_dir=/hepforge/projects/fastjet/public_html
 ###############################################
 
 dry_run=0
-if [[ "$1" == "--dry-run" ]]; then
-    dry_run=1
-    echo "--------------------------------------------------"
-    echo "                   DRY RUN                        "
-    echo "--------------------------------------------------"
-fi
+#only_upload=0
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        # --only-upload)
+        #     only_upload=1
+        #     echo "--------------------------------------------------"
+        #     echo "      ONLY DOING UPLOAD OF EXISTING TARBALL       "
+        #     echo "--------------------------------------------------"
+        #     ;;
+        --dry-run)
+            dry_run=1
+            echo "--------------------------------------------------"
+            echo "                   DRY RUN                        "
+            echo "--------------------------------------------------"
+            ;;
+        *)
+            echo "Error in $0: unknown option $1"
+            exit 1
+            ;;
+    esac
+    shift
+done
 
 #========================================================================
 # System sanity checks

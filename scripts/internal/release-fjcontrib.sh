@@ -300,8 +300,11 @@ echo "Ensuring fastjet group write access for new files on $web_repo_name"
 # the following is needed because group sticky bit is erroneously not set
 # on the fastjet downloads directory, so group does not get set to fastjet
 #ssh login.hepforge.org chgrp fastjet "~fastjet/downloads/fjcontrib-$version.tar.gz"
-# now give fastjet group write permission on these files
-ssh $web_server chmod g+w "$fastjet_web_dir/contrib/fjcversion.php" "$fastjet_web_dir/contrib/fjcreldate.php" "$fastjet_web_dir/contrib/contents/$version.html" "$fastjet_web_dir/contrib/downloads/fjcontrib-$version.tar.gz"
+# now give fastjet group write permission on these files (and read for everyone)
+# Owner: rw- = 6 (4+2)
+# Group: rw- = 6 (4+2)
+# Others: r-- = 4
+ssh $web_server chmod 664 "$fastjet_web_dir/contrib/fjcversion.php" "$fastjet_web_dir/contrib/fjcreldate.php" "$fastjet_web_dir/contrib/contents/$version.html" "$fastjet_web_dir/contrib/downloads/fjcontrib-$version.tar.gz"
 rm -Rf hepforge_tmp
 echo
 echo "Done"

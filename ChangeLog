@@ -1,5 +1,11 @@
 2026-06-11 Gavin Salam
 
+	* scripts/internal/release-fjcontrib.sh:
+	fixed up some permission flags (which were too sensitive to umask of 
+	person making the release).
+
+2026-06-11 Gavin Salam
+
 	* NEWS:
 	* VERSION:
 	prepared for release of 1.103

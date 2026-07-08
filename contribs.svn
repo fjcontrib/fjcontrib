@@ -63,3 +63,5 @@ SDFPlugin                        tags/1.0.1
 GHSAlgo                          tags/1.0.0
 # [from Melissa van Beekveld, Silvia Ferrario Ravasio, Alexander Karlberg, Darcy Peake]
 DISGenkt                         tags/1.1.0
+# [from Tousik Samui]
+DynamicR                         tags/1.0.2

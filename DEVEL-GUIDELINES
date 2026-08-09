@@ -17,7 +17,7 @@ fastjet@projects.hepforge.org
 Basic developer usage
 =====================
 
-   # to get started you will need a hepforge account. Go to
+   # to get started you will need a hepforge account. Go to [GIT-CHANGE:update repo etc]
    #
    #    https://www.hepforge.org/register
    #
@@ -47,7 +47,7 @@ Basic developer usage
    # maintainers at <fastjet@projects.hepforge.org> to get write access to the
    # fjcontrib svn. We will need your username.
 
-   # and then run
+   # and then run [GIT-CHANGE:who should register this?]
    scripts/register-new-contrib.sh ContribName
 
    # within your pre-existing ContribName/ directory you can now "svn

@@ -7,7 +7,7 @@
 # 
 # This does the following
 #
-#  - run svn up to get the updates of all the scripts and latest contrib list
+#  - update the top-level Git checkout to get the latest scripts and list
 #
 #  - build the list of contribs:
 #     . by default, these are read from 'contribs.svn'
@@ -41,33 +41,35 @@ default_yesno_answer=""
 if [[ $# -ge 1 && x"$1" == x'--force' ]]; then
     echo "Assuming 'yes' as an answer to all questions"
     default_yesno_answer="yes"
+    shift
 fi
 . `dirname $0`/internal/common.sh
     
 internal_directories="_,scripts,Template,data,_"
 
 #----------------------------------------------------------------------
-# update svn if we are using svn
-if [[ -d .svn ]]; then
+# update the top-level Git checkout when it has an upstream branch
+if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    script_current_version=$(git rev-parse HEAD)
 
-    # get the revision of this file
-    script_current_version=$(svn info $0 | grep "^Revision: " | sed 's/Revision: //')
-
-    # perform the svn update
     echo "-----------------------------"
     echo "Updating top-level directory:"
     echo "-----------------------------"
-    svn up || { echo "Failed to update svn. Aborting"; exit 1; }
+    if git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' > /dev/null 2>&1; then
+        git pull --ff-only || { echo "Failed to update the top-level Git checkout. Aborting"; exit 1; }
+    else
+        echo "No upstream branch is configured; skipping top-level Git update"
+    fi
 
     # check if this script has been updated
-    script_new_version=$(svn info $0 | grep "^Last Changed Rev: " | sed 's/Last Changed Rev: //')
-    if [[ "$script_new_version" -gt "$script_current_version" ]]; then
+    script_new_version=$(git rev-parse HEAD)
+    if [[ "$script_new_version" != "$script_current_version" ]]; then
         echo "update-contribs.sh has been updated. Re-running the new version."
-        $0 || { exit 1;}
+        "$0" "$@" || { exit 1;}
         exit 0
     fi
 else
-    echo "No .svn/ directory found, skipping svn update for the top-level repository"
+    echo "No Git checkout found, skipping update of the top-level repository"
 fi
 
 #----------------------------------------------------------------------
@@ -76,14 +78,14 @@ fi
 if [[ $# -gt 1 ]]; then
 
     # just call switch-to-version
-    `dirname $0`/internal/switch-to-version.sh $* || exit 1
+    "$(dirname "$0")/internal/switch-to-version.sh" "$@" || exit 1
     exit 0
 fi
 
 #----------------------------------------------------------------------
 # update all the contribs in the contribs.svn file (plus the ones in contribs.local) or only the one
 # specified through the command line
-if [[ $# -gt 0 && x"$1" != x'--force' ]]; then
+if [[ $# -gt 0 ]]; then
     contribs_list=$1
 else
     contribs_list=$(cat contribs.svn | grep -v '^#' | grep -v '^$' | awk '{print " "$1" "}')
@@ -107,7 +109,7 @@ for contrib in $contribs_list; do
     # get the version numbers in contribs.svn file and also from the locally
     # checked out contributions
     get_contrib_version ${contrib} contribs.svn   version_svn
-    get_contrib_version ${contrib} local_svn version_local
+    get_contrib_version ${contrib} local_git version_local
     get_contrib_version ${contrib} contribs.local version_mine
 
     echo
@@ -128,10 +130,8 @@ for contrib in $contribs_list; do
     if [[ "${version_svn}" == "${version_local}" ]]; then
         # match: nothing to do
 	if [[ "$version_svn" != "["*"]" ]]; then
-	    echo -e "you already have the $requested_tag version (${version_svn}).\nRunning svn up"
-	    cd $contrib
-	    svn up
-	    cd ..
+	    echo -e "you already have the $requested_tag version (${version_svn}).\nUpdating it"
+	    "$(dirname "$0")/internal/switch-to-version.sh" "$contrib" "$version_svn" || exit 1
 	else 
 	    echo "you already have the $requested_tag version (${version_svn})"
 	fi	
@@ -147,14 +147,14 @@ for contrib in $contribs_list; do
 	if [[ "${version_local}" == "[None]" ]]; then
 	    # the local version does not exist! Ask if we want to install it
 	    #get_yesno_answer "  Do you want to install the $requested_tag version?" "$default_yesno_answer" || {
-	    `dirname $0`/internal/switch-to-version.sh $contrib $version_svn || exit 1
+	    "$(dirname "$0")/internal/switch-to-version.sh" "$contrib" "$version_svn" || exit 1
 	    #}
-	elif [[ "${version_local}" == "[NoSVN]" ]]; then
-	    echo "You have an unversionned copy of $contrib in the way. It will not be updated."
+	elif [[ "${version_local}" == "[NoGit]" ]]; then
+	    echo "You have an unversioned copy of $contrib in the way. It will not be updated."
 	else
 	    # the local version exists! Ask if we want to update it
 	    get_yesno_answer "  Switch from the installed version to the $requested_tag one?" "$default_yesno_answer" || {
-		`dirname $0`/internal/switch-to-version.sh $contrib $version_svn || exit 1
+		"$(dirname "$0")/internal/switch-to-version.sh" "$contrib" "$version_svn" || exit 1
 	    }
 	fi
         echo
@@ -168,16 +168,19 @@ done
 # Note that we discard any directory that does not point to a tagged
 # version of a contrib
 
-for contrib in $(ls -d */ || sed 's/\/*//g'); do
+for contrib_path in */; do
+    [[ -d "$contrib_path" ]] || continue
+    contrib=${contrib_path%/}
     # discard the fjcontrib dirs
     if [[ "$internal_directories" == *",${contrib},"* ]]; then
 	continue
     fi
 
-    get_svn_info $contrib mode version
+    get_git_info "$contrib" mode version
 
-    if [[ "$version" == "tags/"* ]]; then
-	echo "${contrib}: your local copy ($version) does not appear in the default svn-supported list."
+    get_contrib_version "$contrib" contribs.svn configured_version
+    if [[ "$version" == "tags/"* && ( "$configured_version" == "[None]" || "$configured_version" =~ ^-+ ) ]]; then
+	echo "${contrib}: your local copy ($version) does not appear in the default Git-supported list."
 	get_yesno_answer "  Do you want to remove the local version?" "$default_yesno_answer" || {
 	    rm -Rf $contrib
 	}

@@ -1,151 +1,155 @@
 #!/bin/bash
 #
 # Usage:
-#   switch_to_version ContribName Version
+#   switch-to-version.sh ContribName [version]
 #
-# switch the given contrib to the given version.
-#
-# In both cases, if the version is "trunk", we give it a svn_write
-# access; otherwise, we use a read-only (http) access.
+# Check out or switch a contribution hosted at GitHub.  The historical
+# contribs.svn spelling is retained: trunk means the Git main branch,
+# tags/<version> means a Git tag, and branches/<name> means a Git branch.
 
-# load some common utilities
-. `dirname $0`/common.sh
+set -u
 
-# make sure a contrib is specified
-contrib=${1%/}
+. "$(dirname "$0")/common.sh"
+
+contrib=${1:-}
+contrib=${contrib%/}
 if [[ -z "$contrib" ]]; then
     echo "A contrib name has to be specified"
     exit 1
 fi
 
-# decide which version number to use
-version=$2
-if [[ -z "$version" ]]; then
-    # get the version from the svn list
-    get_contrib_version $contrib contribs.svn version_svn
-    if [[ "$version_svn" == "[None]" ]]; then
-	echo "$contrib is not listed in the svn-supported list of contribs (contribs.svn)."
-	echo "You have to specify the version yourself."
-    	if [ ! -z "`svn ls $svn_read/contribs | grep '^'$contrib'/$'`" ]; then
-    		echo "Possible tagged (released) versions are:"
-    		svn ls $svn_read/contribs/$contrib/tags | sed 's/\/$//g;s/^/  tags\//g'
-    	fi
-	exit 1
+requested_version=${2:-}
+if [[ -z "$requested_version" ]]; then
+    get_contrib_version "$contrib" contribs.svn requested_version
+    if [[ "$requested_version" == "[None]" ]]; then
+        echo "$contrib is not listed in contribs.svn. Specify a version explicitly."
+        exit 1
     fi
-    echo "  Using version $version_svn"
-    version=$version_svn
+    echo "  Using version $requested_version"
 fi
 
-# decide which access mode we want
-mode="ro"
-if [[ "$version" == "trunk" ]]; then
-    mode="rw"
-fi
-if [[ "${version}" =~ ^branches ]]; then
-    mode="rw"
-fi    
+git_ref=""
+ref_kind=""
+case "$requested_version" in
+    trunk|main)
+        git_ref="main"
+        ref_kind="branch"
+        ;;
+    tags/*)
+        git_ref="${requested_version#tags/}"
+        ref_kind="tag"
+        ;;
+    branches/*)
+        git_ref="${requested_version#branches/}"
+        ref_kind="branch"
+        ;;
+    [0-9]*)
+        git_ref="$requested_version"
+        ref_kind="tag"
+        ;;
+    -*|\[*)
+        echo "Invalid version '$requested_version' for $contrib"
+        exit 1
+        ;;
+    *)
+        echo "Version must be trunk, a tag, or branches/<name>"
+        exit 1
+        ;;
+esac
 
-# if the version starts with a number, prefix it by "tags/"
-if [[ "$version" =~ ^[0-9] ]]; then
-    version="tags/$version"
-fi
+repo_url=$(get_contrib_repo_url "$contrib")
 
-# get the current situation
-get_svn_info $contrib current_mode current_version
-if [[ "$version" == "$current_version" ]]; then
-    if [[ "$mode" == "$current_mode" ]]; then
-	if [[ "$version" != "["*"]" ]]; then
-	    echo "  Already at the requested version. Simply running svn up"
-	    cd $contrib
-	    svn up
-	    cd ..
-	else 
-	    echo "  Already at the requested version."
-	fi	
-	exit 0
+local_ref_exists(){
+    if [[ "$ref_kind" == "branch" ]]; then
+        git show-ref --verify --quiet "refs/remotes/origin/$git_ref" || \
+            git show-ref --verify --quiet "refs/heads/$git_ref"
+    else
+        git show-ref --verify --quiet "refs/tags/$git_ref"
     fi
-fi
+}
 
-# make sure that the version exists
-if [ -z "`svn ls $svn_read/contribs | grep '^'$contrib'/$'`" ]; then
-    echo "${contrib} does not appear to be a valid contrib in the svn repository"
+checkout_requested_ref(){
+    if [[ "$ref_kind" == "branch" ]]; then
+        git checkout "$git_ref" 2>/dev/null || \
+            git checkout -b "$git_ref" --track "origin/$git_ref" || return 1
+        git branch --set-upstream-to="origin/$git_ref" "$git_ref" >/dev/null 2>&1 || true
+    else
+        git checkout --detach "tags/$git_ref"
+    fi
+}
+
+get_git_info "$contrib" current_mode current_version
+if [[ "$current_version" == "[NoGit]" ]]; then
+    echo "You appear to have an unversioned copy of $contrib."
+    echo "Please move it out of the way before installing a Git checkout."
     exit 1
 fi
-if [[ "${version}" != "trunk" ]]; then
-    # check if we're requesting a tag or a branch
-    if [[ "$version" =~ ^branches ]]; then
-        # we deal with a branch
-        branch_version=${version#*/}
-        if [ -z "`svn ls $svn_read/contribs/$contrib/branches | grep '^'$branch_version'/$'`" ]; then
-	    echo "Version $version of $contrib does not exist. Exiting."
-	    exit 1
-        fi
-    else
-        # we deal with a tag
-        tagged_version=${version#*/}
-        if [ -z "`svn ls $svn_read/contribs/$contrib/tags | grep '^'$tagged_version'/$'`" ]; then
-	    echo "Version $version of $contrib does not exist. Exiting."
-	    exit 1
-        fi
-    fi
-fi
 
-
-# if the directory does not yet exist, check it out
 if [[ "$current_version" == "[None]" ]]; then
-    echo "  Checking out version ${version} of ${contrib}"
-    if [[ "${mode}" == "rw" ]]; then
-        svn co ${svn_write}/contribs/${contrib}/${version} $contrib
-    else
-        svn co ${svn_read}/contribs/${contrib}/${version} $contrib
-    fi
+    echo "  Checking out $contrib from $repo_url"
+    git clone "$repo_url" "$contrib" || {
+        echo "Failed to clone $repo_url"
+        exit 1
+    }
+    cd "$contrib" || exit 1
+    git fetch --tags origin || exit 1
+    local_ref_exists || {
+        echo "Version '$requested_version' of $contrib does not exist in the Git repository."
+        exit 1
+    }
+    checkout_requested_ref || {
+        echo "Failed to check out $requested_version of $contrib"
+        exit 1
+    }
+    cd ..
     exit 0
 fi
 
-# if the directory exists but is not on svn, print an error
-# TODO: allow to overwrite your local copy
-if [[ "$current_version" == "[NoSVN]" ]]; then
-    echo "You appear to have an unversionned copy of ${contrib}."
-    echo "Please move it out of the way before updating ${contrib} to a versioned version."
+if ! check_pending_modifications "$contrib"; then
+    get_yesno_answer "Your local copy has modifications. Do you want to proceed with the update?" && {
+        echo "Aborting."
+        exit 1
+    }
+fi
+
+cd "$contrib" || exit 1
+remote_url=$(git remote get-url origin 2>/dev/null || true)
+if [[ -n "$remote_url" && "$remote_url" != "$repo_url" ]]; then
+    echo "The origin for $contrib is $remote_url, not $repo_url"
+    cd ..
     exit 1
 fi
 
-# check that there is no pending 
-check_pending_modifications $contrib || {
-    get_yesno_answer "Your local copy has modifications. Do you want to proceed with the update?" && {
-	echo "Aborting."
-	exit 1
-    }
+echo "  Fetching updates for $contrib"
+git fetch --tags origin || {
+    echo "Failed to fetch $repo_url"
+    cd ..
+    exit 1
 }
 
-# move to the contrib's directory
-cd $contrib
-
-# in principle, we should use an "svn switch" here (change
-# a directory in a given repos). But that does not allow
-# to change the access type. So if the access type
-# changes, we combine that with a svn relocate
-#
-# Options include:
-#  - a version upgrade: svn switch
-#  - trunk->stable: svn relocate + svn switch
-#  - stable->trunk: svn switch + svn relocate
-# Se we need to check if we are currently using a svn+ssh
-# or http access
-
-# if we're coming from the trunk, first switch to a read-only access
-if [[ "$current_mode" == "rw" ]]; then
-    echo "  (first changing the access-mode to read-only)"
-    svn switch --relocate ${svn_write}/contribs/$contrib/${current_version} ${svn_read}/contribs/$contrib/${current_version}
-    svn up
+if ! local_ref_exists; then
+    echo "Version '$requested_version' of $contrib does not exist in the Git repository."
+    cd ..
+    exit 1
 fi
 
-# now switch to the correct location
-svn switch ${svn_read}/contribs/$contrib/$version
-# grant write access when needed
-if [[ "${mode}" == "rw" ]]; then
-    svn switch --relocate ${svn_read}/contribs/$contrib/${version} ${svn_write}/contribs/$contrib/${version}
-    svn up
+if [[ "$requested_version" == "$current_version" ]]; then
+    if [[ "$ref_kind" == "branch" ]]; then
+        git pull --ff-only origin "$git_ref" || {
+            echo "Failed to fast-forward $contrib"
+            cd ..
+            exit 1
+        }
+    else
+        echo "  Already at the requested version."
+    fi
+    cd ..
+    exit 0
 fi
 
+checkout_requested_ref || {
+    echo "Failed to switch $contrib to $requested_version"
+    cd ..
+    exit 1
+}
 cd ..

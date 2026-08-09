@@ -1,55 +1,61 @@
 # a list of definitions and tools that we'd like to have an easy access
 # to
 
-# svn repositories for read and write access
-#svn_read=http://fastjet.hepforge.org/svn/contrib
-#svn_write=https://fastjet.hepforge.org/svn/contrib
-#svn_write=svn+ssh://svn.hepforge.org/hepforge/svn/fastjet/contrib
-#svn_read=svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib
-svn_read=https://svn.hepforge.org/fastjetsvn/contrib
-svn_write=svn+ssh://vcs@phab.hepforge.org/source/fastjetsvn/contrib
+# Git repositories for the individual contributions.  The same URL is
+# used for fetching and pushing for now.
+git_repo_base_url=${CONTRIB_REPO_BASE_URL:-https://github.com/fjcontribs-test}
 
-export svn_read svn_write fastjet_web_dir
+export git_repo_base_url fastjet_web_dir
 
-# get the svn URL and fill 
-#  - mode : ro if http:// access; rw otherwise
-#  - version : the version info
-#               [None]  is returned if the directory does not exist
-#               [NoSVN] is returned if the directory is not under svn
+function get_contrib_repo_url(){
+    echo "${git_repo_base_url%/}/$1"
+}
+
+# Get information about a local Git checkout and fill:
+#  - mode    (kept for callers that display access information; GitHub uses
+#            the same URL for read and write access)
+#  - version (trunk, tags/<tag>, branches/<branch>, or a bracketed status)
 #
-#   get_svn_info  contrib  mode  version
-function get_svn_info(){
+#   get_git_info contrib mode version
+function get_git_info(){
     local __modevar=$2
     local __versionvar=$3
+    local start_dir=$(pwd)
 
     # check if the directory exists
     if [[ ! -d $1 ]]; then
-	eval $__modevar="[None]"
-	eval $__versionvar="[None]"
+	eval "$__modevar='[None]'"
+	eval "$__versionvar='[None]'"
 	return 0
     fi
 
     cd $1
 
-    # check if this is in svn
-    svn info > /dev/null 2>&1 || {
-	eval $__modevar="[NoSVN]"
-	eval $__versionvar="[NoSVN]"
-	cd ..
+	# check if this is in Git
+	git rev-parse --is-inside-work-tree > /dev/null 2>&1 || {
+	eval "$__modevar='[NoGit]'"
+	eval "$__versionvar='[NoGit]'"
+	cd "$start_dir"
 	return 0
     }
-	
-    # get the full URL
-    svn_url=$(svn info | grep "^URL:" | sed 's/^URL: //')
-    eval $__versionvar="${svn_url#*/$1/}"
 
-    if [[ "$svn_url" == "http:"* ]]; then
-	eval $__modevar="ro"
-    else
-	eval $__modevar="rw"
-    fi
+	branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)
+	if [[ "$branch" == "main" ]]; then
+	    version="trunk"
+	elif [[ -n "$branch" ]]; then
+	    version="branches/$branch"
+	else
+	    tag=$(git describe --tags --exact-match HEAD 2>/dev/null || true)
+	    if [[ -n "$tag" ]]; then
+	        version="tags/$tag"
+	    else
+	        version="[Detached]"
+	    fi
+	fi
+	eval "$__modevar='rw'"
+	eval "$__versionvar='$version'"
 
-    cd ..
+    cd "$start_dir"
     return 0    
 }
 
@@ -60,11 +66,10 @@ function get_svn_info(){
 function get_contrib_version(){
     local __resultvar=$3
 
-    # nasty hack: if the name of the "file" is "local_svn", 
-    # get the version number  from the local svn checkout of the contribution
-    if [[ "$2" == "local_svn" ]]; then
-	get_svn_info $1 mode version
-	eval $__resultvar="$version"
+	# Get the version from the local Git checkout of the contribution.
+    if [[ "$2" == "local_git" ]]; then
+	get_git_info "$1" mode version
+	eval "$__resultvar='$version'"
 	return 0
     fi
 
@@ -86,14 +91,18 @@ function get_contrib_version(){
 # returns 0 for n/N/no
 #         1 for y/Y/yes
 function get_yesno_answer(){
+    local default_answer=${2:-}
     while true; do
 	echo -ne "$1 [y/n] "
-	if [[ -z "$2" ]]; then
-	    read answer
+	if [[ -z "$default_answer" ]]; then
+	    if ! read answer; then
+	        echo
+	        return 0
+	    fi
 	else
-	    answer="$2"
+	    answer="$default_answer"
 	    # TODO: add a test that the answer is a valid one
-	    echo "$2"
+	    echo "$default_answer"
 	fi
 	case $answer in
 	    y|Y|yes) return 1; break ;;
@@ -102,17 +111,18 @@ function get_yesno_answer(){
     done
 }
 
-# check if the local svn has pending modifications
+# check if the local Git checkout has pending modifications
 # check_pending_modifications contrib
 function check_pending_modifications(){
+    local start_dir=$(pwd)
     cd $1
-    result=$(svn status | grep -v "^?")
+    result=$(git status --porcelain 2>/dev/null)
     if [[ ! -z "$result" ]]; then
-	svn status | grep -v "^?"
-	cd ..
+	git status --short
+	cd "$start_dir"
 	return 1
     fi
-    cd ..
+	cd "$start_dir"
     return 0
 }
 

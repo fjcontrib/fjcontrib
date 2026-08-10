@@ -37,8 +37,9 @@ get_latest_git_tag(){
         tail -n1
 }
 
-printf "  %-25s %-15s %-15s\n" "contrib" "contribs.svn" "git tag"
-printf "  %-25s %-15s %-15s\n" "-------" "------------" "-------"
+printf "  %-35s %-15s %-15s\n" "contrib" "contribs.svn" "git tag"
+printf "  %-35s %-15s %-15s\n" "-------" "------------" "-------"
+check_status=0
 
 # contribs.svn is the maintained list of contributions.  Git itself has no
 # equivalent of the old central SVN contribs/ directory listing.
@@ -56,13 +57,21 @@ while read -r contrib; do
             col=$NORMAL
         else
             col=$RED
+            check_status=1
         fi
+    elif [[ "$version_included" =~ ^-+ ]]; then
+        # A skipped contribution has no required release version.
+        col=$NORMAL
     elif [[ "$version_tag" == "[Error]" ]]; then
         col=$RED
+        check_status=1
     elif [[ "$version_included" > "$version_tag" ]]; then
         col=$NORMAL
     else
         col=$RED
+        check_status=1
     fi
-    printf "%s  %-25s %-15s %-15s%s\n" "$col" "$contrib" "$version_included" "$version_tag" "$NORMAL"
+    printf "%s  %-35s %-15s %-15s%s\n" "$col" "$contrib" "$version_included" "$version_tag" "$NORMAL"
 done < <(awk '!/^[[:space:]]*#/ && NF {print $1}' contribs.svn)
+
+exit "$check_status"

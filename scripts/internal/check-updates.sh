@@ -1,46 +1,71 @@
 #!/bin/bash
 #
-# check if the versions in contrib.svn correspond to the latest tags
+# Check if the versions in contribs.svn correspond to the latest Git tags.
 
-# preamble
-if [ x`which tput` != "x" ]; then
-   GREEN=$(tput setaf 2)
-   RED=$(tput setaf 1)
-   NORMAL=$(tput sgr0)
+if command -v tput >/dev/null 2>&1; then
+    GREEN=$(tput setaf 2)
+    RED=$(tput setaf 1)
+    NORMAL=$(tput sgr0)
+else
+    GREEN=""
+    RED=""
+    NORMAL=""
 fi
-. `dirname $0`/common.sh
+. "$(dirname "$0")/common.sh"
 
-# get the list of contribs (discard "graveyard"
-contrib_list=`svn ls $svn_read/contribs/ | grep -v graveyard | sed 's/\///g'`
+get_latest_git_tag(){
+    local contrib=$1
+    local repo_url
+    local tag_output
+    local tag_status
 
-# loop over contribs
-printf "  %-25s %-15s %-15s\n" "contrib" "contribs.svn" "svn tag"
+    repo_url=$(get_contrib_repo_url "$contrib")
+    tag_output=$(git ls-remote --tags "$repo_url" 2>&1)
+    tag_status=$?
+    if [[ "$tag_status" -ne 0 ]]; then
+        echo "[Error]"
+        echo "${contrib}: failed to query tags from ${repo_url}: ${tag_output}" >&2
+        return 0
+    fi
+
+    printf '%s\n' "$tag_output" |
+        awk '
+            $2 !~ /\^\{\}$/ {
+                tag=$2
+                sub("^refs/tags/", "", tag)
+                if (tag ~ /^[0-9]+\.[0-9]+\.[0-9]+$/) print tag
+            }
+        ' |
+        sort -t. -k1,1n -k2,2n -k3,3n |
+        tail -n1
+}
+
+printf "  %-25s %-15s %-15s\n" "contrib" "contribs.svn" "git tag"
 printf "  %-25s %-15s %-15s\n" "-------" "------------" "-------"
-for contrib in $contrib_list; do
-    # check version in contribs.svn
-    get_contrib_version $contrib contribs.svn version_included
-    version_included=`echo $version_included | sed 's/.*\///'`
-    
-    # check latest svn tag
-    version_tag=`svn ls $svn_read/contribs/${contrib}/tags | grep -E "^[0-9].[0-9].[0-9]/$" | tail -n1 | sed 's/\///g'`
 
-    # see if that agrees
-    if [ x"$version_included" == x"$version_tag" ]; then
+# contribs.svn is the maintained list of contributions.  Git itself has no
+# equivalent of the old central SVN contribs/ directory listing.
+while read -r contrib; do
+    [[ -n "$contrib" ]] || continue
+
+    get_contrib_version "$contrib" contribs.svn version_included
+    version_included=${version_included##*/}
+    version_tag=$(get_latest_git_tag "$contrib")
+
+    if [[ "$version_included" == "$version_tag" ]]; then
         col=$GREEN
-    elif [ x"$version_included" == x"[None]" ]; then
-        if [ x"$version_tag" == x"" ]; then
+    elif [[ "$version_included" == "[None]" ]]; then
+        if [[ -z "$version_tag" ]]; then
             col=$NORMAL
         else
             col=$RED
         fi
-    elif [ x"$version_included" \> x"$version_tag" ]; then
+    elif [[ "$version_tag" == "[Error]" ]]; then
+        col=$RED
+    elif [[ "$version_included" > "$version_tag" ]]; then
         col=$NORMAL
     else
         col=$RED
     fi
-    printf "%s  %-25s %-15s %-15s%s\n" ${col} $contrib $version_included $version_tag $NORMAL
-done
-
-
-
-
+    printf "%s  %-25s %-15s %-15s%s\n" "$col" "$contrib" "$version_included" "$version_tag" "$NORMAL"
+done < <(awk '!/^[[:space:]]*#/ && NF {print $1}' contribs.svn)

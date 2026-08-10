@@ -1,6 +1,9 @@
 # a list of definitions and tools that we'd like to have an easy access
 # to
 
+# All scripts sourcing this file must stop when an internal command fails.
+set -e
+
 # Git repositories for the individual contributions.  The same URL is
 # used for fetching and pushing for now.
 git_repo_base_url=${CONTRIB_REPO_BASE_URL:-https://github.com/fjcontribs-test}
@@ -76,7 +79,7 @@ function get_contrib_version(){
     # now deal with the version number as if it was an entry in "file" $2
     if [[ -e $2 ]]; then # check if the file actually exists
 #      entry=$(grep "^[ \t]*$1[ \t]" $2)  # does not seem to work with tabs
-      entry=$(grep "^[[:space:]]*$1[[:space:]]" $2)
+      entry=$(grep "^[[:space:]]*$1[[:space:]]" $2 || true)
       if [ -z "$entry" ]; then
 	  eval $__resultvar="[None]"
       else

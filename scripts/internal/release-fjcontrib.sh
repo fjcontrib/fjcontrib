@@ -12,6 +12,11 @@
 web_repo_name="LPTHE"
 web_server="tycho.lpthe.jussieu.fr"
 fastjet_web_dir="~salam/www/fastjet3/"
+
+web_repo_name="Local"
+web_server="localhost"
+fastjet_web_dir="/tmp/fastjet3/"
+
 # web_repo_name="HepForge"
 # web_server="login.hepforge.org"
 # fastjet_web_dir=/hepforge/projects/fastjet/public_html

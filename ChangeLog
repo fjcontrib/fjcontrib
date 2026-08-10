@@ -1,3 +1,12 @@
+2026-07-08 Matteo Cacciari
+
+	* NEWS:
+	* VERSION:
+	prepared for release of 1.104
+
+	* contribs.svn:
+	added DynamicR, v 1.0.2, from Tousik Samui 
+
 2026-06-11 Gavin Salam
 
 	* scripts/internal/release-fjcontrib.sh:

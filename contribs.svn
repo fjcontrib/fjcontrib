@@ -47,7 +47,7 @@ QCDAwarePlugin                   tags/2.0.0
 FlavorCone                       tags/1.0.0
 # [from Frederic Dreyer, Alexander Karlberg, Keith Hamilton, Gavin Salam, Gregory Soyez, Ludovic Scyboz, Rob Verheyen]
 LundPlane                        tags/2.1.2
-# [from Miguel Arratia, Yiannis Makris, Duff Neill, Felix Ringer, Nobuo Sato]
+# [from Miguel Arratia, Yiannis Makris, Duff Neill, Felix Ringer, Nobuo Sato -- no longer maintaining, Wouter Deconinck contributing since 2026-06]
 Centauro                         tags/1.0.0
 # [from Andrii Verbytskyi]
 KTClusCXX                        tags/1.0.1
@@ -63,3 +63,5 @@ SDFPlugin                        tags/1.0.1
 GHSAlgo                          tags/1.0.0
 # [from Melissa van Beekveld, Silvia Ferrario Ravasio, Alexander Karlberg, Darcy Peake]
 DISGenkt                         tags/1.1.0
+# [from Tousik Samui]
+DynamicR                         tags/1.0.2

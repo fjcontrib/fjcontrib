@@ -47,6 +47,42 @@ fi
     
 internal_directories="_,scripts,Template,data,_"
 
+# For a release tag, make sure the contribution declares the same version
+# internally.  Numeric versions are accepted as shorthand for tags/<version>.
+check_tag_version(){
+    local contrib=$1
+    local requested_version=$2
+    local expected_version=""
+    local declared_version=""
+
+    case "$requested_version" in
+        tags/*)
+            expected_version=${requested_version#tags/}
+            ;;
+        [0-9]*)
+            expected_version=$requested_version
+            ;;
+        *)
+            return 0
+            ;;
+    esac
+
+    read_tag "$contrib" version declared_version
+    if [[ "$declared_version" != "$expected_version" ]]; then
+        echo "Error: ${contrib}: tag ${expected_version} does not match declared version ${declared_version}"
+        echo "Contact the contrib maintainer for them to fix this issue or downgrade to a consistent version."
+        return 1
+    fi
+}
+
+switch_to_requested_version(){
+    local contrib=$1
+    local requested_version=$2
+
+    "$(dirname "$0")/internal/switch-to-version.sh" "$contrib" "$requested_version" || return 1
+    check_tag_version "$contrib" "$requested_version"
+}
+
 #----------------------------------------------------------------------
 # update the top-level Git checkout when it has an upstream branch
 if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
@@ -78,7 +114,7 @@ fi
 if [[ $# -gt 1 ]]; then
 
     # just call switch-to-version
-    "$(dirname "$0")/internal/switch-to-version.sh" "$@" || exit 1
+    switch_to_requested_version "$1" "$2" || exit 1
     exit 0
 fi
 
@@ -131,7 +167,7 @@ for contrib in $contribs_list; do
         # match: nothing to do
 	if [[ "$version_svn" != "["*"]" ]]; then
 	    echo -e "you already have the $requested_tag version (${version_svn}).\nUpdating it"
-	    "$(dirname "$0")/internal/switch-to-version.sh" "$contrib" "$version_svn" || exit 1
+	    switch_to_requested_version "$contrib" "$version_svn" || exit 1
 	else 
 	    echo "you already have the $requested_tag version (${version_svn})"
 	fi	
@@ -147,14 +183,14 @@ for contrib in $contribs_list; do
 	if [[ "${version_local}" == "[None]" ]]; then
 	    # the local version does not exist! Ask if we want to install it
 	    #get_yesno_answer "  Do you want to install the $requested_tag version?" "$default_yesno_answer" || {
-	    "$(dirname "$0")/internal/switch-to-version.sh" "$contrib" "$version_svn" || exit 1
+	    switch_to_requested_version "$contrib" "$version_svn" || exit 1
 	    #}
 	elif [[ "${version_local}" == "[NoGit]" ]]; then
 	    echo "You have an unversioned copy of $contrib in the way. It will not be updated."
 	else
 	    # the local version exists! Ask if we want to update it
 	    get_yesno_answer "  Switch from the installed version to the $requested_tag one?" "$default_yesno_answer" || {
-		"$(dirname "$0")/internal/switch-to-version.sh" "$contrib" "$version_svn" || exit 1
+		switch_to_requested_version "$contrib" "$version_svn" || exit 1
 	    }
 	fi
         echo

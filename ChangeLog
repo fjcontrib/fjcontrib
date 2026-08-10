@@ -1,3 +1,8 @@
+2026-08-10 Gavin Salam
+
+	* scripts/:
+	a range of updates to get things to work with git rather than svn
+
 2026-06-11 Gavin Salam
 
 	* scripts/internal/release-fjcontrib.sh:

@@ -17,12 +17,9 @@ get_latest_git_tag(){
     local contrib=$1
     local repo_url
     local tag_output
-    local tag_status
 
     repo_url=$(get_contrib_repo_url "$contrib")
-    tag_output=$(git ls-remote --tags "$repo_url" 2>&1)
-    tag_status=$?
-    if [[ "$tag_status" -ne 0 ]]; then
+    if ! tag_output=$(git ls-remote --tags "$repo_url" 2>&1); then
         echo "[Error]"
         echo "${contrib}: failed to query tags from ${repo_url}: ${tag_output}" >&2
         return 0

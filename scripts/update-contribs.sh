@@ -83,6 +83,13 @@ switch_to_requested_version(){
     check_tag_version "$contrib" "$requested_version"
 }
 
+normalize_requested_version(){
+    case "$1" in
+        [0-9]*) echo "tags/$1" ;;
+        *) echo "$1" ;;
+    esac
+}
+
 #----------------------------------------------------------------------
 # update the top-level Git checkout when it has an upstream branch
 if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
@@ -92,7 +99,9 @@ if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     echo "Updating top-level directory:"
     echo "-----------------------------"
     if git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' > /dev/null 2>&1; then
-        git pull --ff-only || { echo "Failed to update the top-level Git checkout. Aborting"; exit 1; }
+        if ! git pull --ff-only; then
+            echo "Warning: failed to update the top-level Git checkout; continuing with the current checkout"
+        fi
     else
         echo "No upstream branch is configured; skipping top-level Git update"
     fi
@@ -161,6 +170,7 @@ for contrib in $contribs_list; do
         version_svn="$version_mine"
 	requested_tag="requested"
     fi
+    version_svn=$(normalize_requested_version "$version_svn")
     
     # check which situation we are in
     if [[ "${version_svn}" == "${version_local}" ]]; then
@@ -199,10 +209,15 @@ done
 
 #----------------------------------------------------------------------
 # now do the opposite: for each local contrib, check if it exists in
-# the supported lists
+# the configured lists
 #
 # Note that we discard any directory that does not point to a tagged
 # version of a contrib
+
+# A targeted update must not inspect or remove unrelated local contribs.
+if [[ $# -gt 0 ]]; then
+    exit 0
+fi
 
 for contrib_path in */; do
     [[ -d "$contrib_path" ]] || continue
@@ -213,10 +228,12 @@ for contrib_path in */; do
     fi
 
     get_git_info "$contrib" mode version
-
     get_contrib_version "$contrib" contribs.svn configured_version
-    if [[ "$version" == "tags/"* && ( "$configured_version" == "[None]" || "$configured_version" =~ ^-+ ) ]]; then
-	echo "${contrib}: your local copy ($version) does not appear in the default Git-supported list."
+    get_contrib_version "$contrib" contribs.local local_configured_version
+
+
+    if [[ "$version" == "tags/"* && "$configured_version" == "[None]" && "$local_configured_version" == "[None]" ]]; then
+	echo "${contrib}: your local copy ($version) is not listed in contribs.svn or contribs.local."
 	get_yesno_answer "  Do you want to remove the local version?" "$default_yesno_answer" || {
 	    rm -Rf $contrib
 	}

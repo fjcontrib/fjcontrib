@@ -7,7 +7,7 @@
 #
 # set to 1 to sort contribs alphabetically, 0 otherwise
 $sort=1;
-# set to 1 to include release date taken from svn tags, 0 otherwise.
+# set to 1 to include release date taken from Git tags, 0 otherwise.
 $include_date=1;
 # set to 1 to include dependencies
 $include_deps=1;
@@ -20,20 +20,15 @@ $lpthe=1;
 
 $versions="contribs.svn";
 
-# get svn info from one common location
-if (! exists $ENV{'svn_read'}) {
-  print STDERR '$svn_read environment variable must be set, but is not (source common.sh first?)',"\n";
+# The contribution repositories are hosted independently on GitHub.  The
+# release script sources common.sh before invoking this generator, so the
+# base URL is available here as an environment variable.
+if (! exists $ENV{'git_repo_base_url'}) {
+  print STDERR '$git_repo_base_url environment variable must be set (source common.sh first?)',"\n";
   exit(-1)
 } else {
-  $svn_read=$ENV{'svn_read'};
-  print STDERR '$svn_read is: ', $svn_read,"\n";
+  $git_repo_base_url=$ENV{'git_repo_base_url'};
 }
-
-$svn=$svn_read."/contribs/";
-# link to browse the svn
-$svnBrowse='https://phab.hepforge.org/source/fastjetsvn/browse/contrib/contribs/';
-# this ensures that one doesn't get the whole "blame" info, which is ugly
-$svnPost='?as=source&blame=off';
 
 $topversion=`head -1 VERSION`;
 chomp $topversion;
@@ -62,12 +57,9 @@ foreach ( @contribs_array ) {
     if ($version =~ /^[0-9]/) {$version = "tags/$version";}
     ($textversion = $version) =~ s/tags\///;
     if($include_date) {
-      # extract date of last version tag from svn
-      print STDERR "getting date for $svn$contrib/$version\n";
-      $date = `svn info $svn$contrib/$version | grep "Last Changed Date" | awk '{print \$4}'`;
-      # One could  also use the --xml option and parse appropriately the output:
-      # $date = `svn --xml list $svn$contrib/$version`;
-      # At this stage, XML parsing is not implemented though.
+      # The checkout used for release generation is at the requested Git tag.
+      print STDERR "getting date for $contrib/$version from Git\n";
+      $date = `git -C "$contrib" log -1 --format=%ad --date=format:%Y-%m-%d HEAD`;
       #
       #print $contrib." ".$date."\n";
     }
@@ -91,16 +83,20 @@ foreach ( @contribs_array ) {
 	 if (! $minFJ ) { $minFJ = ""; } # to avoid a warning
        }
     }   
+    $git_version = $version;
+    if ($git_version eq "trunk") {$git_version = "main";}
+    $git_version =~ s/^tags\///;
+    $gitBrowse = $git_repo_base_url."/".$contrib;
     $list .= "<tr> <td class=\"contribname\"> 
-                   <a href=\"$svnBrowse$contrib/$version/\">$contrib</a>
+                   <a href=\"$gitBrowse/tree/$git_version\">$contrib</a>
                </td> <td style=\"{text-align:center;}\"> $textversion </td>";
     if ($include_date) {$list .= "<td>$date</td>";}
     $list .=  "<td>";
     if (-e "$contrib/README") {
-      $list .= '<a href="'.$svnBrowse.$contrib.'/'.$version.'/README'.$svnPost.'">README</a> ';
+      $list .= '<a href="'.$gitBrowse.'/blob/'.$git_version.'/README">README</a> ';
     }
     if (-e "$contrib/NEWS") {
-      $list .= '<a href="'.$svnBrowse.$contrib.'/'.$version.'/NEWS'.$svnPost.'">NEWS</a> ';
+      $list .= '<a href="'.$gitBrowse.'/blob/'.$git_version.'/NEWS">NEWS</a> ';
     }
     if ($include_deps) {$list .= "<td>$deps</td>";}
     if ($include_minFJ) {$list .= "<td>$minFJ</td>";}

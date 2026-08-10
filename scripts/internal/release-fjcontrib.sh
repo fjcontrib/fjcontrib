@@ -1,10 +1,10 @@
 #!/bin/bash
 #
-# make a full release of the current trunk
+# make a full release of the current main branch
 # Then produce a tarball
 
-# include function and svn location definitions, etc.
-. `dirname $0`/common.sh
+# include common Git utilities, etc.
+. "$(dirname "$0")/common.sh"
 
 # Uncomment to upload files to LPTHE rather than to HepForge
 # In this case, make sure to make the appropriate modifications
@@ -23,6 +23,7 @@ fastjet_web_dir="/tmp/fastjet3/"
 ###############################################
 
 dry_run=0
+allow_non_main=0
 #only_upload=0
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -37,6 +38,14 @@ while [[ $# -gt 0 ]]; do
             echo "--------------------------------------------------"
             echo "                   DRY RUN                        "
             echo "--------------------------------------------------"
+            ;;
+        --allow-non-main)
+            if get_yesno_answer "Allow this release from a non-main branch?"; then
+                echo "Non-main release override not confirmed. Aborting"
+                exit 1
+            fi
+            allow_non_main=1
+            echo "WARNING: allowing a release from a non-main branch"
             ;;
         *)
             echo "Error in $0: unknown option $1"
@@ -55,28 +64,71 @@ done
 find_gnu_tar 
 
 #========================================================================
-# svn sanity checks
+# Git sanity checks
 #========================================================================
 
-# make sure that everything is committed
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "The top-level directory is not a Git checkout. Aborting"
+    exit 1
+fi
+
+current_branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)
+if [[ -z "$current_branch" ]]; then
+    echo "The top-level checkout is in detached HEAD state. Aborting"
+    exit 1
+fi
+release_branch="main"
+if [[ "$current_branch" != "main" && "$allow_non_main" -eq 0 ]]; then
+    echo "The top-level checkout must be on the main branch. Aborting"
+    echo "To override this check, rerun with --allow-non-main"
+    exit 1
+fi
+if [[ "$current_branch" != "main" ]]; then
+    release_branch="$current_branch"
+    echo "WARNING: using $release_branch as the release source"
+fi
+
+top_repo_url=$(git remote get-url origin 2>/dev/null || true)
+if [[ -z "$top_repo_url" ]]; then
+    echo "The top-level checkout has no origin remote. Aborting"
+    exit 1
+fi
+
+# Untracked contrib directories are expected during development; only tracked
+# top-level changes prevent a release.
 echo
 echo "Checking for pending modifications or updates (this may take a few seconds...)"
-if [[ ! -z  "`svn status --show-updates | grep -v "^?" | grep -v "^Status"`" ]]; then
+if ! git diff --quiet || ! git diff --cached --quiet; then
     echo
-    echo "WARNING: There are pending modifications or updates:"
+    echo "WARNING: There are pending tracked modifications:"
     echo
-    svn status --show-updates | grep -v '^\?'
+    git status --short --untracked-files=no
     echo
     get_yesno_answer "Are you really sure you want to proceed?" &&  exit 1
     echo
 else
-    echo "All files are up to date relative to the svn"
+    echo "All tracked files are committed"
 fi
 
 # make sure there is a VERSION and it does not already exist
-version=`head -n1 VERSION`
-if [[ ! -z $(svn ls $svn_read/tags | grep "^$version/") ]]; then
-    echo "Version $version of fjcontrib already exists. Aborting"
+version=$(head -n1 VERSION)
+if [[ -z "$version" ]] || ! git check-ref-format "refs/tags/$version" >/dev/null 2>&1; then
+    echo "The top-level VERSION is missing or is not a valid Git tag. Aborting"
+    exit 1
+fi
+
+if git show-ref --verify --quiet "refs/tags/$version"; then
+    echo "Version $version of fjcontrib already exists locally. Aborting"
+    exit 1
+fi
+
+remote_tag=""
+if ! remote_tag=$(git ls-remote --tags origin "refs/tags/$version" 2>/dev/null); then
+    echo "Could not query release tags from $top_repo_url. Aborting"
+    exit 1
+fi
+if [[ -n "$remote_tag" ]]; then
+    echo "Version $version of fjcontrib already exists remotely. Aborting"
     exit 1
 fi
 
@@ -90,12 +142,29 @@ echo
 
 get_yesno_answer "Do you want to proceed with the release of fjcontrib-$version?" &&  exit 1
 
+# Make sure the commit that will be tested is available from the remote.
+git fetch origin "$release_branch" || { echo "Failed to fetch origin/$release_branch. Aborting"; exit 1; }
+remote_branch=$(git rev-parse --verify "refs/remotes/origin/$release_branch" 2>/dev/null || true)
+local_branch=$(git rev-parse "$release_branch")
+if [[ -n "$remote_branch" ]] && ! git merge-base --is-ancestor "$remote_branch" "$release_branch"; then
+    echo "Local $release_branch and origin/$release_branch have diverged. Aborting"
+    exit 1
+fi
+if [[ "$local_branch" != "$remote_branch" ]]; then
+    echo "Pushing $release_branch to $top_repo_url"
+    git push -u origin "$release_branch" || { echo "Failed to push $release_branch. Aborting"; exit 1; }
+fi
+
 
 #========================================================================
 # check that the tools in contribs.svn behave OK
 #========================================================================
-# get a clean checkout to perform sanity checks
-svn co $svn_read/trunk fjcontrib-$version || { echo "Failed to do the svn checkout"; exit 1; }
+# get a clean Git checkout to perform sanity checks
+if [[ -e "fjcontrib-$version" ]]; then
+    echo "fjcontrib-$version already exists. Aborting"
+    exit 1
+fi
+git clone --branch "$release_branch" "$top_repo_url" "fjcontrib-$version" || { echo "Failed to clone the top-level Git repository"; exit 1; }
 cd fjcontrib-$version
 echo "------------------------------------------------------------------------"
 echo "Getting the contribs"
@@ -121,7 +190,7 @@ which fastjet-config > /dev/null || is_in_path="no"
 
 trunk_version=""
 if [[ -e "../Makefile" ]]; then
-    trunk_version=$(head -n3 ../Makefile | tail -n1 | grep "\--fastjet-config=" | sed 's/.*--fastjet-config=//;s/ .*$//')
+    trunk_version=$(head -n3 ../Makefile | tail -n1 | grep "\--fastjet-config=" | sed 's/.*--fastjet-config=//;s/ .*$//' || true)
 fi
 
 if [[ -z "$trunk_version" ]]; then
@@ -202,8 +271,14 @@ else
     echo "------------------------------------------------------------------------"
     echo "Making a tag of fjcontrib version $version"
     echo "------------------------------------------------------------------------"
-    echo svn copy -m "tagging fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
-         svn copy -m "tagging fjcontrib-$version" $svn_write/trunk $svn_write/tags/$version
+    git tag -a "$version" -m "tagging fjcontrib-$version" || {
+        echo "Failed to create tag $version"
+        exit 1
+    }
+    git push origin "$version" || {
+        echo "Failed to push tag $version"
+        exit 1
+    }
 fi
 
 #========================================================================
@@ -211,20 +286,16 @@ fi
 #========================================================================
 if (( ${dry_run} )); then
     echo "------------------------------------------------------------------------"
-    echo "Dry run: checking out the trunk build the fjcontrib tarball"
+    echo "Dry run: checking out $release_branch to build the fjcontrib tarball"
     echo "------------------------------------------------------------------------"
-    # using svn_write, because the http access sometimes doesn't
-    # immediately see the up to date svn repository(?!)
-    echo svn co $svn_read/trunk fjcontrib-$version
-    svn co $svn_read/trunk fjcontrib-$version || { echo "Failed to checkout the fjcontrib trunk"; exit 1; }
+    echo git clone --branch "$release_branch" "$top_repo_url" "fjcontrib-$version"
+    git clone --branch "$release_branch" "$top_repo_url" "fjcontrib-$version" || { echo "Failed to clone the top-level release branch"; exit 1; }
 else
     echo "------------------------------------------------------------------------"
-    echo "Checking out tags/$version of fjcontrib"
+    echo "Checking out tag $version of fjcontrib"
     echo "------------------------------------------------------------------------"
-    # using svn_write, because the http access sometimes doesn't
-    # immediately see the up to date svn repository(?!)
-    echo svn co $svn_write/tags/$version fjcontrib-$version
-    svn co $svn_write/tags/$version fjcontrib-$version || { echo "Failed to checkout the new released version tags/$version"; exit 1; }
+    echo git clone --branch "$version" "$top_repo_url" "fjcontrib-$version"
+    git clone --branch "$version" "$top_repo_url" "fjcontrib-$version" || { echo "Failed to clone the new released version $version"; exit 1; }
 fi
 cd fjcontrib-$version
 echo
@@ -260,7 +331,8 @@ echo "------------------------------------------------------------------------"
 echo "Producing fjcontrib-$version.tar.gz"
 echo "------------------------------------------------------------------------"
 # NB: $tar was set by find_gnu_tar
-$tar --exclude=".svn" \
+$tar --exclude=".git" \
+    --exclude=".git/*" \
     --exclude="fjcontrib-$version/contribs.svn" \
   -czf fjcontrib-$version.tar.gz fjcontrib-$version
 rm -Rf fjcontrib-$version
@@ -314,5 +386,3 @@ rm -Rf hepforge_tmp
 echo
 echo "Done"
 echo
-
-

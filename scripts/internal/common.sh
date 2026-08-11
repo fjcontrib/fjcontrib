@@ -119,9 +119,11 @@ function get_yesno_answer(){
 function check_pending_modifications(){
     local start_dir=$(pwd)
     cd $1
-    result=$(git status --porcelain 2>/dev/null)
+    # Untracked files, such as build products, are not pending changes to
+    # the contribution and should not trigger an update confirmation.
+    result=$(git status --porcelain --untracked-files=no 2>/dev/null)
     if [[ ! -z "$result" ]]; then
-	git status --short
+	git status --short --untracked-files=no
 	cd "$start_dir"
 	return 1
     fi

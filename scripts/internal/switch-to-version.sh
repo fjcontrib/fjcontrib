@@ -11,6 +11,12 @@ set -u
 
 . "$(dirname "$0")/common.sh"
 
+force_update=0
+if [[ "${1:-}" == "--force" ]]; then
+    force_update=1
+    shift
+fi
+
 contrib=${1:-}
 contrib=${contrib%/}
 if [[ -z "$contrib" ]]; then
@@ -106,10 +112,14 @@ if [[ "$current_version" == "[None]" ]]; then
 fi
 
 if ! check_pending_modifications "$contrib"; then
-    get_yesno_answer "Your local copy has modifications. Do you want to proceed with the update?" && {
-        echo "Aborting."
-        exit 1
-    }
+    if [[ "$force_update" -eq 1 ]]; then
+        echo "Assuming 'yes' and proceeding with local modifications"
+    else
+        get_yesno_answer "Your local copy has modifications. Do you want to proceed with the update?" && {
+            echo "Aborting."
+            exit 1
+        }
+    fi
 fi
 
 cd "$contrib" || exit 1

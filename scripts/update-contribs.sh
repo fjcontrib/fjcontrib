@@ -79,7 +79,11 @@ switch_to_requested_version(){
     local contrib=$1
     local requested_version=$2
 
-    "$(dirname "$0")/internal/switch-to-version.sh" "$contrib" "$requested_version" || return 1
+    if [[ "$default_yesno_answer" == "yes" ]]; then
+        "$(dirname "$0")/internal/switch-to-version.sh" --force "$contrib" "$requested_version" || return 1
+    else
+        "$(dirname "$0")/internal/switch-to-version.sh" "$contrib" "$requested_version" || return 1
+    fi
     check_tag_version "$contrib" "$requested_version"
 }
 

@@ -5,6 +5,8 @@
 #
 # create the structure of a new contrib
 
+. `dirname $0`/internal/common.sh
+
 #------------------------------------------------------------------------
 # get the contrib name
 if [ "x$1" == "x" ]; then
@@ -54,13 +56,18 @@ for fn in $(find $(dirname $0)/internal/Template/ ); do
     fi
 #for fn in `dirname $0`/internal/Template/*; do
 done
+
+git -C $contrib init
+git -C $contrib add .
+git -C $contrib commit -m "Initial commit of FastJet contrib '${contrib}' from Template"
+
 echo "----------------------------------------------------------------------"
 echo "$contrib successfully created from Template. Rerun ./configure"
 echo "for it to be included in your builds."
 echo
 echo "Once you are ready to make it public, write to "
 echo "fastjet@projects.hepforge.org "
-echo "to obtain write access to the fastjet-contrib svn repository "
+echo "to ask for creation of the ${git_repo_base_url}/${contrib}.git repo "
 echo
 echo "You may then start to upload your contrib by running "
 echo

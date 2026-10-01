@@ -1,4 +1,26 @@
-2026-08-10 Gavin Salam
+2026-09-30 Gavin, Matteo & Gregory
+
+	* contribs.svn:
+
+	Batch application of patch from Juan Miguel Carceller & Jesse
+	Thaler(+Claude) to resolve compilation issues with MacOS27/C++23
+
+	Contrib                          Old          New
+	-------                          -------      ---
+  	EnergyCorrelator                 1.3.2        1.3.3
+	IFNPlugin                        1.0.4        1.0.5
+	KTClusCXX                        1.0.1        1.0.2
+	LundPlane                        2.1.2        2.1.3
+	Nsubjettiness                    2.3.2        2.3.3
+	RecursiveTools                   2.0.4        2.0.5
+	SignalFreeBackgroundEstimator    1.0.1        1.0.2
+	SoftKiller                       1.0.0        1.0.1
+
+	* scripts/internal/apply-multi-contrib-patch.sh:
+	new script (ChatGPT Sol + Luna) to apply a patch across multiple
+	contribs, including preparing ChangeLog etc. 
+
+2026-08-10 Gavin Salam [2026-08-git-migration branch]
 
 	* scripts/:
 	a range of updates to get things to work with git rather than svn

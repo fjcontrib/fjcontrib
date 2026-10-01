@@ -1,3 +1,9 @@
+2026-09-30: release of 1.105
+* update of multiple contribs to resolve compilation issues with MacOS27/C++23
+  (specifically, EnergyCorrelator IFNPlugin KTClusCXX LundPlane
+  Nsubjettiness RecursiveTools SignalFreeBackgroundEstimator SoftKiller), 
+  with thanks to Juan Miguel Carceller & Jesse Thaler
+
 2026-07-08: release of 1.104
 * new contrib DynamicR, v 1.0.2
 
